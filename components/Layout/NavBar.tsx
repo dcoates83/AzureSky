@@ -62,7 +62,11 @@ function NavBar(props: Props) {
                 {navItems.map((item) => (
                   <Button
                     key={item.name}
-                    sx={{ color: 'text.primary' }}
+                    sx={{
+                      color: 'text.primary',
+                      textTransform: 'capitalize',
+                      fontSize: '1.125rem',
+                    }}
                     onClick={() => _handleNavigate(item.name)}
                   >
                     {item.name}

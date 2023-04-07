@@ -12,11 +12,10 @@ import sophia2 from '../assets/sophia-2.png'
 import sophia3 from '../assets/sophia-3.jpg'
 import tica from '../assets/Tica.png'
 import tzarBear from '../assets/tzar-bear.jpg'
-const LandingPage = () => {
+
+const HeroLanding = () => {
   return (
     <>
-      {/* <MetaTags title="Home" description="Home page" /> */}
-
       <section className="landing">
         <Image className="hero-background-image" src={Landing} alt="main-img" />
         <div className="hero-container">
@@ -30,6 +29,15 @@ const LandingPage = () => {
         </p>
         <Image src={tica} alt="tica" className="registered-tica" />
       </section>
+    </>
+  )
+}
+
+const LandingPage = () => {
+  return (
+    <>
+      {/* <MetaTags title="Home" description="Home page" /> */}
+      <HeroLanding />
       <section id="about">
         <div className="container-text">
           <h1 className="header-2 about">About Us</h1>
