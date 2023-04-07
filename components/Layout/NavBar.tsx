@@ -10,10 +10,8 @@ import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-// import Link from 'next/link'
 import * as React from 'react'
 
 import Logo from '../../public/images/logo.svg'
@@ -49,7 +47,7 @@ function NavBar(props: Props) {
             sx={{
               flexGrow: 1,
               display: 'flex',
-              alighItems: 'center',
+              alignItems: 'center',
               pt: 0.5,
               height: '60px',
             }}

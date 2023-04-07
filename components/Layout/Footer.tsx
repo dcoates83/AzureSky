@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer>
       <div className="social-links">
-        <ul className="navbar-nav me-auto mb-2 mb-lg-0 social-network social-circle">
+        <ul className="navbar-nav mb-lg-0 social-network social-circle mb-2 me-auto">
           <li className="nav-item">
             <a
               rel="noopener"
@@ -14,7 +14,6 @@ const Footer = () => {
               className="nav-link icoFacebook"
               title="Facebook"
             >
-              {/* <i className="fa fa-facebook"></i> */}
               <FacebookOutlinedIcon sx={{ color: '#0A82ED' }} />
             </a>
           </li>

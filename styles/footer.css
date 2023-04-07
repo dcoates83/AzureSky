@@ -1,4 +1,3 @@
-
 footer {
   margin-top: 1em;
   background-color: #cca3a3;
@@ -19,12 +18,10 @@ footer a:hover {
 }
 .footer-items {
   display: flex;
- 
 }
-.footer-items li{
- 
-    font-size: 16px;
-  
+.footer-items li {
+  font-size: 16px;
+  padding: 16px;
 }
 .copyright {
   display: flex;
@@ -38,10 +35,8 @@ footer a:hover {
   flex-grow: 1;
 }
 
-.social-links i{
-  
-    color: #fff !important;
-
+.social-links i {
+  color: #fff !important;
 }
 /* // Social Icons */
 ul.social-network {
@@ -92,6 +87,9 @@ ul.social-network li {
 /* // Facebook */
 .social-network a.icoFacebook {
   background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 /* // Rss
 // .social-network a.icoRss {
