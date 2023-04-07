@@ -10,12 +10,12 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 // import Link from 'next/link'
 import * as React from 'react'
 
-import Logo from '../public/logo.svg'
-
+import Logo from '../../public/images/logo.svg'
 interface INavItems {
   name: string
   icon: React.ReactNode
@@ -24,8 +24,6 @@ interface INavItems {
 interface Props {
   navItems: INavItems[]
 }
-
-// const LogoComponent = (props: any) => <Logo {...props} />
 
 function NavBar(props: Props) {
   const { navItems } = props
@@ -43,7 +41,6 @@ function NavBar(props: Props) {
 
   return (
     <>
-      {/* ( */}
       <AppBar component="nav" color="default">
         <Toolbar>
           <Box
@@ -54,8 +51,7 @@ function NavBar(props: Props) {
               pt: 0.5,
             }}
           >
-            Test
-            {/* <LogoComponent onClick={() => _handleNavigate('Home')} /> */}
+            <Image src={Logo} height={64} width={120} alt={'Logo'}></Image>
           </Box>
           <>
             {!isMobile && (

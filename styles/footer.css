@@ -1,0 +1,124 @@
+
+footer {
+  margin-top: 1em;
+  background-color: #cca3a3;
+  min-height: 20dvh;
+  color: #fff;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+footer a {
+  color: #fff;
+}
+
+footer a:hover {
+  color: #3b5998;
+}
+.footer-items {
+  display: flex;
+ 
+}
+.footer-items li{
+ 
+    font-size: 16px;
+  
+}
+.copyright {
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+}
+
+.footer-bg {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.social-links i{
+  
+    color: #fff !important;
+
+}
+/* // Social Icons */
+ul.social-network {
+  list-style: none;
+  display: inline;
+  margin-left: 0 !important;
+  padding: 0;
+}
+
+ul.social-network li {
+  display: inline;
+  margin: 0 5px;
+}
+.social-circle li a {
+  display: inline-block;
+  position: relative;
+  margin: 0 auto 0 auto;
+  border-radius: 50%;
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  font-size: 15px;
+  background-color: #d3d3d3;
+}
+
+.social-circle li i {
+  margin: 0;
+  color: #fff;
+  line-height: 25px;
+  text-align: center;
+}
+
+.social-circle li a:hover i,
+.triggeredHover {
+  -moz-transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  -ms--transform: rotate(360deg);
+  transform: rotate(360deg);
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.social-circle i {
+  color: #fff;
+  -webkit-transition: all 0.8s;
+  transition: all 0.8s;
+}
+/* // Facebook */
+.social-network a.icoFacebook {
+  background-color: #fff;
+}
+/* // Rss
+// .social-network a.icoRss {
+//   background-color: #f56505;
+// }
+// Twitter
+// .social-network a.icoTwitter {
+// 	background-color: #33ccff;
+// }
+// google plus
+// .social-network a.icoGoogle {
+// 	background-color: #BD3518;
+// }
+
+// .social-network a.icoVimeo {
+// 	background-color: #0590B8;
+// }
+
+// .social-network a.icoLinkedin {
+// 	background-color: #007bb7;
+// } */
+
+.social-network a.icoRss:hover i,
+.social-network a.icoFacebook:hover i,
+.social-network a.icoTwitter:hover i,
+.social-network a.icoGoogle:hover i,
+.social-network a.icoVimeo:hover i,
+.social-network a.icoLinkedin:hover i {
+  color: #fff;
+}

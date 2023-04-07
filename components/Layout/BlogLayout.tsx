@@ -5,6 +5,7 @@ import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded'
 import AlertBanner from 'components/AlertBanner'
 
+import Footer from './Footer'
 import NavBar from './NavBar'
 export default function BlogLayout({
   preview,
@@ -29,7 +30,7 @@ export default function BlogLayout({
         ]}
       />
       {children}
-      {/* <Footer /> */}
+      <Footer />
       </div>
     </>
   )
