@@ -8,6 +8,8 @@ import IntroTemplate from 'intro-template'
 import * as demo from 'lib/demo.data'
 import type { Post, Settings } from 'lib/sanity.queries'
 
+import LandingPage from './LandingPage'
+
 export interface IndexPageProps {
   preview?: boolean
   loading?: boolean
@@ -26,7 +28,8 @@ export default function IndexPage(props: IndexPageProps) {
 
       <Layout preview={preview} loading={loading}>
         <Container>
-          <BlogHeader title={title} description={description} level={1} />
+          <LandingPage />
+          {/* <BlogHeader title={title} description={description} level={1} />
           {heroPost && (
             <HeroPost
               title={heroPost.title}
@@ -37,9 +40,9 @@ export default function IndexPage(props: IndexPageProps) {
               excerpt={heroPost.excerpt}
             />
           )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+          {morePosts.length > 0 && <MoreStories posts={morePosts} />} */}
         </Container>
-        <IntroTemplate />
+        {/* <IntroTemplate /> */}
       </Layout>
     </>
   )

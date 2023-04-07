@@ -1,6 +1,7 @@
 import {
   BottomNavigation,
   BottomNavigationAction,
+  IconButton,
   Paper,
   useMediaQuery,
   useTheme,
@@ -47,11 +48,15 @@ function NavBar(props: Props) {
             component="div"
             sx={{
               flexGrow: 1,
-              display: { height: '60px' },
+              display: 'flex',
+              alighItems: 'center',
               pt: 0.5,
+              height: '60px',
             }}
           >
-            <Image src={Logo} height={64} width={120} alt={'Logo'}></Image>
+            <IconButton disableRipple onClick={() => router.push(`/`)}>
+              <Image src={Logo} height={64} width={120} alt={'Logo'}></Image>
+            </IconButton>
           </Box>
           <>
             {!isMobile && (
