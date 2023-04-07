@@ -21,16 +21,16 @@ export default function BlogLayout({
       <div className="min-h-screen">
         <AlertBanner preview={preview} loading={loading} />
         <NavBar
-        navItems={[
-          { name: 'Home', icon: <HomeRoundedIcon /> },
-          { name: 'About', icon: <InfoRoundedIcon /> },
-          { name: 'Purchasing', icon: <ShoppingBasketRoundedIcon /> },
-          { name: 'New Litters', icon: <FiberNewRoundedIcon /> },
-          { name: 'Shop', icon: <ShoppingCartRoundedIcon /> },
-        ]}
-      />
-      {children}
-      <Footer />
+          navItems={[
+            { name: 'Home', icon: <HomeRoundedIcon /> },
+            { name: 'About', icon: <InfoRoundedIcon /> },
+            { name: 'Purchasing', icon: <ShoppingBasketRoundedIcon /> },
+            { name: 'New Litters', icon: <FiberNewRoundedIcon /> },
+            // { name: 'Shop', icon: <ShoppingCartRoundedIcon /> },
+          ]}
+        />
+        {children}
+        <Footer />
       </div>
     </>
   )

@@ -1,0 +1,16 @@
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin-top: 4em;
+  letter-spacing: 0.3px;
+  --tw-bg-opacity: 1;
+  /* // background-color: rgba(248, 240, 240, var(--tw-bg-opacity)); */
+  /* background-color: $background-one; */
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  /* --tw-text-opacity: 1; */
+  /* color: $grey-header; */
+  text-align: justify;
+}
