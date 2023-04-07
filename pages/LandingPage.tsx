@@ -1,3 +1,4 @@
+import Grid from '@mui/material/Unstable_Grid2'
 import Image from 'next/image'
 
 import aasia from '../assets/Aasia.jpg'
@@ -12,12 +13,18 @@ import sophia2 from '../assets/sophia-2.png'
 import sophia3 from '../assets/sophia-3.jpg'
 import tica from '../assets/Tica.png'
 import tzarBear from '../assets/tzar-bear.jpg'
-
 const HeroLanding = () => {
   return (
     <>
-      <section className="landing">
-        <Image className="hero-background-image" src={Landing} alt="main-img" />
+      <Grid container sx={{ height: '100dvh' }}>
+        <Grid sx={{ height: '80%', backgroundColor: '#eee', width: '100%' }}>
+          <Grid md={6} sx={{ height: '100%' }}></Grid>
+          <Grid md={6} sx={{ height: '100%' }}></Grid>
+        </Grid>
+        <Grid
+          sx={{ height: '20%', backgroundColor: '#efe', width: '100%' }}
+        ></Grid>
+        {/* <Image className="hero-background-image" src={Landing} alt="main-img" />
         <div className="hero-container">
           <Image src={catInBox} alt="cat in a box" className="second-hero" />
           <div className="rectangle">
@@ -27,8 +34,8 @@ const HeroLanding = () => {
         <p className="registered-text registered">
           All of our cats are tica Registered
         </p>
-        <Image src={tica} alt="tica" className="registered-tica" />
-      </section>
+        <Image src={tica} alt="tica" className="registered-tica" /> */}
+      </Grid>
     </>
   )
 }
