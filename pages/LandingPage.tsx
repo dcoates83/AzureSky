@@ -107,7 +107,7 @@ const HeroLanding = () => {
   return (
     <>
       <Box
-        sx={{ height: '100dvh', display: 'grid', gridTemplateRows: '8fr 2fr' }}
+        sx={{ height: '100dvh', display: 'grid', gridTemplateRows: '9fr 1fr' }}
       >
         <Box
           sx={{
@@ -128,7 +128,7 @@ const HeroLanding = () => {
             <Box sx={{ width: '80%' }}>
               <Typography
                 variant="h1"
-                sx={{ fontSize: '4em', textAlign: 'justify' }}
+                sx={{ fontSize: '4em', textAlign: 'left' }}
               >
                 Fall in love with your new friend
               </Typography>
@@ -136,16 +136,18 @@ const HeroLanding = () => {
                 sx={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
+                  // justifyContent: 'space-between',
                   mt: 2,
                 }}
               >
                 <Typography
-                  sx={{ color: (theme) => theme.palette.text.secondary }}
+                  sx={{ color: (theme) => theme.palette.text.secondary, mr: 5 }}
                 >
                   All of our cats are Tica registered
                 </Typography>
-                <Button variant="contained">Contact Us</Button>
+                <Button variant="contained" sx={{ color: '#fff' }}>
+                  Contact Us
+                </Button>
               </Box>
             </Box>
           </Box>

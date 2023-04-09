@@ -40,7 +40,7 @@ function NavBar(props: Props) {
 
   return (
     <>
-      <AppBar component="nav" color="default">
+      <AppBar component="nav" color="inherit" sx={{ boxShadow: 'unset' }}>
         <Toolbar>
           <Box
             component="div"
