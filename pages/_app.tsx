@@ -1,4 +1,3 @@
-import 'tailwindcss/tailwind.css'
 import '../styles/footer.css'
 import '../styles/main.css'
 
@@ -9,7 +8,11 @@ const theme = createTheme({
   typography: {
     allVariants: {
       fontFamily: "'Public Sans', 'Open Sans', 'sans-serif'",
-      // fontSize: '1.125rem',
+    },
+  },
+  palette: {
+    primary: {
+      main: '#EFA3A3',
     },
   },
 })

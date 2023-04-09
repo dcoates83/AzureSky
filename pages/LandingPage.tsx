@@ -1,3 +1,4 @@
+import { Box, Button, Typography } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 import Image from 'next/image'
 
@@ -16,14 +17,51 @@ import tzarBear from '../assets/tzar-bear.jpg'
 const HeroLanding = () => {
   return (
     <>
-      <Grid container sx={{ height: '100dvh' }}>
-        <Grid sx={{ height: '80%', backgroundColor: '#eee', width: '100%' }}>
-          <Grid md={6} sx={{ height: '100%' }}></Grid>
-          <Grid md={6} sx={{ height: '100%' }}></Grid>
-        </Grid>
-        <Grid
-          sx={{ height: '20%', backgroundColor: '#efe', width: '100%' }}
-        ></Grid>
+      <Box
+        sx={{ height: '100dvh', display: 'grid', gridTemplateRows: '8fr 2fr' }}
+      >
+        <Box
+          sx={{
+            width: '100%',
+            display: 'grid',
+            gridAutoFlow: 'column',
+            gridTemplateColumns: '1fr 1fr',
+          }}
+        >
+          <Box
+            sx={{
+              width: '100%',
+              height: '100%',
+              display: 'grid',
+              placeItems: 'center',
+            }}
+          >
+            <Box sx={{ width: '56%' }}>
+              <Typography variant="h2">
+                Fall in love with your new friend
+              </Typography>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  mt: 2,
+                }}
+              >
+                <Typography
+                  sx={{ color: (theme) => theme.palette.text.secondary }}
+                >
+                  All of our cats are Tica registered
+                </Typography>
+                <Button variant="contained">Contact Us</Button>
+              </Box>
+            </Box>
+          </Box>
+          <Box
+            sx={{ backgroundColor: 'olive', width: '100%', height: '100%' }}
+          ></Box>
+        </Box>
+        <Box sx={{ backgroundColor: '#efe', width: '100%' }}></Box>
         {/* <Image className="hero-background-image" src={Landing} alt="main-img" />
         <div className="hero-container">
           <Image src={catInBox} alt="cat in a box" className="second-hero" />
@@ -35,7 +73,7 @@ const HeroLanding = () => {
           All of our cats are tica Registered
         </p>
         <Image src={tica} alt="tica" className="registered-tica" /> */}
-      </Grid>
+      </Box>
     </>
   )
 }
