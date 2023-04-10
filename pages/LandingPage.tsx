@@ -16,6 +16,7 @@ import sophia3 from '../assets/sophia-3.jpg'
 import tica from '../assets/Tica.png'
 import tzarBear from '../assets/tzar-bear.jpg'
 import cat from '../assets/Vectorcat.jpg'
+import WaveDivider from '../components/WaveDivider/WaveDivider'
 const imageSx = {
   width: '695.88134765625px',
   height: '615.177490234375px',
@@ -29,7 +30,6 @@ const heroStyling = (theme) => ({
   height: '100%',
   display: 'grid',
   placeItems: 'center',
-  // gridArea: 'hero-image',
 })
 
 const containerSx = (theme) => ({
@@ -40,10 +40,6 @@ const containerSx = (theme) => ({
   [theme.breakpoints.down('md')]: {
     display: 'flex',
     flexDirection: 'column-reverse',
-    // gridAutoFlow: 'row',
-    // gridTemplateColumns: '1fr',
-    // gridTemplateRows: '1fr 1fr',
-    // gridTemplateAreas: '"hero-image" ',
   },
 })
 
@@ -52,7 +48,6 @@ const heroItemContainer = {
   height: '100%',
   display: 'grid',
   placeItems: 'center',
-  // gridArea: 'hero-text',
 }
 // const BlobSvg = () => (
 //   <svg
@@ -179,7 +174,9 @@ const HeroLanding = () => {
             {/* <BlobSvg /> */}
           </Box>
         </Box>
-        <Box sx={{ backgroundColor: '#efe', width: '100%' }}></Box>
+        <Box>
+          <WaveDivider />
+        </Box>
       </Box>
     </>
   )
@@ -190,6 +187,9 @@ const LandingPage = () => {
     <>
       {/* <MetaTags title="Home" description="Home page" /> */}
       <HeroLanding />
+      {/* <Box sx={{ width: '100%', maxWidth: '100vw' }}>
+        <WaveDivider />
+      </Box> */}
       <section id="about">
         <div className="container-text">
           <h1 className="header-2 about">About Us</h1>

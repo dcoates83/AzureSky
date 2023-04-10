@@ -1,5 +1,6 @@
 import '../styles/footer.css'
 import '../styles/main.css'
+import '../styles/waveStyles.css'
 
 import {
   createTheme,
