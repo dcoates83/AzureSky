@@ -91,13 +91,17 @@ const HeroLanding = () => {
 }
 
 const LandingPage = () => {
+  const aboutSection = await client.fetch(`
+    *[_type == "aboutSection"]{
+      title,
+      description
+    }
+  `)
   return (
     <>
       {/* <MetaTags title="Home" description="Home page" /> */}
       <HeroLanding />
-      {/* <Box sx={{ width: '100%', maxWidth: '100vw' }}>
-        <WaveDivider />
-      </Box> */}
+
       <section id="about">
         <div className="container-text">
           <h1 className="header-2 about">About Us</h1>

@@ -15,7 +15,6 @@ const theme = createTheme({
       fontFamily: "'Public Sans', 'Open Sans', 'sans-serif'",
     },
   },
-  // h3: { fontSize: '3em' },
   palette: {
     primary: {
       main: '#EFA3A3',

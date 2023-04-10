@@ -1,9 +1,9 @@
 import { usePreview } from 'lib/sanity.preview'
 import {
   indexQuery,
-  settingsQuery,
   type Post,
   type Settings,
+  settingsQuery,
 } from 'lib/sanity.queries'
 import IndexPage from 'pages/IndexPage'
 
