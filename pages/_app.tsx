@@ -1,7 +1,11 @@
 import '../styles/footer.css'
 import '../styles/main.css'
 
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from '@mui/material/styles'
 import { AppProps } from 'next/app'
 
 const theme = createTheme({
@@ -10,6 +14,7 @@ const theme = createTheme({
       fontFamily: "'Public Sans', 'Open Sans', 'sans-serif'",
     },
   },
+  // h3: { fontSize: '3em' },
   palette: {
     primary: {
       main: '#EFA3A3',
@@ -17,9 +22,10 @@ const theme = createTheme({
   },
 })
 export default function App({ Component, pageProps }: AppProps) {
+  const responsiveTheme = responsiveFontSizes(theme)
   return (
     <>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={responsiveTheme}>
         <Component {...pageProps} />
       </ThemeProvider>
     </>

@@ -2,12 +2,25 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  /* margin-top: 4em; */
+  margin: 0;
+  margin-top: 4em;
   letter-spacing: 0.3px;
   --tw-bg-opacity: 1;
-
   font-family: 'Open Sans', sans-serif;
   /* font-size: 1.125rem; */
   line-height: 1.75rem;
-  text-align: justify;
+  /* text-align: justify; */
+}
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.page-container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: auto;
 }
