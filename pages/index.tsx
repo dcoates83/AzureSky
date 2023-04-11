@@ -2,8 +2,11 @@ import { PreviewSuspense } from '@sanity/preview-kit'
 import { getAllPosts, getSettings } from 'lib/sanity.client'
 import { Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
+import { createClient } from 'next-sanity'
 import IndexPage from 'pages/IndexPage'
 import { lazy } from 'react'
+
+import homePage from '../schemas/homePage'
 
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 
@@ -12,6 +15,7 @@ interface PageProps {
   settings: Settings
   preview: boolean
   token: string | null
+  homePage: any
 }
 
 interface Query {
@@ -22,14 +26,26 @@ interface PreviewData {
   token?: string
 }
 
+const client = createClient({
+  projectId: 'wx24r2h9',
+  dataset: 'production',
+  apiVersion: '2022-11-15',
+  useCdn: false,
+})
 export default function Page(props: PageProps) {
-  const { posts, settings, preview, token } = props
+  const { posts, settings, preview, token, homePage } = props
 
   if (preview) {
     return (
       <PreviewSuspense
         fallback={
-          <IndexPage loading preview posts={posts} settings={settings} />
+          <IndexPage
+            loading
+            preview
+            posts={posts}
+            settings={settings}
+            pages={homePage}
+          />
         }
       >
         <PreviewIndexPage token={token} />
@@ -37,7 +53,7 @@ export default function Page(props: PageProps) {
     )
   }
 
-  return <IndexPage posts={posts} settings={settings} />
+  return <IndexPage posts={posts} settings={settings} pages={homePage} />
 }
 
 export const getStaticProps: GetStaticProps<
@@ -51,9 +67,10 @@ export const getStaticProps: GetStaticProps<
     getSettings(),
     getAllPosts(),
   ])
-
+  const homePage = await client.fetch(`*[_type == "homePage"]`)
   return {
     props: {
+      homePage,
       posts,
       settings,
       preview,

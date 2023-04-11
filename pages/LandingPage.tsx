@@ -11,6 +11,8 @@ import sophia3 from '../assets/sophia-3.jpg'
 import tica from '../assets/Tica.png'
 import tzarBear from '../assets/tzar-bear.jpg'
 import cat from '../assets/Vectorcat.jpg'
+import CMSSection from '../components/CMSSection'
+import SectionSubHeader from '../components/SectionSubHeader'
 import WaveDivider from '../components/WaveDivider'
 
 const heroStyling = (theme: Theme) => ({
@@ -90,35 +92,43 @@ const HeroLanding = () => {
   )
 }
 
-const LandingPage = () => {
-  const aboutSection = await client.fetch(`
-    *[_type == "aboutSection"]{
-      title,
-      description
-    }
-  `)
+interface LandingPageProps {
+  aboutSection: any
+}
+
+const LandingPage = (props: LandingPageProps) => {
+  const { aboutSection } = props
+  // const aboutSection = await client.fetch(`
+  //   *[_type == "aboutSection"]{
+  //     title,
+  //     description
+  //   }
+  // `)
+  console.log(`homePage`, props)
   return (
     <>
       {/* <MetaTags title="Home" description="Home page" /> */}
       <HeroLanding />
-
-      <section id="about">
+      <CMSSection title={'About us'} content={aboutSection[0].title} />
+      {/* <section id="about">
         <div className="container-text">
           <h1 className="header-2 about">About Us</h1>
           <p>
-            Azure Sky Ragdolls is TICA registered cattery, licensed and located
-            in the city of Kamloops, British Columbia.
+            {aboutSection.title}
+            //  Azure Sky Ragdolls is TICA registered cattery, licensed and located
+            // in the city of Kamloops, British Columbia. 
           </p>
-          <h2 className="about-subheader">
-            All of our cats live with us as part of our family
-          </h2>
+
           <p>
             Azure Sky Ragdolls is, and always has been, a closed cattery meaning
             Buyers may not visit inside the cattery. This is to protect the
             kittens and parents from disease and parasites.
           </p>
         </div>
-      </section>
+      </section> 
+    */}
+      <SectionSubHeader text="All of our cats live with us as part of our family" />
+
       <section id="queens">
         <div className=" center queens-header-container">
           {/* <Image
