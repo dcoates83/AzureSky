@@ -1,96 +1,18 @@
 import { Box, Button, Theme, Typography, useMediaQuery } from '@mui/material'
 import Image from 'next/image'
 
-import aasia from '../assets/Aasia.jpg'
-import aiyla from '../assets/aiyla.jpg'
-import Amethyst from '../assets/Amethyst.jpg'
-import athena from '../assets/athena-catbed.jpg'
-import sapphiresKitten from '../assets/sapphire-with-kitten.jpg'
-import sophia2 from '../assets/sophia-2.png'
-import sophia3 from '../assets/sophia-3.jpg'
-import tica from '../assets/Tica.png'
-import tzarBear from '../assets/tzar-bear.jpg'
-import cat from '../assets/Vectorcat.jpg'
-import CMSSection from '../components/CMSSection'
-import SectionSubHeader from '../components/SectionSubHeader'
-import WaveDivider from '../components/WaveDivider'
-
-const heroStyling = (theme: Theme) => ({
-  width: '100%',
-  height: '100%',
-  display: 'grid',
-  placeItems: 'center',
-})
-
-const containerSx = (theme: Theme) => ({
-  width: '100%',
-  display: 'grid',
-  gridAutoFlow: 'column',
-  gridTemplateColumns: '1fr 1fr',
-  [theme.breakpoints.down('md')]: {
-    display: 'flex',
-    flexDirection: 'column-reverse',
-  },
-})
-
-const heroItemContainer = {
-  width: '100%',
-  height: '100%',
-  display: 'grid',
-  placeItems: 'center',
-}
-
-const HeroLanding = () => {
-  const smallScreens = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down('sm')
-  )
-  return (
-    <>
-      <Box
-        sx={{ height: '100dvh', display: 'grid', gridTemplateRows: '9fr 1fr' }}
-      >
-        <Box sx={containerSx}>
-          <Box sx={heroItemContainer}>
-            <Box sx={{ width: '80%' }}>
-              <Typography variant="h2" sx={{ textAlign: 'left' }}>
-                Fall in love with your new friend
-              </Typography>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  // justifyContent: 'space-between',
-                  mt: 2,
-                }}
-              >
-                <Typography
-                  sx={{ color: (theme) => theme.palette.text.secondary, mr: 2 }}
-                >
-                  All of our cats are Tica registered
-                </Typography>
-                <Button
-                  variant="contained"
-                  sx={{
-                    color: '#fff',
-                    lineHeight: smallScreens ? '1.15em' : 'undefined',
-                  }}
-                >
-                  Contact Us
-                </Button>
-              </Box>
-            </Box>
-          </Box>
-          <Box sx={heroItemContainer}>
-            <Image src={cat} alt="cat" width={smallScreens ? 380 : undefined} />
-          </Box>
-        </Box>
-        <Box>
-          <WaveDivider />
-        </Box>
-      </Box>
-    </>
-  )
-}
+import aasia from '../../assets/Aasia.jpg'
+import aiyla from '../../assets/aiyla.jpg'
+import Amethyst from '../../assets/Amethyst.jpg'
+import athena from '../../assets/athena-catbed.jpg'
+import sapphiresKitten from '../../assets/sapphire-with-kitten.jpg'
+import sophia2 from '../../assets/sophia-2.png'
+import sophia3 from '../../assets/sophia-3.jpg'
+import tica from '../../assets/Tica.png'
+import tzarBear from '../../assets/tzar-bear.jpg'
+import CMSSection from '../../components/CMSSection'
+import SectionSubHeader from '../../components/SectionSubHeader'
+import { HeroLanding } from './HeroLanding'
 
 interface LandingPageProps {
   aboutSection: any
@@ -104,7 +26,7 @@ const LandingPage = (props: LandingPageProps) => {
   //     description
   //   }
   // `)
-  console.log(`homePage`, props)
+
   return (
     <>
       {/* <MetaTags title="Home" description="Home page" /> */}

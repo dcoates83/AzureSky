@@ -8,7 +8,7 @@ import IntroTemplate from 'intro-template'
 import * as demo from 'lib/demo.data'
 import type { Post, Settings } from 'lib/sanity.queries'
 
-import LandingPage from './LandingPage'
+import LandingPage from './LandingPage/LandingPage'
 
 export interface IndexPageProps {
   preview?: boolean
