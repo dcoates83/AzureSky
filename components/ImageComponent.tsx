@@ -37,6 +37,7 @@ const ImageComponent = ({ image }) => {
           margin: '0 auto',
           borderRadius: '100%',
           border: `5px solid ${theme.palette.primary.light}`,
+          // boxShadow: theme.shadows[5],
         }}
       />
 
@@ -44,7 +45,9 @@ const ImageComponent = ({ image }) => {
         variant="image"
         image={urlFor(image).image(image).auto('format').url()}
         // image={urlFor(image).image(image.value).auto('format').url()}
-        style={{ objectFit: 'contain' }}
+        style={{
+          objectFit: 'contain',
+        }}
         shapeProps={{ edges: 5 }}
       /> */}
     </Box>

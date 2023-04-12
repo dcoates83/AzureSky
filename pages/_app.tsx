@@ -19,6 +19,9 @@ const theme = createTheme({
     primary: {
       main: '#EFA3A3',
     },
+    secondary: {
+      main: '#2081C3',
+    },
   },
 })
 export default function App({ Component, pageProps }: AppProps) {

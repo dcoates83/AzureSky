@@ -49,58 +49,28 @@ const LandingPage = (props: LandingPageProps) => {
         title={aboutSection[0]?.title_KingsQueens}
         content={aboutSection[0]?.content_KingsQueens}
       />
-      {/* <section id="queens">
-        <CMSSection
-          title={aboutSection[0]?.title_KingsQueens}
-          content={aboutSection[0]?.content_KingsQueens}
-        />
-        <div className="container-text queens-container">
-          <div className="ragdoll-img-container">
-            <div className="queen">
-              <h4 className="color-header king">Tzar</h4>
-              <Image src={tzarBear} alt="Tzar" className="ragdoll-img" />
-              <div className="queen-text">
-                <p>Mr Mellow, likes to sleep with our dog</p>
-              </div>
-            </div>
-            <div className="queen">
-              <h4 className="color-header">Sapphire</h4>
-              <Image
-                src={sapphiresKitten}
-                alt="sapphire"
-                className="ragdoll-img"
-              />
-              <p>She is a real Sweetheart</p>
-            </div>
-            <div className="queen">
-              <h4 className="color-header">Amethys</h4>
-              <Image src={Amethyst} alt="amethys" className="ragdoll-img" />
-              <p>Amethyst is sweet and snuggly</p>
-            </div>
-            <div className="queen">
-              <h4 className="color-header">Aiyla</h4>
-              <Image src={aiyla} alt="ailya" className="ragdoll-img" />
-              <p>Still developing her beautiful coat</p>
-            </div>
-            <div className="queen">
-              <h4 className="color-header">Aasia </h4>
-              <Image src={aasia} alt="aasia" className="ragdoll-img" />
-              <p>She is an absolute Sweet Pea</p>
-            </div>
-            <div className="queen">
-              <h4 className="color-header ">Athena</h4>
-              <Image src={athena} alt="athena" className="ragdoll-img" />
-              <p>Athena likes to cuddle at bedtime</p>
-            </div>
-          </div>
-          <h2>
-            Interested in a Ragdoll{' '}
-            <a className="underline" href="./about.html#colors">
-              colors?
-            </a>
-          </h2>
-        </div>
-      </section> */}
+      {/* blue for male #279AF1 */}
+      {aboutSection[0]?.content_KingsQueensImages.map((image) => (
+        <>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Typography
+              variant="h4"
+              sx={{
+                color: image?.gender ? 'secondary.main' : 'primary.main',
+              }}
+            >
+              {image?.name}
+            </Typography>
+            <ImageComponent image={image} key={String(image)} />
+          </Box>
+        </>
+      ))}
 
       {/* TODO - Move to About Ragdolls Section */}
       {/* <section id="purebred">

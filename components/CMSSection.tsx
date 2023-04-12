@@ -17,7 +17,7 @@ const headerSx = {
   margin: '1em 0',
   textAlign: 'left',
   // fontWeight: '600',
-  color: 'primary.light',
+  // color: 'primary.light',
 }
 
 // Maybe generate this from a random blob generator?

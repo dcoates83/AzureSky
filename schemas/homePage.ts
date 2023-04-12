@@ -34,6 +34,39 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'content_KingsQueensImages',
+      title: 'Current - "Kings and Queens" ',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          of: [{ type: 'array' }],
+          fields: [
+            {
+              name: 'name',
+              type: 'string',
+              title: 'Name',
+              validation: (rule) => rule.required(),
+            },
+            {
+              name: 'gender',
+              type: 'boolean',
+              title:
+                'If the cat is a boy, set this to true, otherwise leave it false',
+              initialValue: false,
+              validation: (rule) => rule.required(),
+            },
+
+            {
+              name: 'description',
+              type: 'string',
+              title: 'Description',
+            },
+          ],
+        },
+      ],
+    }),
+    defineField({
       name: 'title_Assistants',
       title: 'Header - "Assistants"',
       type: 'string',
