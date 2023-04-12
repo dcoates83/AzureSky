@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material'
+import { PortableText } from '@portabletext/react'
 import React from 'react'
 
 interface CMSSectionProps {
@@ -22,7 +23,14 @@ const CMSSection = (props: CMSSectionProps) => {
         {title}
       </Typography>
 
-      <Box sx={{ color: 'text.primary' }}>{content}</Box>
+      <Box sx={{ color: 'text.primary' }}>
+        {
+          <PortableText
+            value={content}
+            // components={/* optional object of custom components to use */}
+          />
+        }
+      </Box>
     </>
   )
 }

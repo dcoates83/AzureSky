@@ -8,9 +8,29 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'title',
-      title: 'About us',
+      name: 'title_AboutUs',
+      title: 'Header - "About us" ',
       type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'content_AboutUs',
+      title: 'Content - "About us" ',
+      type: 'array',
+      of: [{ type: 'block' }],
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'title_KingsQueens',
+      title: 'Header - "Kings & Queens" ',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'content_KingsQueens',
+      title: 'Content - "Kings & Queens" ',
+      type: 'array',
+      of: [{ type: 'block' }],
       validation: (rule) => rule.required(),
     }),
   ],

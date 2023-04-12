@@ -31,46 +31,22 @@ const LandingPage = (props: LandingPageProps) => {
     <>
       {/* <MetaTags title="Home" description="Home page" /> */}
       <HeroLanding />
-      <CMSSection title={'About us'} content={aboutSection[0].title} />
-      {/* <section id="about">
-        <div className="container-text">
-          <h1 className="header-2 about">About Us</h1>
-          <p>
-            {aboutSection.title}
-            //  Azure Sky Ragdolls is TICA registered cattery, licensed and located
-            // in the city of Kamloops, British Columbia. 
-          </p>
+      <CMSSection
+        title={aboutSection[0].title_AboutUs}
+        content={aboutSection[0].content_AboutUs}
+      />
 
-          <p>
-            Azure Sky Ragdolls is, and always has been, a closed cattery meaning
-            Buyers may not visit inside the cattery. This is to protect the
-            kittens and parents from disease and parasites.
-          </p>
-        </div>
-      </section> 
-    */}
       <SectionSubHeader text="All of our cats live with us as part of our family" />
 
+      {/* <CMSSection
+        title={aboutSection[0].title_KingsQueens}
+        content={aboutSection[0].content_KingsQue}
+      /> */}
       <section id="queens">
-        <div className=" center queens-header-container">
-          {/* <Image
-            src={ragdollSplash}
-            alt="background image of cat"
-            className="background-image"
-          /> */}
-          <h1 className="header-2 about">
-            <span className="king">Kings</span> <span className="amp">&</span>{' '}
-            Queens
-          </h1>
-          <div className="queens-sub-header">
-            <p>- Tested for FeLv/FIV -</p>
-            <p>
-              We <strong>extensively genetic</strong> test <strong>all</strong>{' '}
-              of our Kings and Queens.
-            </p>
-            <p>This is to ensure buyers receive a healthy and quality cat.</p>
-          </div>
-        </div>
+        <CMSSection
+          title={aboutSection[0].title_KingsQueens}
+          content={aboutSection[0].content_KingsQueens}
+        />
         <div className="container-text queens-container">
           <div className="ragdoll-img-container">
             <div className="queen">
