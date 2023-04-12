@@ -16,41 +16,41 @@ const ImageComponent = ({ image }) => {
   const theme = useTheme()
 
   return (
-    <Box
-      sx={{
-        height: '500px',
-        width: '500px',
-        display: 'flex',
-        alignItems: 'center',
+    // <Box
+    //   sx={{
+    //     // height: '500px',
+    //     // width: '500px',
+    //     display: 'flex',
+    //     alignItems: 'center',
+    //   }}
+    // >
+    <Image
+      src={urlFor(image).image(image).auto('format').url()}
+      alt={image.alt || ' '}
+      loading="lazy"
+      width={300}
+      height={300}
+      style={{
+        display: image.isInline ? 'inline-block' : 'block',
+        aspectRatio: width / height,
+        objectFit: 'cover',
+        margin: '0 auto',
+        borderRadius: '100%',
+        border: `5px solid ${theme.palette.primary.light}`,
+        // boxShadow: theme.shadows[5],
       }}
-    >
-      <Image
-        src={urlFor(image).image(image).auto('format').url()}
-        alt={image.alt || ' '}
-        loading="lazy"
-        width={300}
-        height={300}
-        style={{
-          display: image.isInline ? 'inline-block' : 'block',
-          aspectRatio: width / height,
-          objectFit: 'cover',
-          margin: '0 auto',
-          borderRadius: '100%',
-          border: `5px solid ${theme.palette.primary.light}`,
-          // boxShadow: theme.shadows[5],
-        }}
-      />
+    />
 
-      {/* <SvgBlob
-        variant="image"
-        image={urlFor(image).image(image).auto('format').url()}
-        // image={urlFor(image).image(image.value).auto('format').url()}
-        style={{
-          objectFit: 'contain',
-        }}
-        shapeProps={{ edges: 5 }}
-      /> */}
-    </Box>
+    // {/* <SvgBlob
+    //   variant="image"
+    //   image={urlFor(image).image(image).auto('format').url()}
+    //   // image={urlFor(image).image(image.value).auto('format').url()}
+    //   style={{
+    //     objectFit: 'contain',
+    //   }}
+    //   shapeProps={{ edges: 5 }}
+    // /> */}
+    // </Box>
   )
 }
 

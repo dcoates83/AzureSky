@@ -1,4 +1,11 @@
-import { Box, Theme, Typography, useMediaQuery, useTheme } from '@mui/material'
+import {
+  Box,
+  Container,
+  Theme,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material'
 import { PortableText } from '@portabletext/react'
 import { getImageDimensions } from '@sanity/asset-utils'
 import imageUrlBuilder from '@sanity/image-url'
@@ -38,39 +45,55 @@ const LandingPage = (props: LandingPageProps) => {
     <>
       {/* <MetaTags title="Home" description="Home page" /> */}
       <HeroLanding />
-      <CMSSection
-        title={aboutSection[0]?.title_AboutUs}
-        content={aboutSection[0]?.content_AboutUs}
-      />
-
-      <SectionSubHeader text="All of our cats live with us as part of our family" />
 
       <CMSSection
         title={aboutSection[0]?.title_KingsQueens}
         content={aboutSection[0]?.content_KingsQueens}
       />
       {/* blue for male #279AF1 */}
-      {aboutSection[0]?.content_KingsQueensImages.map((image) => (
-        <>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Typography
-              variant="h4"
+      <Container
+        sx={{
+          display: 'grid',
+          flexFlow: 'column',
+
+          wordBreak: 'keep-all',
+          justifyItems: 'center',
+
+          alignItems: 'center',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          columnGap: '4em',
+        }}
+      >
+        {aboutSection[0]?.content_KingsQueensImages.map((image) => (
+          <>
+            <Box
               sx={{
-                color: image?.gender ? 'secondary.main' : 'primary.main',
+                m: 1,
+                textAlign: 'center',
               }}
             >
-              {image?.name}
-            </Typography>
-            <ImageComponent image={image} key={String(image)} />
-          </Box>
-        </>
-      ))}
+              <Typography
+                variant="h4"
+                sx={{
+                  color: image?.gender ? 'secondary.main' : 'primary.main',
+                  m: 1,
+                }}
+              >
+                {image?.name}
+              </Typography>
+              <ImageComponent image={image} key={String(image)} />
+              {/* <Typography
+                // variant="h4"
+                sx={{
+                  color: 'text.secondary',
+                }}
+              >
+                {image?.description}
+              </Typography> */}
+            </Box>
+          </>
+        ))}
+      </Container>
 
       {/* TODO - Move to About Ragdolls Section */}
       {/* <section id="purebred">
@@ -156,7 +179,12 @@ const LandingPage = (props: LandingPageProps) => {
           </p>
         </div>
       </section> */}
+      <CMSSection
+        title={aboutSection[0]?.title_AboutUs}
+        content={aboutSection[0]?.content_AboutUs}
+      />
 
+      <SectionSubHeader text="All of our cats live with us as part of our family" />
       <CMSSection
         title={aboutSection[0]?.title_Assistants}
         content={aboutSection[0]?.content_Assistants}

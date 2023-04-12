@@ -40,6 +40,7 @@ export default defineType({
       of: [
         {
           type: 'image',
+          validation: (rule) => rule.required(),
           of: [{ type: 'array' }],
           fields: [
             {
