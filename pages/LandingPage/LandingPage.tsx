@@ -1,16 +1,23 @@
-import { Box, Button, Theme, Typography, useMediaQuery } from '@mui/material'
+import { Box, Theme, Typography, useMediaQuery, useTheme } from '@mui/material'
+import { PortableText } from '@portabletext/react'
+import { getImageDimensions } from '@sanity/asset-utils'
+import imageUrlBuilder from '@sanity/image-url'
 import Image from 'next/image'
+import React from 'react'
+import { SvgBlob } from 'react-svg-blob'
 
+import { client } from '..'
 import aasia from '../../assets/Aasia.jpg'
-import aiyla from '../../assets/aiyla.jpg'
 import Amethyst from '../../assets/Amethyst.jpg'
+import tica from '../../assets/Tica.png'
+import aiyla from '../../assets/aiyla.jpg'
 import athena from '../../assets/athena-catbed.jpg'
 import sapphiresKitten from '../../assets/sapphire-with-kitten.jpg'
 import sophia2 from '../../assets/sophia-2.png'
 import sophia3 from '../../assets/sophia-3.jpg'
-import tica from '../../assets/Tica.png'
 import tzarBear from '../../assets/tzar-bear.jpg'
 import CMSSection from '../../components/CMSSection'
+import ImageComponent from '../../components/ImageComponent'
 import SectionSubHeader from '../../components/SectionSubHeader'
 import { HeroLanding } from './HeroLanding'
 
@@ -32,20 +39,20 @@ const LandingPage = (props: LandingPageProps) => {
       {/* <MetaTags title="Home" description="Home page" /> */}
       <HeroLanding />
       <CMSSection
-        title={aboutSection[0].title_AboutUs}
-        content={aboutSection[0].content_AboutUs}
+        title={aboutSection[0]?.title_AboutUs}
+        content={aboutSection[0]?.content_AboutUs}
       />
 
       <SectionSubHeader text="All of our cats live with us as part of our family" />
 
       <CMSSection
-        title={aboutSection[0].title_KingsQueens}
-        content={aboutSection[0].content_KingsQueens}
+        title={aboutSection[0]?.title_KingsQueens}
+        content={aboutSection[0]?.content_KingsQueens}
       />
       {/* <section id="queens">
         <CMSSection
-          title={aboutSection[0].title_KingsQueens}
-          content={aboutSection[0].content_KingsQueens}
+          title={aboutSection[0]?.title_KingsQueens}
+          content={aboutSection[0]?.content_KingsQueens}
         />
         <div className="container-text queens-container">
           <div className="ragdoll-img-container">
@@ -179,10 +186,22 @@ const LandingPage = (props: LandingPageProps) => {
           </p>
         </div>
       </section> */}
+
       <CMSSection
-        title={aboutSection[0].title_Assistants}
-        content={aboutSection[0].content_Assistants}
+        title={aboutSection[0]?.title_Assistants}
+        content={aboutSection[0]?.content_Assistants}
       />
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+        }}
+      >
+        {aboutSection[0]?.content_ImageAssistants?.map((image) => (
+          <ImageComponent image={image} key={String(image)} />
+        ))}
+      </Box>
       {/* <section id="sophia">
         <div className="container-text">
           <h1 className="header-2 center">
