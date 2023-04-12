@@ -26,7 +26,7 @@ interface PreviewData {
   token?: string
 }
 
-const client = createClient({
+export const client = createClient({
   projectId: 'wx24r2h9',
   dataset: 'production',
   apiVersion: '2022-11-15',

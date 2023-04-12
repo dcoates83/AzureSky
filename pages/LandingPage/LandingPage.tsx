@@ -38,11 +38,11 @@ const LandingPage = (props: LandingPageProps) => {
 
       <SectionSubHeader text="All of our cats live with us as part of our family" />
 
-      {/* <CMSSection
+      <CMSSection
         title={aboutSection[0].title_KingsQueens}
-        content={aboutSection[0].content_KingsQue}
-      /> */}
-      <section id="queens">
+        content={aboutSection[0].content_KingsQueens}
+      />
+      {/* <section id="queens">
         <CMSSection
           title={aboutSection[0].title_KingsQueens}
           content={aboutSection[0].content_KingsQueens}
@@ -93,8 +93,10 @@ const LandingPage = (props: LandingPageProps) => {
             </a>
           </h2>
         </div>
-      </section>
-      <section id="purebred">
+      </section> */}
+
+      {/* TODO - Move to About Ragdolls Section */}
+      {/* <section id="purebred">
         <div className="container-text">
           <h1 className="header-2 about">Why own a Purebred Ragdoll?</h1>
           <p>
@@ -147,8 +149,8 @@ const LandingPage = (props: LandingPageProps) => {
             guaranteed support for the life of your kitten.
           </h2>
         </div>
-      </section>
-      <section id="tica">
+      </section> */}
+      {/* <section id="tica">
         <div className="container-text">
           <h4>Why Tica and what is it?</h4>
           <p>
@@ -176,8 +178,12 @@ const LandingPage = (props: LandingPageProps) => {
             for current, reliable, and interesting information about all cats.
           </p>
         </div>
-      </section>
-      <section id="sophia">
+      </section> */}
+      <CMSSection
+        title={aboutSection[0].title_Assistants}
+        content={aboutSection[0].content_Assistants}
+      />
+      {/* <section id="sophia">
         <div className="container-text">
           <h1 className="header-2 center">
             Our assistant kitten worker
@@ -206,7 +212,7 @@ const LandingPage = (props: LandingPageProps) => {
             to other cats, people, and dogs.
           </h2>
         </div>
-      </section>
+      </section> */}
     </>
   )
 }
