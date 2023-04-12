@@ -1,28 +1,6 @@
-import {
-  Box,
-  Container,
-  Theme,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material'
-import { PortableText } from '@portabletext/react'
-import { getImageDimensions } from '@sanity/asset-utils'
-import imageUrlBuilder from '@sanity/image-url'
-import Image from 'next/image'
+import { Box, Container, Typography, useMediaQuery } from '@mui/material'
 import React from 'react'
-import { SvgBlob } from 'react-svg-blob'
 
-import { client } from '..'
-import aasia from '../../assets/Aasia.jpg'
-import Amethyst from '../../assets/Amethyst.jpg'
-import tica from '../../assets/Tica.png'
-import aiyla from '../../assets/aiyla.jpg'
-import athena from '../../assets/athena-catbed.jpg'
-import sapphiresKitten from '../../assets/sapphire-with-kitten.jpg'
-import sophia2 from '../../assets/sophia-2.png'
-import sophia3 from '../../assets/sophia-3.jpg'
-import tzarBear from '../../assets/tzar-bear.jpg'
 import CMSSection from '../../components/CMSSection'
 import ImageComponent from '../../components/ImageComponent'
 import SectionSubHeader from '../../components/SectionSubHeader'
@@ -45,20 +23,36 @@ const LandingPage = (props: LandingPageProps) => {
     <>
       {/* <MetaTags title="Home" description="Home page" /> */}
       <HeroLanding />
+      <Box sx={{ width: '100vw', mb: 20 }}>
+        <div className="custom-shape-divider-top-1681342266">
+          <svg
+            data-name="Layer 1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+              className="shape-fill"
+            ></path>
+          </svg>
+        </div>
+      </Box>
+      <Container maxWidth="lg">
+        <CMSSection
+          title={aboutSection[0]?.title_KingsQueens}
+          content={aboutSection[0]?.content_KingsQueens}
+        />
+      </Container>
 
-      <CMSSection
-        title={aboutSection[0]?.title_KingsQueens}
-        content={aboutSection[0]?.content_KingsQueens}
-      />
       {/* blue for male #279AF1 */}
       <Container
+        maxWidth="lg"
         sx={{
           display: 'grid',
           flexFlow: 'column',
-
           wordBreak: 'keep-all',
           justifyItems: 'center',
-
           alignItems: 'center',
           gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
           columnGap: '4em',
@@ -94,9 +88,9 @@ const LandingPage = (props: LandingPageProps) => {
           </>
         ))}
       </Container>
-
-      {/* TODO - Move to About Ragdolls Section */}
-      {/* <section id="purebred">
+      <Container maxWidth="md">
+        {/* TODO - Move to About Ragdolls Section */}
+        {/* <section id="purebred">
         <div className="container-text">
           <h1 className="header-2 about">Why own a Purebred Ragdoll?</h1>
           <p>
@@ -150,7 +144,7 @@ const LandingPage = (props: LandingPageProps) => {
           </h2>
         </div>
       </section> */}
-      {/* <section id="tica">
+        {/* <section id="tica">
         <div className="container-text">
           <h4>Why Tica and what is it?</h4>
           <p>
@@ -179,57 +173,28 @@ const LandingPage = (props: LandingPageProps) => {
           </p>
         </div>
       </section> */}
-      <CMSSection
-        title={aboutSection[0]?.title_AboutUs}
-        content={aboutSection[0]?.content_AboutUs}
-      />
+        <CMSSection
+          title={aboutSection[0]?.title_AboutUs}
+          content={aboutSection[0]?.content_AboutUs}
+        />
 
-      <SectionSubHeader text="All of our cats live with us as part of our family" />
-      <CMSSection
-        title={aboutSection[0]?.title_Assistants}
-        content={aboutSection[0]?.content_Assistants}
-      />
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-        }}
-      >
-        {aboutSection[0]?.content_ImageAssistants?.map((image) => (
-          <ImageComponent image={image} key={String(image)} />
-        ))}
-      </Box>
-      {/* <section id="sophia">
-        <div className="container-text">
-          <h1 className="header-2 center">
-            Our assistant kitten worker
-            <br />- Nanny Sophia -
-          </h1>
-          <div className="sophia">
-            <Image src={sophia2} alt="sophia" className="ragdoll-img" />
-            <Image src={sophia3} alt="sophia" className="ragdoll-img" />
-          </div>
-          <p>
-            Sophia has been raised with cats since she was little; they are part
-            of her family. She does offend them to no end when they are grown
-            into adults as she insists that she must still clean their face and
-            bottoms. As such all the kittens we raise do spend a significant
-            amount of time looking like Elvis.
-          </p>
-          <p>
-            We socialize our kittens well. They are part of our home and used to
-            all the strange noises and sights most homes have. Nanny Sophia of
-            course is constantly “on the job”. The Socialization by us, before
-            they&apos;re 2 months old is extremely important to providing you
-            happy, well-balanced cat.
-          </p>
-          <h2>
-            All of our animals receive loving attention and are well socialized
-            to other cats, people, and dogs.
-          </h2>
-        </div>
-      </section> */}
+        <SectionSubHeader text="All of our cats live with us as part of our family" />
+        <CMSSection
+          title={aboutSection[0]?.title_Assistants}
+          content={aboutSection[0]?.content_Assistants}
+        />
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+          }}
+        >
+          {aboutSection[0]?.content_ImageAssistants?.map((image) => (
+            <ImageComponent image={image} key={String(image)} />
+          ))}
+        </Box>
+      </Container>
     </>
   )
 }

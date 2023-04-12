@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import React from 'react'
 
 const WaveDivider = () => {
@@ -16,6 +17,7 @@ const WaveDivider = () => {
           ></path>
         </svg>
       </div>
+    
     </>
   )
 }
