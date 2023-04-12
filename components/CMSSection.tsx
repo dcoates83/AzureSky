@@ -4,6 +4,7 @@ import { getImageDimensions } from '@sanity/asset-utils'
 import imageUrlBuilder from '@sanity/image-url'
 import Image from 'next/image'
 import React from 'react'
+import { SvgBlob } from 'react-svg-blob'
 
 import { client } from '../pages'
 interface CMSSectionProps {
@@ -18,6 +19,9 @@ const headerSx = {
   // fontWeight: '600',
   color: 'primary.light',
 }
+
+// Maybe generate this from a random blob generator?
+// https://www.npmjs.com/package/unique-blob
 const ImageComponent = (image) => {
   const { width, height } = getImageDimensions(image.value)
   const builder = imageUrlBuilder(client)
@@ -25,26 +29,26 @@ const ImageComponent = (image) => {
     return builder.image(source)
   }
   const theme = useTheme()
+
   return (
-    <Box
-      sx={{
-        height: 'inherit',
-        position: 'relative',
-      }}
-    >
-      <Image
+    <Box sx={{ height: '500px', width: '500px', display: 'flex' }}>
+      {/* <Image
         src={urlFor(image).image(image.value).auto('format').url()}
         alt={image.value.alt || ' '}
         loading="lazy"
         width={width}
         height={height}
         style={{
-          // Display alongside text if image appears inside a block text span
           display: image.isInline ? 'inline-block' : 'block',
           borderRadius: theme.shape.borderRadius,
           // Avoid jumping around with aspect-ratio CSS property
           // aspectRatio: width / height,
         }}
+      /> */}
+      <SvgBlob
+        variant="image"
+        image={urlFor(image).image(image.value).auto('format').url()}
+        shapeProps={{ edges: 5 }}
       />
     </Box>
   )
