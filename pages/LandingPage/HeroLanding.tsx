@@ -29,7 +29,11 @@ export const HeroLanding = () => {
   return (
     <>
       <Box
-        sx={{ height: '100dvh', display: 'grid', gridTemplateRows: '9fr 1fr' }}
+        sx={{
+          height: '100dvh',
+          display: 'grid',
+          gridTemplateRows: '9fr 1fr',
+        }}
       >
         <Box sx={containerSx}>
           <Box sx={heroItemContainer}>

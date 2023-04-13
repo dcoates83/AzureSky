@@ -3,6 +3,7 @@ import React from 'react'
 
 import CMSSection from '../../components/CMSSection'
 import ImageComponent from '../../components/ImageComponent'
+import ImageContainer from '../../components/ImageContainer'
 import SectionSubHeader from '../../components/SectionSubHeader'
 import { HeroLanding } from './HeroLanding'
 
@@ -38,7 +39,7 @@ const LandingPage = (props: LandingPageProps) => {
           </svg>
         </div>
       </Box>
-      <Container maxWidth="lg">
+      <Container maxWidth="md">
         <CMSSection
           title={aboutSection[0]?.title_KingsQueens}
           content={aboutSection[0]?.content_KingsQueens}
@@ -46,37 +47,27 @@ const LandingPage = (props: LandingPageProps) => {
       </Container>
 
       {/* blue for male #279AF1 */}
-      <Container
-        maxWidth="lg"
-        sx={{
-          display: 'grid',
-          flexFlow: 'column',
-          wordBreak: 'keep-all',
-          justifyItems: 'center',
-          alignItems: 'center',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-          columnGap: '4em',
-        }}
-      >
-        {aboutSection[0]?.content_KingsQueensImages.map((image) => (
-          <>
-            <Box
-              sx={{
-                m: 1,
-                textAlign: 'center',
-              }}
-            >
-              <Typography
-                variant="h4"
+      <Container maxWidth="lg">
+        <ImageContainer>
+          {aboutSection[0]?.content_KingsQueensImages.map((image) => (
+            <>
+              <Box
                 sx={{
-                  color: image?.gender ? 'secondary.main' : 'primary.main',
                   m: 1,
+                  textAlign: 'center',
                 }}
               >
-                {image?.name}
-              </Typography>
-              <ImageComponent image={image} key={String(image)} />
-              {/* <Typography
+                <ImageComponent image={image} key={String(image)} />
+                <Typography
+                  variant="h5"
+                  sx={{
+                    color: image?.gender ? 'secondary.main' : 'primary.main',
+                    m: 1,
+                  }}
+                >
+                  {image?.name}
+                </Typography>
+                {/* <Typography
                 // variant="h4"
                 sx={{
                   color: 'text.secondary',
@@ -84,9 +75,10 @@ const LandingPage = (props: LandingPageProps) => {
               >
                 {image?.description}
               </Typography> */}
-            </Box>
-          </>
-        ))}
+              </Box>
+            </>
+          ))}
+        </ImageContainer>
       </Container>
       <Container maxWidth="md">
         {/* TODO - Move to About Ragdolls Section */}
@@ -183,17 +175,11 @@ const LandingPage = (props: LandingPageProps) => {
           title={aboutSection[0]?.title_Assistants}
           content={aboutSection[0]?.content_Assistants}
         />
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-          }}
-        >
+        <ImageContainer>
           {aboutSection[0]?.content_ImageAssistants?.map((image) => (
             <ImageComponent image={image} key={String(image)} />
           ))}
-        </Box>
+        </ImageContainer>
       </Container>
     </>
   )

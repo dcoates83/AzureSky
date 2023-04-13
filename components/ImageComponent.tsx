@@ -36,7 +36,7 @@ const ImageComponent = ({ image }) => {
         objectFit: 'cover',
         margin: '0 auto',
         borderRadius: '100%',
-        border: `5px solid ${theme.palette.primary.light}`,
+        // border: `5px solid ${theme.palette.primary.light}`,
         // boxShadow: theme.shadows[5],
       }}
     />
