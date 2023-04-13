@@ -163,7 +163,7 @@ const LandingPage = (props: LandingPageProps) => {
         />
         <ImageContainer>
           {aboutSection[0]?.content_ImageAssistants?.map((image) => (
-            <ImageComponent image={image} key={encodeURI(image)} />
+            <ImageComponent image={image} key={image} />
           ))}
         </ImageContainer>
       </Container>
