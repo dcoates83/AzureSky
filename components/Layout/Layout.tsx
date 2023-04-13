@@ -3,7 +3,7 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded'
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded'
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded'
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded'
-import { Box } from '@mui/material'
+import { Box, Container } from '@mui/material'
 import AlertBanner from 'components/AlertBanner'
 
 import Footer from './Footer'
@@ -31,7 +31,10 @@ export default function BlogLayout({
             // { name: 'Shop', icon: <ShoppingCartRoundedIcon /> },
           ]}
         />
-        <Box className="page-container">{children}</Box>
+        <Container maxWidth="lg" sx={{ overflow: 'hidden' }}>
+          {/* <Container className="page-container" maxWidth="md"> */}
+          {children}
+        </Container>
         <Footer />
       </div>
     </>

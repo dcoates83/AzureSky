@@ -4,6 +4,7 @@ import Image from 'next/image'
 import aasia from '../assets/aasia-kitten.jpg'
 import catTower from '../assets/cat-cattower.jpg'
 import deposit from '../assets/kittens-deposit.jpg'
+import CMSSection from '../components/CMSSection'
 import FaqQuestion from '../components/FaqQuestion'
 import Logo from '../public/Logo'
 
@@ -130,11 +131,15 @@ const Purchasing = () => {
       /> */}
       <Container maxWidth="md">
         <section id="purchasing">
+          <CMSSection
+            title={'Should I go on a call List or should I reserve?'}
+            content={undefined}
+          />
           <div className="container-text">
             <header>
               <h1 className="header-2">Purchasing a Kitten</h1>
             </header>
-            <h3>Should I go on a call List or should I reserve?</h3>
+            {/* <h3>Should I go on a call List or should I reserve?</h3> */}
             <p>
               <span className="underline">Its best to reserve a kitten:</span>
               Ragdolls are highly coveted so 95% of our kittens are sold by
