@@ -33,6 +33,7 @@ export const HeroLanding = () => {
           height: '100dvh',
           display: 'grid',
           gridTemplateRows: '9fr 1fr',
+          // width: '100vw',
         }}
       >
         <Box sx={containerSx}>

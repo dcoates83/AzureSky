@@ -35,6 +35,7 @@ function NavBar(props: Props) {
     if (item === 'Home') {
       return router.push(`/`)
     }
+    // If the item has a space in it, replace it with a no space
     router.push(`/${item.replace(/\s+/, '')}`)
   }
 

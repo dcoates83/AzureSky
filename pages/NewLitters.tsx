@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-const NewLittersPage = () => {
+const NewLitters = () => {
   return (
     <>
       {/* <MetaTags title="NewLitters" description="NewLitters page" /> */}
@@ -74,11 +74,13 @@ const NewLittersPage = () => {
               <div className="blog-posted">
                 {/* <h2 className="posted-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2> */}
                 <a href="{{ post.url | relative_url }}">
-                  <Image
+                  {/* <Image
+                    width={300}
+                    height={300}
                     className="blog-img"
                     src="{{ post.thumbnail | relative_url}}"
                     alt={''}
-                  />{' '}
+                  />{' '} */}
                 </a>
                 <small>
                   {/* <h4 className="expected"><strong>Expected: {{expected }}</strong></h4>   */}
@@ -102,4 +104,4 @@ const NewLittersPage = () => {
   )
 }
 
-export default NewLittersPage
+export default NewLitters
