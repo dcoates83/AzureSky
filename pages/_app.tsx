@@ -9,6 +9,8 @@ import {
 } from '@mui/material/styles'
 import { AppProps } from 'next/app'
 
+import Layout from '../components/Layout/Layout'
+
 const theme = createTheme({
   typography: {
     allVariants: {
@@ -30,7 +32,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <ThemeProvider theme={responsiveTheme}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </>
   )

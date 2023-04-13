@@ -2,7 +2,7 @@ import Container from 'components/BlogContainer'
 import BlogHeader from 'components/BlogHeader'
 import HeroPost from 'components/HeroPost'
 import IndexPageHead from 'components/IndexPageHead'
-import Layout from 'components/Layout/BlogLayout'
+import Layout from 'components/Layout/Layout'
 import MoreStories from 'components/MoreStories'
 import IntroTemplate from 'intro-template'
 import * as demo from 'lib/demo.data'
@@ -27,10 +27,10 @@ export default function IndexPage(props: IndexPageProps) {
     <>
       <IndexPageHead settings={settings} />
 
-      <Layout preview={preview} loading={loading}>
-        <Container>
-          <LandingPage aboutSection={pages} />
-          {/* <BlogHeader title={title} description={description} level={1} />
+      {/* <Layout preview={preview} loading={loading}> */}
+      <Container>
+        <LandingPage aboutSection={pages} />
+        {/* <BlogHeader title={title} description={description} level={1} />
           {heroPost && (
             <HeroPost
               title={heroPost.title}
@@ -42,9 +42,9 @@ export default function IndexPage(props: IndexPageProps) {
             />
           )}
           {morePosts.length > 0 && <MoreStories posts={morePosts} />} */}
-        </Container>
-        {/* <IntroTemplate /> */}
-      </Layout>
+      </Container>
+      {/* <IntroTemplate /> */}
+      {/* </Layout> */}
     </>
   )
 }

@@ -13,12 +13,6 @@ interface LandingPageProps {
 
 const LandingPage = (props: LandingPageProps) => {
   const { aboutSection } = props
-  // const aboutSection = await client.fetch(`
-  //   *[_type == "aboutSection"]{
-  //     title,
-  //     description
-  //   }
-  // `)
 
   return (
     <>
@@ -47,7 +41,7 @@ const LandingPage = (props: LandingPageProps) => {
       </Container>
 
       {/* blue for male #279AF1 */}
-      <Container maxWidth="lg">
+      <Container maxWidth="md">
         <ImageContainer>
           {aboutSection[0]?.content_KingsQueensImages.map((image) => (
             <>
@@ -57,7 +51,7 @@ const LandingPage = (props: LandingPageProps) => {
                   textAlign: 'center',
                 }}
               >
-                <ImageComponent image={image} key={String(image)} />
+                <ImageComponent image={image} key={encodeURI(image)} />
                 <Typography
                   variant="h5"
                   sx={{
@@ -67,14 +61,6 @@ const LandingPage = (props: LandingPageProps) => {
                 >
                   {image?.name}
                 </Typography>
-                {/* <Typography
-                // variant="h4"
-                sx={{
-                  color: 'text.secondary',
-                }}
-              >
-                {image?.description}
-              </Typography> */}
               </Box>
             </>
           ))}
@@ -177,7 +163,7 @@ const LandingPage = (props: LandingPageProps) => {
         />
         <ImageContainer>
           {aboutSection[0]?.content_ImageAssistants?.map((image) => (
-            <ImageComponent image={image} key={String(image)} />
+            <ImageComponent image={image} key={encodeURI(image)} />
           ))}
         </ImageContainer>
       </Container>

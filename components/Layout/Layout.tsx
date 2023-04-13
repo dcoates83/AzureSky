@@ -9,18 +9,19 @@ import AlertBanner from 'components/AlertBanner'
 import Footer from './Footer'
 import NavBar from './NavBar'
 export default function BlogLayout({
-  preview,
-  loading,
+  // preview,
+  // loading,
   children,
 }: {
-  preview: boolean
-  loading?: boolean
+  // preview: boolean
+  // loading?: boolean
   children: React.ReactNode
 }) {
   return (
     <>
       <div className="min-h-screen">
-        <AlertBanner preview={preview} loading={loading} />
+        {/* <AlertBanner preview={preview} loading={loading} /> */}
+        {/* <AlertBanner preview={preview} loading={loading} /> */}
         <NavBar
           navItems={[
             { name: 'Home', icon: <HomeRoundedIcon /> },

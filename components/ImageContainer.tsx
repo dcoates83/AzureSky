@@ -11,7 +11,6 @@ const ImageContainer = (props) => {
     <Box
       sx={{
         display: 'grid',
-        // flexFlow: 'column',
         wordBreak: 'keep-all',
         justifyItems: 'center',
         alignItems: 'center',
