@@ -1,4 +1,4 @@
-import { Box, Theme, Typography, useTheme } from '@mui/material'
+import { Box, SxProps, Theme, Typography, useTheme } from '@mui/material'
 import { PortableText } from '@portabletext/react'
 import { getImageDimensions } from '@sanity/asset-utils'
 import imageUrlBuilder from '@sanity/image-url'
@@ -10,6 +10,9 @@ import { client } from '../pages'
 interface CMSSectionProps {
   title: string
   content: any
+  titleSx?: SxProps<Theme>
+  headerVariant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  contentSx?: SxProps<Theme>
 }
 
 const headerSx = {
@@ -55,7 +58,7 @@ const ImageComponent = (image) => {
 }
 
 const CMSSection = (props: CMSSectionProps) => {
-  const { title, content } = props
+  const { title, content, contentSx, headerVariant, titleSx } = props
 
   const components = {
     types: {
@@ -67,7 +70,7 @@ const CMSSection = (props: CMSSectionProps) => {
 
   return (
     <>
-      <Typography variant="h4" sx={headerSx}>
+      <Typography variant={headerVariant || 'h4'} sx={titleSx || headerSx}>
         {title}
       </Typography>
 
