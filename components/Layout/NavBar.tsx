@@ -66,7 +66,7 @@ function NavBar(props: Props) {
                     sx={{
                       color: 'text.primary',
                       textTransform: 'capitalize',
-                      fontSize: '1.125rem',
+                      fontSize: '1.12rem',
                     }}
                     onClick={() => _handleNavigate(item.name)}
                   >

@@ -31,7 +31,7 @@ export default function BlogLayout({
             // { name: 'Shop', icon: <ShoppingCartRoundedIcon /> },
           ]}
         />
-        <Container maxWidth="lg" sx={{ overflow: 'hidden' }}>
+        <Container maxWidth="lg" sx={{ overflow: 'hidden', pt: 4 }}>
           {/* <Container className="page-container" maxWidth="md"> */}
           {children}
         </Container>

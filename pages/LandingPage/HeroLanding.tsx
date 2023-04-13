@@ -30,7 +30,7 @@ export const HeroLanding = () => {
     <>
       <Box
         sx={{
-          height: '100dvh',
+          height: '96.5dvh',
           display: 'grid',
           gridTemplateRows: '9fr 1fr',
           // width: '100vw',
