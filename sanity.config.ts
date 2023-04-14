@@ -8,13 +8,16 @@ import { previewDocumentNode } from 'plugins/previewPane'
 import { productionUrl } from 'plugins/productionUrl'
 import { settingsPlugin, settingsStructure } from 'plugins/settings'
 import { defineConfig } from 'sanity'
-import { deskTool } from 'sanity/desk'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
+import { deskTool } from 'sanity/desk'
 import aboutPage from 'schemas/aboutPageT'
 import authorType from 'schemas/author'
 import homeType from 'schemas/homePage'
 import postType from 'schemas/post'
 import settingsType from 'schemas/settings'
+
+import faqType from './schemas/faqType'
+import purchasingPage from './schemas/purchasingPage'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Azure Sky Ragdolls'
@@ -26,7 +29,15 @@ export default defineConfig({
   title,
   schema: {
     // If you want more content types, you can add them to this array
-    types: [authorType, postType, settingsType, homeType, aboutPage],
+    types: [
+      authorType,
+      postType,
+      settingsType,
+      homeType,
+      aboutPage,
+      purchasingPage,
+      faqType,
+    ],
   },
   plugins: [
     deskTool({

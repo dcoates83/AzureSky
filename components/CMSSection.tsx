@@ -70,12 +70,14 @@ const CMSSection = (props: CMSSectionProps) => {
 
   return (
     <>
-      <Typography variant={headerVariant || 'h4'} sx={titleSx || headerSx}>
-        {title}
-      </Typography>
+      <Box>
+        <Typography variant={headerVariant || 'h4'} sx={titleSx || headerSx}>
+          {title}
+        </Typography>
 
-      <Box sx={{ color: 'text.primary' }}>
-        {<PortableText value={content} components={components} />}
+        <Box sx={{ color: 'text.primary' }}>
+          {<PortableText value={content} components={components} />}
+        </Box>
       </Box>
     </>
   )

@@ -183,7 +183,7 @@ const Purchasing = () => {
               the birth of their kitten - we have been exceptionally lucky that
               every new Forever Family has ended up with the kitten they wanted.
             </p>
-            <div className="deposit-price">
+            {/* <div className="deposit-price">
               <Image
                 src={deposit}
                 alt="kitten on a couch"
@@ -221,7 +221,7 @@ const Purchasing = () => {
                   </g>
                 </svg>
               </div>
-            </div>
+            </div> */}
             <div className="deposit-question">
               <p>
                 <strong>Why are deposits so much?</strong>
@@ -307,7 +307,7 @@ const Purchasing = () => {
             </ol>
           </div>
         </section>
-        <section id="guarantee">
+        {/* <section id="guarantee">
           <div className="container-text">
             <header>
               <h1 className="header-2">
@@ -523,7 +523,7 @@ const Purchasing = () => {
                 </ul>
               </div>
               <div className="guarantee-grid-image">
-                {/* <?xml version="1.0" encoding="UTF-8"?> */}
+          
                 <svg
                   className="doctor"
                   width="499.49"
@@ -1032,7 +1032,8 @@ const Purchasing = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> 
+      */}
         <section id="pick-up">
           <div className="container-text">
             <h2>We take very good care of them until you can pick them up!</h2>

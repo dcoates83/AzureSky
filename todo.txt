@@ -1,0 +1,2 @@
+litters set to expire
+Send a email when the litters page is outdated

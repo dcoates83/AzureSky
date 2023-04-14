@@ -76,28 +76,38 @@ const AboutPage = ({ aboutPage }) => {
             content={aboutPage[0]?.content_RagdollHistory}
           />
           <ImageContainer className="ragdoll-history-img">
-            <Image src={fugianna} alt="fugianna cat" className="history-img" />
+            <Image
+              src={fugianna}
+              alt="fugianna cat"
+              className="history-img"
+              style={{ borderRadius: 8 }}
+            />
             <Image
               src={daddyWarbucks}
               alt="daddy warbucks cat"
               className="history-img"
+              style={{ borderRadius: 8 }}
             />
             <Image
+              style={{ borderRadius: 8 }}
               src={buckwheat}
               alt="buckwheat cat"
               className="history-img"
             />
           </ImageContainer>
-          <CMSSection
-            title={aboutPage[0]?.title_GrumpyCat}
-            content={aboutPage[0]?.content_GrumpyCat}
-          />{' '}
-          <Image
-            src={grumpyCat}
-            height={300}
-            alt="grumpy cat"
-            className="heading-img"
-          />
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <CMSSection
+              title={aboutPage[0]?.title_GrumpyCat}
+              content={aboutPage[0]?.content_GrumpyCat}
+            />{' '}
+            <Image
+              src={grumpyCat}
+              style={{ borderRadius: 8, marginLeft: '1em' }}
+              height={300}
+              alt="grumpy cat"
+              className="heading-img"
+            />
+          </Box>
           <CMSSection
             title={aboutPage[0]?.title_AppearanceRagdolls}
             content={aboutPage[0]?.content_AppearanceRagdolls}
