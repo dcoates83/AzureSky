@@ -14,7 +14,7 @@ const ImageContainer = (props) => {
         wordBreak: 'keep-all',
         justifyItems: 'center',
         alignItems: 'center',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
         columnGap: '4em',
       }}
     >

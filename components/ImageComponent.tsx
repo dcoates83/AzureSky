@@ -16,14 +16,6 @@ const ImageComponent = ({ image }) => {
   const theme = useTheme()
 
   return (
-    // <Box
-    //   sx={{
-    //     // height: '500px',
-    //     // width: '500px',
-    //     display: 'flex',
-    //     alignItems: 'center',
-    //   }}
-    // >
     <Image
       src={urlFor(image).image(image).auto('format').url()}
       alt={image.alt || ' '}
@@ -40,17 +32,6 @@ const ImageComponent = ({ image }) => {
         // boxShadow: theme.shadows[5],
       }}
     />
-
-    // {/* <SvgBlob
-    //   variant="image"
-    //   image={urlFor(image).image(image).auto('format').url()}
-    //   // image={urlFor(image).image(image.value).auto('format').url()}
-    //   style={{
-    //     objectFit: 'contain',
-    //   }}
-    //   shapeProps={{ edges: 5 }}
-    // /> */}
-    // </Box>
   )
 }
 

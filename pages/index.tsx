@@ -18,11 +18,11 @@ interface PageProps {
   homePage: any
 }
 
-interface Query {
+export interface Query {
   [key: string]: string
 }
 
-interface PreviewData {
+export interface PreviewData {
   token?: string
 }
 

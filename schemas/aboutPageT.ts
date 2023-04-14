@@ -34,7 +34,7 @@ export default defineType({
     }),
     defineField({
       name: 'content_RagdollHistoryImages',
-      title: 'Current - "Kings and Queens" ',
+      title: 'Current - "History Images" ',
       type: 'array',
       of: [
         {
@@ -72,13 +72,13 @@ export default defineType({
     }),
     defineField({
       name: 'title_ColorPatterns',
-      title: 'Header - "Appearance Ragdolls" ',
+      title: 'Header - "Color Patterns" ',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'content_ColorPatterns',
-      title: 'Content - "Appearance Ragdolls" ',
+      title: 'Content - "Color Patterns" ',
       type: 'array',
       of: [{ type: 'block' }],
       validation: (rule) => rule.required(),
@@ -88,6 +88,12 @@ export default defineType({
       title: 'Header - "Color Points" ',
       type: 'string',
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'content_ColorPoints',
+      title: 'Content - "Color Points (Optional)" ',
+      type: 'array',
+      of: [{ type: 'block' }],
     }),
     defineField({
       name: 'content_ColorPointsImages',
@@ -100,9 +106,9 @@ export default defineType({
           of: [{ type: 'array' }],
           fields: [
             {
-              name: 'name',
+              name: 'color',
               type: 'string',
-              title: 'Name',
+              title: 'Color',
               validation: (rule) => rule.required(),
             },
             {
@@ -116,7 +122,7 @@ export default defineType({
     }),
     defineField({
       name: 'title_ColorVariations',
-      title: 'Header - "Color Points" ',
+      title: 'Header - "Color Variations" ',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
