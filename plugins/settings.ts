@@ -54,7 +54,7 @@ export const settingsStructure = (
     )
 
     return S.list()
-      .title('Content')
+      .title('Website')
       .items([settingsListItem, S.divider(), ...defaultListItems])
   }
 }

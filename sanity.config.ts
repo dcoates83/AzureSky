@@ -16,7 +16,10 @@ import homeType from 'schemas/homePage'
 import postType from 'schemas/post'
 import settingsType from 'schemas/settings'
 
+import { pagesStructure } from './plugins/pages'
 import faqType from './schemas/faqType'
+import newLitters from './schemas/newLitters'
+import newLittersTest from './schemas/newLittersTest'
 import purchasingPage from './schemas/purchasingPage'
 
 const title =
@@ -30,29 +33,33 @@ export default defineConfig({
   schema: {
     // If you want more content types, you can add them to this array
     types: [
-      authorType,
-      postType,
-      settingsType,
+      // authorType,
+      // postType,
+      // settingsType,
       homeType,
       aboutPage,
       purchasingPage,
       faqType,
+      newLitters,
+      newLittersTest,
     ],
   },
   plugins: [
     deskTool({
-      structure: settingsStructure(settingsType),
+      structure: pagesStructure([homeType, purchasingPage, newLitters]),
+      // structure: settingsStructure(settingsType),
       // `defaultDocumentNode` is responsible for adding a “Preview” tab to the document pane
       defaultDocumentNode: previewDocumentNode({ apiVersion, previewSecretId }),
     }),
     // Configures the global "new document" button, and document actions, to suit the Settings document singleton
-    settingsPlugin({ type: settingsType.name }),
+    // settingsPlugin({ type: homeType.name }),
     // Add the "Open preview" action
-    productionUrl({
-      apiVersion,
-      previewSecretId,
-      types: [postType.name, settingsType.name],
-    }),
+    // productionUrl({
+    //   apiVersion,
+    //   previewSecretId,
+    //   // types: [postType.name],
+    //   // types: [postType.name, settingsType.name],
+    // }),
     // Add an image asset source for Unsplash
     unsplashImageAsset(),
     // Vision lets you query your content with GROQ in the studio
