@@ -30,44 +30,25 @@ import { type StructureResolver } from 'sanity/desk'
 //   }
 // })
 
-// The StructureResolver is how we're changing the DeskTool structure to linking to a single "Settings" document, instead of rendering "settings" in a list
-// like how "Post" and "Author" is handled.
+// This code filters the list of pages in the content studio to only show pages that are in the pages array. It does this by checking the ID of the list item, and checking if the ID matches any of the pages in the array. If the ID matches the ID of a page in the array, the code will not display the list item. If the ID does not match the ID of a page in the array, the code will display the list item.
+
 export const pagesStructure = (
   pages: DocumentDefinition[]
-): // typeDef: DocumentDefinition
-StructureResolver => {
+): StructureResolver => {
   return (S) => {
-    // The `Settings` root list item
-    // const settingsListItem = // A singleton not using `documentListItem`, eg no built-in preview
-    //   S.listItem()
-    //     .title(typeDef.title)
-    //     .icon(typeDef.icon)
-    //     .child(
-    //       S.editor()
-    //         .id(typeDef.name)
-    //         .schemaType(typeDef.name)
-    //         .documentId(typeDef.name)
-    //     )
-
-    // // The default root list items (except custom ones)
-
     const defaultListItems = S.documentTypeListItems().filter((listItem) => {
-      console.log(listItem)
-      const duplicatePageType = pages.find(
-        (page) => page.name === listItem.getId()
-      )
-      if (duplicatePageType && duplicatePageType.name === listItem.getId()) {
+      // Get the ID of the list item
+      const id = listItem.getId()
+
+      // Check if the page already exists in the pages list
+      const pageExists = pages.find((page) => page.name === id)
+
+      // If it exists, return
+      if (pageExists) {
         return
       }
+      // Otherwise, return the list item
       return listItem
-      // filter the list items to only include the ones that are in the pages array
-      // and not the ones that are in the pages array
-      // const typeDef = pages.filter((page) => page.name === listItem.getId())
-      // if (listItem.getId() !== typeDef?.name) {
-      //   return listItem
-      // }
-      // return typeDef
-      // return listItem.getId() !== typeDef.name
     })
 
     const pagesList = S.list()
@@ -84,19 +65,32 @@ StructureResolver => {
               .documentId('purchasingPage')
           ),
         S.listItem()
-          .title('New Litters')
+          .title('New Litters Page')
           .child(
-            S.document().schemaType('newLitters').documentId('newLitters')
+            S.list()
+              .title('Manage New Litters')
+              .items([
+                S.listItem()
+                  .title('Upcoming litters')
+                  .child(
+                    S.document()
+                      .schemaType('newLitters')
+                      .documentId('newLitters')
+                  ),
+                S.listItem()
+                  .title('Post new litters')
+                  .child(S.documentTypeList('newLittersTest')),
+              ])
+              .id('testId')
           ),
         // S.listItem()
-        //   .title('Purchasing Page')
-        //   .child(S.document().schemaType('purchasingPage')),
+        //   .title('New Litters')
+        //   .child(
+        //     S.document().schemaType('newLitters').documentId('newLitters')
+        //   ),
+
         ...defaultListItems,
-        // ...S.documentTypeListItems(),
       ])
     return pagesList
-    // return S.list()
-    //   .title('Website')
-    //   .items([...defaultListItems, pagesList])
   }
 }

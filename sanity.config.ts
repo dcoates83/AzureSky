@@ -46,7 +46,12 @@ export default defineConfig({
   },
   plugins: [
     deskTool({
-      structure: pagesStructure([homeType, purchasingPage, newLitters]),
+      structure: pagesStructure([
+        homeType,
+        purchasingPage,
+        newLitters,
+        newLittersTest,
+      ]),
       // structure: settingsStructure(settingsType),
       // `defaultDocumentNode` is responsible for adding a “Preview” tab to the document pane
       defaultDocumentNode: previewDocumentNode({ apiVersion, previewSecretId }),
