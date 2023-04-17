@@ -17,10 +17,11 @@ import postType from 'schemas/post'
 import settingsType from 'schemas/settings'
 
 import { pagesStructure } from './plugins/pages'
-import faqType from './schemas/faqType'
 import newLitters from './schemas/newLitters'
 import newLittersTest from './schemas/newLittersTest'
-import purchasingPage from './schemas/purchasingPage'
+import faqType from './schemas/purchasing/faqType'
+import purchasing from './schemas/purchasing/purchasing'
+import purchasingPage from './schemas/purchasing/purchasingPage'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Azure Sky Ragdolls'
@@ -36,6 +37,7 @@ export default defineConfig({
       // authorType,
       // postType,
       // settingsType,
+      purchasing,
       homeType,
       aboutPage,
       purchasingPage,
@@ -47,6 +49,7 @@ export default defineConfig({
   plugins: [
     deskTool({
       structure: pagesStructure([
+        purchasing,
         homeType,
         purchasingPage,
         newLitters,

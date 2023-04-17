@@ -51,44 +51,56 @@ export const pagesStructure = (
       return listItem
     })
 
+    const newLittersPage = S.listItem()
+      .title('New Litters Page')
+      .child(
+        S.list()
+          .title('Manage new litters page')
+          .items([
+            S.listItem()
+              .title('Upcoming litters')
+              .child(
+                S.document().schemaType('newLitters').documentId('newLitters')
+              ),
+            S.listItem()
+              .title('Post new litters')
+              .child(S.documentTypeList('newLittersTest')),
+          ])
+          .id('testId')
+      )
+
+    const purchasingPage = S.listItem()
+      .title('Purchasing Page')
+      .child(
+        S.list()
+          .title('Manage purchasing page')
+          .items([
+            S.listItem()
+              .title('Purchasing page content/agreement')
+              .child(
+                S.document().schemaType('purchasing').documentId('purchasing')
+              ),
+            S.listItem()
+              .title('Frequently asked questions')
+              .child(S.documentTypeList('faqType')),
+            S.listItem()
+              .title('Post new purchasing page content')
+              .child(S.documentTypeList('purchasingPage')),
+          ])
+          .id('testId')
+      )
+    // .child(
+    //   S.document().schemaType('purchasingPage').documentId('purchasingPage')
+    // )
+
     const pagesList = S.list()
       .title('Pages')
       .items([
         S.listItem()
           .title('Home Page')
           .child(S.document().schemaType('homePage').documentId('homePage')),
-        S.listItem()
-          .title('Purchasing Page')
-          .child(
-            S.document()
-              .schemaType('purchasingPage')
-              .documentId('purchasingPage')
-          ),
-        S.listItem()
-          .title('New Litters Page')
-          .child(
-            S.list()
-              .title('Manage New Litters')
-              .items([
-                S.listItem()
-                  .title('Upcoming litters')
-                  .child(
-                    S.document()
-                      .schemaType('newLitters')
-                      .documentId('newLitters')
-                  ),
-                S.listItem()
-                  .title('Post new litters')
-                  .child(S.documentTypeList('newLittersTest')),
-              ])
-              .id('testId')
-          ),
-        // S.listItem()
-        //   .title('New Litters')
-        //   .child(
-        //     S.document().schemaType('newLitters').documentId('newLitters')
-        //   ),
-
+        purchasingPage,
+        newLittersPage,
         ...defaultListItems,
       ])
     return pagesList
