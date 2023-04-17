@@ -8,13 +8,13 @@ export default defineType({
   fields: [
     defineField({
       name: 'title_newLitters',
-      title: 'Header - "Whatever you want" ',
+      title: 'Header - "Upcoming litters" ',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'content_newLitters',
-      title: 'Content - "Whatever you want" ',
+      title: 'Content - "Upcoming Litters" ',
       type: 'array',
       of: [{ type: 'block' }],
       validation: (rule) => rule.required(),

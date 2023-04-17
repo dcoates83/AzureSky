@@ -63,8 +63,17 @@ const CMSSection = (props: CMSSectionProps) => {
   const components = {
     types: {
       image: ImageComponent,
-      // Any other custom types you have in your content
-      // Examples: mapLocation, contactForm, code, featuredProjects, latestNews, etc.
+
+      block: {
+        // h1: ({ children }) => <Typography variant="h1">{children}</Typography>,
+        // h2: ({ children }) => <Typography variant="h2">{children}</Typography>,
+        // h3: ({ children }) => <Typography variant="h3">{children}</Typography>,
+        // h4: ({ children }) => <Typography variant="h4">{children}</Typography>,
+        // h5: ({ children }) => <Typography variant="h5">{children}</Typography>,
+        // span: ({ children }) => (
+        //   <Typography component="span">{children}</Typography>
+        // ),
+      },
     },
   }
 
@@ -76,7 +85,9 @@ const CMSSection = (props: CMSSectionProps) => {
         </Typography>
 
         <Box sx={{ color: 'text.primary' }}>
-          {<PortableText value={content} components={components} />}
+          <Typography>
+            {<PortableText value={content} components={components} />}
+          </Typography>
         </Box>
       </Box>
     </>

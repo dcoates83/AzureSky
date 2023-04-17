@@ -64,7 +64,7 @@ export const pagesStructure = (
               ),
             S.listItem()
               .title('Post new litters')
-              .child(S.documentTypeList('newLittersTest')),
+              .child(S.documentTypeList('newLittersPost')),
           ])
           .id('testId')
       )

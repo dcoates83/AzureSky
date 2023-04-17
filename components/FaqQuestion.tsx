@@ -3,6 +3,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Divider,
   Typography,
 } from '@mui/material'
 
@@ -22,8 +23,9 @@ const FaqQuestion = (props: Props) => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className="faq-q">{question}</Typography>
+          <Typography>{question}</Typography>
         </AccordionSummary>
+        <Divider></Divider>
         <AccordionDetails>
           <Typography>{renderAnswer(answer)}</Typography>
         </AccordionDetails>
