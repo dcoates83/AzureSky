@@ -2,6 +2,8 @@ import '../styles/footer.css'
 import '../styles/main.css'
 import '../styles/waveStyles.css'
 
+import CssBaseline from '@mui/material/CssBaseline'
+import GlobalStyles from '@mui/material/GlobalStyles'
 import {
   createTheme,
   responsiveFontSizes,
@@ -31,6 +33,8 @@ export default function App({ Component, pageProps }: AppProps) {
   const responsiveTheme = responsiveFontSizes(theme)
   return (
     <>
+      <CssBaseline />
+      {/* <GlobalStyles styles={{ ...theme.typography }} /> */}
       <ThemeProvider theme={responsiveTheme}>
         <Layout>
           <Component {...pageProps} />
