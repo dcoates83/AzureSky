@@ -3,6 +3,7 @@ import Image from 'next/image'
 
 import { client, Query } from '.'
 import CMSSection from '../components/CMSSection'
+import NewLittersCard from '../components/NewLittersCard'
 export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
   ctx
 ) => {
@@ -29,36 +30,25 @@ const NewLitters = ({ newLitters, newLittersPosts }) => {
         />
 
         <section id="posted-litters">
-          <h1 className="header-2">Posted Litters</h1>
-
-          <div className="posted ">
-            {/* {% for post in site.posts %} */}
-            <div className="blog-posted">
-              {/* <h2 className="posted-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2> */}
-              <a href="{{ post.url | relative_url }}">
-                {/* <Image
-                    width={300}
-                    height={300}
-                    className="blog-img"
-                    src="{{ post.thumbnail | relative_url}}"
-                    alt={''}
-                  />{' '} */}
-              </a>
-              <small>
-                {/* <h4 className="expected"><strong>Expected: {{expected }}</strong></h4>   */}
-                {/* <p className="click"><a href="{{ post.url | relative_url }}">{{ post.color }}</a></p> */}
-                <hr />
-                <p className="click">
-                  <a href="{{ post.url | relative_url }}">
-                    Click for more detail
-                  </a>
-                </p>
-                {/* <h4 className="reserved">{{post.reserved }}</h4> */}
-              </small>
-              {/* <!-- {{ post.excerpt }} --> */}
-            </div>
-            {/* {% endfor %} */}
-          </div>
+          <NewLittersCard
+            key={new Date().getMilliseconds()}
+            title={'Athena & Tao - 2nd litter'}
+            image={undefined}
+            description={
+              'Queen Sapphire and King Tzar are seal bicolor so according to the genetic Punnett Square (a device used to predict kitten colors and markings) 25%- 50% of these kittens will mitted and 50-75% will be Bicolor. All will be seal. These kittens will have the easy care traditional Ragdoll coat where the undercoat is less heavy than other long hair breeds.Sapphire quite bonded to Tzar. They have lovely affectionate kittens every time.'
+            }
+            expected={new Date()}
+            colors={'Seal Bicolor and Mitted Kittens.'}
+            quantityRemaining={3}
+            reservedPreConception={0}
+            reservedPostConception={0}
+          />
+          {newLittersPosts.map((newLittersPost) => (
+            <NewLittersCard
+              key={new Date().getMilliseconds()}
+              {...newLittersPost}
+            />
+          ))}
         </section>
         {/* </div> */}
       </section>
