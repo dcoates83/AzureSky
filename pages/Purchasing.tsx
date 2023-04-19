@@ -40,7 +40,7 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
         title="Purchasing"
         description="Before buying your Ragdolls kitten, get an idea of whether or not you can afford a cat for ... Purr-chase Prices – How Much Do Ragdolls Cost?"
       /> */}
-      <Container maxWidth="md">
+      <Container maxWidth="md" sx={{ mb: 1 }}>
         <CMSSection
           title={purchasing[0].title_purchasingAgreement}
           content={purchasing[0].content_purchasingAgreement}
@@ -103,15 +103,31 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
             </h5>
           </div>
           <div className="top">
-            <ImageContainer>
+            <Box
+              sx={{
+                display: 'grid',
+                // wordBreak: 'keep-all',
+                justifyItems: 'center',
+                alignItems: 'center',
+                gridTemplateColumns: '1fr 1fr',
+
+                gap: 2,
+                [theme.breakpoints.down('md')]: {
+                  gridTemplateColumns: '1fr',
+                  gridAutoFlow: 'row',
+                },
+              }}
+            >
               {faqQuestions.map((q) => (
-                <FaqQuestion
-                  question={q.title_faqs}
-                  answer={q.content_faqs}
-                  key={q.answer + q.answer}
-                />
+                <Box key={q.title} sx={{ width: '100%' }}>
+                  <FaqQuestion
+                    question={q.title_faqs}
+                    answer={q.content_faqs}
+                    key={q.answer + q.answer}
+                  />
+                </Box>
               ))}
-            </ImageContainer>
+            </Box>
           </div>
         </section>
       </Container>

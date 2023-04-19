@@ -3,6 +3,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Box,
   Divider,
   Typography,
 } from '@mui/material'
@@ -16,7 +17,7 @@ const FaqQuestion = (props: Props) => {
   const { question, answer } = props
   const renderAnswer = require('html-react-parser')
   return (
-    <div>
+    <Box sx={{ width: '100%' }}>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -30,7 +31,7 @@ const FaqQuestion = (props: Props) => {
           <Typography>{renderAnswer(answer)}</Typography>
         </AccordionDetails>
       </Accordion>
-    </div>
+    </Box>
   )
 }
 

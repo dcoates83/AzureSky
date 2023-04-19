@@ -1,21 +1,20 @@
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  FormGroup,
-  TextField,
-  useTheme,
-} from '@mui/material'
-import { Formik, useFormik } from 'formik'
+import { Box, Button, Card, TextField, useTheme } from '@mui/material'
+import { useFormik } from 'formik'
 import React from 'react'
 import * as Yup from 'yup'
 const PurchaseForm = () => {
   const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email('Enter a valid email')
-      .required('Email is required'),
+    email: Yup.string().email('Enter a valid email'),
+    // .required('Email is required'),
+    // .required('Email is required'),
     firstName: Yup.string().required('First Name is required'),
+    lastName: Yup.string().required('Last Name is required'),
+    phone: Yup.string().required('Phone is required'),
+    // street: Yup.string().required('Street is required'),
+    city: Yup.string().required('City is required'),
+    province: Yup.string().required('Province is required'),
+    questions: Yup.string(),
+    about: Yup.string().required('About is required'),
   })
 
   const theme = useTheme()
@@ -34,8 +33,9 @@ const PurchaseForm = () => {
       about: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {},
+    onSubmit: async (values) => {},
   })
+
   return (
     <Card sx={{ p: 2, height: '100%' }}>
       <Box
@@ -49,7 +49,7 @@ const PurchaseForm = () => {
           flexDirection: 'column',
           justifyContent: 'space-between',
         }}
-        // action="https://formpost.app/devonbcoates@gmail.com"
+        action="https://formpost.app/devonbcoates@gmail.com"
       >
         <TextField
           error={Boolean(formik.errors.firstName)}
@@ -57,7 +57,7 @@ const PurchaseForm = () => {
           variant="standard"
           size="small"
           fullWidth
-          name="First Name"
+          name="firstName"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.firstName}
@@ -70,7 +70,7 @@ const PurchaseForm = () => {
           size="small"
           fullWidth
           type="lastName"
-          name="Last Name"
+          name="lastName"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.lastName}
@@ -83,7 +83,7 @@ const PurchaseForm = () => {
           size="small"
           fullWidth
           type="email"
-          name="Email"
+          name="email"
           label="Email"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -96,7 +96,7 @@ const PurchaseForm = () => {
           size="small"
           fullWidth
           type="number"
-          name="Phone"
+          name="phone"
           label="Phone"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -123,9 +123,9 @@ const PurchaseForm = () => {
             variant="standard"
             size="small"
             fullWidth
-            name="City"
-            // onChange={handleChange}
-            // onBlur={formik.handleBlur}
+            name="city"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.city}
             label={'City'}
           />
@@ -135,7 +135,7 @@ const PurchaseForm = () => {
             variant="standard"
             size="small"
             fullWidth
-            name="Province"
+            name="province"
             label="Province"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -164,7 +164,7 @@ const PurchaseForm = () => {
             fullWidth
             multiline
             rows={2}
-            name="Questions"
+            name="questions"
             label="Questions?"
             onBlur={formik.handleBlur}
             value={formik.values.questions}
@@ -178,8 +178,9 @@ const PurchaseForm = () => {
             fullWidth
             multiline
             rows={4}
-            name="About"
+            name="about"
             label="About you and your home"
+            onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.about}
           />
@@ -208,7 +209,7 @@ const PurchaseForm = () => {
           variant="contained"
           disabled={!formik.isValid}
           onClick={() => {
-            formik.validateForm().then(() => formik.submitForm())
+            // formik.validateForm()
           }}
           sx={{ color: '#fff', gridColumn: 'span 2', width: '100%', mt: 2 }}
         >
