@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import { GetStaticProps, PreviewData } from 'next'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 import { client, Query } from '.'
 import CMSSection from '../components/CMSSection'
@@ -25,6 +26,7 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
   }
 }
 const NewLitters = ({ newLitters, newLittersPosts }) => {
+
   return (
     <>
       {/* <MetaTags title="NewLitters" description="NewLitters page" /> */}

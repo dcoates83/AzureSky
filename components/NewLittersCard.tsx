@@ -9,6 +9,7 @@ import {
   CardHeader,
   Collapse,
   IconButton,
+  useTheme,
 } from '@mui/material'
 import { default as Card } from '@mui/material/Card'
 import { default as CardContent } from '@mui/material/CardContent'
@@ -20,6 +21,7 @@ import { default as Typography } from '@mui/material/Typography'
 import imageUrlBuilder from '@sanity/image-url'
 import dayjs from 'dayjs'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import React from 'react'
 
 import cat from '../assets/cat-in-basket.jpg'
@@ -168,7 +170,7 @@ const NewLittersCard = (props: NewLittersProps) => {
     image,
   } = props
   const [expanded, setExpanded] = React.useState(false)
-
+  const router = useRouter()
   const handleExpandClick = () => {
     setExpanded(!expanded)
   }
@@ -176,6 +178,7 @@ const NewLittersCard = (props: NewLittersProps) => {
   function urlFor(source) {
     return builder.image(source)
   }
+  const theme = useTheme()
   return (
     <Card sx={{ maxWidth: 345, m: 1, boxShadow: 2 }}>
       <CardHeader title={title} />
@@ -213,6 +216,7 @@ const NewLittersCard = (props: NewLittersProps) => {
         <Button
           aria-label="add to favorites"
           sx={{ textTransform: 'capitalize' }}
+          onClick={() => router.replace(`/Purchasing#form-info`)}
         >
           Reserve
         </Button>
@@ -221,7 +225,6 @@ const NewLittersCard = (props: NewLittersProps) => {
           sx={{ textTransform: 'capitalize' }}
         >
           Share
-          {/* <ShareIcon sx={{ ml: 1 }} /> */}
         </Button>
 
         <ExpandMore
