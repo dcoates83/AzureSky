@@ -1,4 +1,11 @@
-import { Box, SxProps, Theme, Typography, useTheme } from '@mui/material'
+import {
+  Box,
+  Container,
+  SxProps,
+  Theme,
+  Typography,
+  useTheme,
+} from '@mui/material'
 import { PortableText } from '@portabletext/react'
 import { getImageDimensions } from '@sanity/asset-utils'
 import imageUrlBuilder from '@sanity/image-url'
@@ -68,7 +75,7 @@ const CMSSection = (props: CMSSectionProps) => {
 
   return (
     <>
-      <Box>
+      <Container disableGutters sx={{ mt: 2, mb: 2 }}>
         <Typography variant={headerVariant || 'h4'} sx={titleSx || headerSx}>
           {title}
         </Typography>
@@ -76,7 +83,7 @@ const CMSSection = (props: CMSSectionProps) => {
         <Box sx={{ color: 'text.primary' }}>
           {<PortableText value={content} components={components} />}
         </Box>
-      </Box>
+      </Container>
     </>
   )
 }

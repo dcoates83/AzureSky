@@ -181,7 +181,7 @@ const NewLittersCard = (props: NewLittersProps) => {
   const theme = useTheme()
   return (
     <Card sx={{ maxWidth: 345, m: 1, boxShadow: 2 }}>
-      <CardHeader title={title} />
+      <CardHeader title={title}  />
       <Image
         height="200"
         width={345}

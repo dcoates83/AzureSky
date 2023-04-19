@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Card,
   Container,
   FormGroup,
   TextField,
@@ -21,107 +22,72 @@ const PurchaseForm = () => {
   //     .required('Password is required'),
   // })
 
-  // const WithMaterialUI = () => {
-  //   const formik = useFormik({
-  //     initialValues: {
-  //       email: 'foobar@example.com',
-  //       password: 'foobar',
-  //     },
-  //     validationSchema: validationSchema ?? undefined,
-  //     onSubmit: (values) => {
-  //       alert(JSON.stringify(values, null, 2))
-  //     },
-  //   })
   const theme = useTheme()
+
   return (
-    <Formik
-      initialValues={{
-        email: '',
-        password: '',
-        firstName: '',
-        lastName: '',
-        phone: '',
-        street: '',
-        city: '',
-        province: '',
-        about: '',
-      }}
-      // validate={}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2))
-          setSubmitting(false)
-        }, 400)
-      }}
-    >
-      {({
-        values,
-        errors,
+    <Card sx={{ p: 2, height: '100%' }}>
+      <Box
+        id="form-info"
+        method="POST"
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { p: 1 },
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+        }}
+        action="https://formpost.app/devonbcoates@gmail.com"
+      >
+        <TextField
+          variant="standard"
+          size="small"
+          fullWidth
+          type="firstName"
+          name="First Name"
+          // onChange={handleChange}
+          // onBlur={handleBlur}
+          // value={values.firstName}
+          label={'First Name'}
+        />
+        <TextField
+          variant="standard"
+          size="small"
+          fullWidth
+          type="lastName"
+          name="Last Name"
+          // onChange={handleChange}
+          // onBlur={handleBlur}
+          // value={values.lastName}
+          label={'Last Name'}
+        />
+        <TextField
+          variant="standard"
+          size="small"
+          fullWidth
+          type="email"
+          name="Email"
+          label="Email"
+          // onChange={handleChange}
+          // onBlur={handleBlur}
+          // value={values.email}
+        />
+        <TextField
+          variant="standard"
+          size="small"
+          fullWidth
+          type="number"
+          name="Phone"
+          label="Phone"
+          // onChange={handleChange}
+          // onBlur={handleBlur}
+          // value={values.password}
+        />
 
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-        /* and other goodies */
-      }) => (
-        <Container maxWidth="sm" sx={{ mt: 5 }} disableGutters>
-          <Box
-            component="form"
-            sx={{
-              '& .MuiTextField-root': { p: 1 },
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
-              gridAutoFlow: 'row',
-              // gridGap: '1rem',
-              [theme.breakpoints.down('sm')]: {
-                // gridAutoFlow: 'row',
-                display: 'flex',
-                flexDirection: 'column',
-              },
-            }}
-            action="https://submit-form.com/AqUcFuf1"
-          >
-            <FormGroup>
-              <TextField
-                fullWidth
-                type="firstName"
-                name="First Name"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.firstName}
-                label={'First Name'}
-              />
-              <TextField
-                fullWidth
-                type="lastName"
-                name="Last Name"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.lastName}
-                label={'Last Name'}
-              />
-              <TextField
-                fullWidth
-                type="email"
-                name="Email"
-                label="Email"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-              />
-
-              <TextField
-                fullWidth
-                type="number"
-                name="Phone"
-                label="Phone"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-              />
-            </FormGroup>
-            <Box>
-              {/* <TextField
+        <Box>
+          {/* <TextField
+              variant="standard"
+              size='small'
             fullWidth
               type="street"
               name="street"
@@ -130,24 +96,30 @@ const PurchaseForm = () => {
               value={values.street}
               label={'First Name'}
             /> */}
-              <TextField
-                fullWidth
-                name="City"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.city}
-                label={'City'}
-              />
-              <TextField
-                fullWidth
-                name="Province"
-                label="Province"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.province}
-              />
+          <TextField
+            variant="standard"
+            size="small"
+            fullWidth
+            name="City"
+            // onChange={handleChange}
+            // onBlur={handleBlur}
+            // value={values.city}
+            label={'City'}
+          />
+          <TextField
+            variant="standard"
+            size="small"
+            fullWidth
+            name="Province"
+            label="Province"
+            // onChange={handleChange}
+            // onBlur={handleBlur}
+            // value={values.province}
+          />
 
-              {/* <TextField
+          {/* <TextField
+              variant="standard"
+              size='small'
             fullWidth
               type="number"
               name="phone"
@@ -156,41 +128,60 @@ const PurchaseForm = () => {
               onBlur={handleBlur}
               value={values.password}
             /> */}
-              <TextField
-                type="text"
-                fullWidth
-                multiline
-                rows={4}
-                name="About"
-                label="About you and your home"
-                // placeholder="-What occupations do your household members hold?
-                // &#10;
-                // -Tell us about any children, and what ages they are?
-                // &#10;
-                // -Any other pets in your home?
-                // &#10;
-                // -Have you owned a cat/Ragdoll/purebred cat or pets before?
-                // &#10;
-                // -Who is the kitten for?
-                // &#10;
-                // -Who will be responsible for caring for the kitten?"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.about}
-              />
-            </Box>
-            <Button
-              type="submit"
-              variant="contained"
-              disabled={isSubmitting}
-              sx={{ color: '#fff', gridColumn: 'span 2' }}
-            >
-              Submit
-            </Button>
-          </Box>
-        </Container>
-      )}
-    </Formik>
+          <TextField
+            variant="standard"
+            size="small"
+            type="text"
+            fullWidth
+            multiline
+            rows={2}
+            name="Questions"
+            label="Questions?"
+            // onBlur={handleBlur}
+            // value={values.questions}
+          />
+          <TextField
+            variant="standard"
+            size="small"
+            type="text"
+            fullWidth
+            multiline
+            rows={4}
+            name="About"
+            label="About you and your home"
+            // onBlur={handleBlur}
+            // value={values.about}
+          />
+        </Box>
+
+        <input
+          type="hidden"
+          name="fp_subject"
+          value="New Submission for a Kitten"
+        ></input>
+        <input type="hidden" name="fp_reply" value="true"></input>
+
+        <input
+          type="hidden"
+          name="fp_reply_from"
+          value="Azure sky ragdolls"
+        ></input>
+        <input
+          type="hidden"
+          name="fp_reply_message"
+          value="Thank you for contacting us! We will be in touch with you soon."
+        ></input>
+
+        <Button
+          type="submit"
+          variant="contained"
+          // disabled={isSubmitting}
+          sx={{ color: '#fff', gridColumn: 'span 2', width: '100%', mt: 2 }}
+        >
+          Submit
+        </Button>
+      </Box>
+    </Card>
   )
 }
 
