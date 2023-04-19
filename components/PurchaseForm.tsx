@@ -9,21 +9,33 @@ import {
 } from '@mui/material'
 import { Formik, useFormik } from 'formik'
 import React from 'react'
-import yup from 'yup'
+import * as Yup from 'yup'
 const PurchaseForm = () => {
-  // const validationSchema = yup.object({
-  //   email: yup
-  //     .string()
-  //     .email('Enter a valid email')
-  //     .required('Email is required'),
-  //   password: yup
-  //     .string()
-  //     .min(8, 'Password should be of minimum 8 characters length')
-  //     .required('Password is required'),
-  // })
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email('Enter a valid email')
+      .required('Email is required'),
+    firstName: Yup.string().required('First Name is required'),
+  })
 
   const theme = useTheme()
-
+  const formik = useFormik({
+    validateOnBlur: true,
+    // validateOnChange: true,
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      street: '',
+      city: '',
+      province: '',
+      questions: '',
+      about: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {},
+  })
   return (
     <Card sx={{ p: 2, height: '100%' }}>
       <Box
@@ -37,87 +49,102 @@ const PurchaseForm = () => {
           flexDirection: 'column',
           justifyContent: 'space-between',
         }}
-        action="https://formpost.app/devonbcoates@gmail.com"
+        // action="https://formpost.app/devonbcoates@gmail.com"
       >
         <TextField
+          error={Boolean(formik.errors.firstName)}
+          helperText={formik.errors.firstName}
           variant="standard"
           size="small"
           fullWidth
-          type="firstName"
           name="First Name"
-          // onChange={handleChange}
-          // onBlur={handleBlur}
-          // value={values.firstName}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.firstName}
           label={'First Name'}
         />
         <TextField
+          error={Boolean(formik.errors.lastName)}
+          helperText={formik.errors.lastName}
           variant="standard"
           size="small"
           fullWidth
           type="lastName"
           name="Last Name"
-          // onChange={handleChange}
-          // onBlur={handleBlur}
-          // value={values.lastName}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.lastName}
           label={'Last Name'}
         />
         <TextField
+          error={Boolean(formik.errors.email)}
+          helperText={formik.errors.email}
           variant="standard"
           size="small"
           fullWidth
           type="email"
           name="Email"
           label="Email"
-          // onChange={handleChange}
-          // onBlur={handleBlur}
-          // value={values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}
         />
         <TextField
+          error={Boolean(formik.errors.phone)}
+          helperText={formik.errors.phone}
           variant="standard"
           size="small"
           fullWidth
           type="number"
           name="Phone"
           label="Phone"
-          // onChange={handleChange}
-          // onBlur={handleBlur}
-          // value={values.password}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.phone}
         />
 
         <Box>
           {/* <TextField
+          error={Boolean(formik.errors.)}
+          helperText={formik.errors.}
               variant="standard"
               size='small'
             fullWidth
               type="street"
               name="street"
               onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.street}
+              onBlur={formik.handleBlur}
+              value={formik.values.street}
               label={'First Name'}
             /> */}
           <TextField
+            error={Boolean(formik.errors.city)}
+            helperText={formik.errors.city}
             variant="standard"
             size="small"
             fullWidth
             name="City"
             // onChange={handleChange}
-            // onBlur={handleBlur}
-            // value={values.city}
+            // onBlur={formik.handleBlur}
+            value={formik.values.city}
             label={'City'}
           />
           <TextField
+            error={Boolean(formik.errors.province)}
+            helperText={formik.errors.province}
             variant="standard"
             size="small"
             fullWidth
             name="Province"
             label="Province"
-            // onChange={handleChange}
-            // onBlur={handleBlur}
-            // value={values.province}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.province}
           />
 
           {/* <TextField
+          error={Boolean(formik.errors.)}
+          helperText={formik.errors.}
               variant="standard"
               size='small'
             fullWidth
@@ -125,10 +152,12 @@ const PurchaseForm = () => {
               name="phone"
               label="Phone"
               onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
             /> */}
           <TextField
+            error={Boolean(formik.errors.questions)}
+            helperText={formik.errors.questions}
             variant="standard"
             size="small"
             type="text"
@@ -137,10 +166,12 @@ const PurchaseForm = () => {
             rows={2}
             name="Questions"
             label="Questions?"
-            // onBlur={handleBlur}
-            // value={values.questions}
+            onBlur={formik.handleBlur}
+            value={formik.values.questions}
           />
           <TextField
+            error={Boolean(formik.errors.about)}
+            helperText={formik.errors.about}
             variant="standard"
             size="small"
             type="text"
@@ -149,8 +180,8 @@ const PurchaseForm = () => {
             rows={4}
             name="About"
             label="About you and your home"
-            // onBlur={handleBlur}
-            // value={values.about}
+            onBlur={formik.handleBlur}
+            value={formik.values.about}
           />
         </Box>
 
@@ -175,7 +206,10 @@ const PurchaseForm = () => {
         <Button
           type="submit"
           variant="contained"
-          // disabled={isSubmitting}
+          disabled={!formik.isValid}
+          onClick={() => {
+            formik.validateForm().then(() => formik.submitForm())
+          }}
           sx={{ color: '#fff', gridColumn: 'span 2', width: '100%', mt: 2 }}
         >
           Submit
