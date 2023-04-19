@@ -1,3 +1,4 @@
+import { Container, Divider, Typography } from '@mui/material'
 import dayjs from 'dayjs'
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import { GetStaticProps, PreviewData } from 'next'
@@ -32,13 +33,13 @@ const NewLitters = ({ newLitters, newLittersPosts }) => {
           title={newLitters[0].title_newLitters}
           content={newLitters[0].content_newLitters}
         />
-
-        <section id="posted-litters">
+        <Typography variant="h5" sx={{ mt: 2, mb: 2 }}>
+          Posted Litters
+        </Typography>
+        <Divider sx={{ mt: 2, mb: 2 }}></Divider>
+        <Container id="posted-litters" disableGutters sx={{ mt: 2 }}>
           {newLittersPosts?.map((newLittersPost) => {
-            return dayjs().isSameOrBefore(
-              new Date(),
-              newLittersPost.expirationDate
-            ) ? (
+            return dayjs().isSameOrBefore(newLittersPost.expirationDate) ? (
               <NewLittersCard
                 key={new Date().getMilliseconds()}
                 title={newLittersPost.title}
@@ -51,10 +52,10 @@ const NewLitters = ({ newLitters, newLittersPosts }) => {
                 reservedPostConception={newLittersPost.reservedPostConception}
               />
             ) : (
-              <></>
+              <>No Records</>
             )
           })}
-        </section>
+        </Container>
         {/* </div> */}
       </section>
     </>

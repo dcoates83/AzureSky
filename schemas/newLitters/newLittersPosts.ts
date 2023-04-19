@@ -23,6 +23,7 @@ export default defineType({
     defineField({
       name: 'expected',
       title: 'Expected date',
+      options: { dateFormat: 'MMMM - YYYY' },
       type: 'date',
 
       validation: (rule) => rule.required(),
@@ -36,16 +37,19 @@ export default defineType({
     defineField({
       name: 'reservedPreConception',
       title: 'Reserved pre-conception',
+      description: 'Leave blank if taking reservations for all kittens',
       type: 'number',
     }),
     defineField({
       name: 'reservedPostConception',
       title: 'Reserved post-conception',
+      description: 'Leave blank if taking reservations for all kittens',
       type: 'number',
     }),
     defineField({
       name: 'quantityRemaining',
       title: 'Kittens remaining',
+      description: 'Leave blank if taking reservations for all kittens',
       type: 'number',
     }),
 

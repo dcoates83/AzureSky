@@ -4,6 +4,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import ShareIcon from '@mui/icons-material/Share'
 import {
   Box,
+  Button,
   CardActions,
   CardHeader,
   Collapse,
@@ -16,12 +17,13 @@ import { red } from '@mui/material/colors'
 import { IconButtonProps } from '@mui/material/IconButton'
 import { styled } from '@mui/material/styles'
 import { default as Typography } from '@mui/material/Typography'
+import imageUrlBuilder from '@sanity/image-url'
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import React from 'react'
 
 import cat from '../assets/cat-in-basket.jpg'
-import ImageComponent from './ImageComponent'
+import { client } from '../pages'
 
 interface ReservedOrAvailableProps {
   quantityRemaining?: number
@@ -170,16 +172,19 @@ const NewLittersCard = (props: NewLittersProps) => {
   const handleExpandClick = () => {
     setExpanded(!expanded)
   }
-
+  const builder = imageUrlBuilder(client)
+  function urlFor(source) {
+    return builder.image(source)
+  }
   return (
-    <Card sx={{ maxWidth: 345, m: 1, boxShadow: 1 }}>
+    <Card sx={{ maxWidth: 345, m: 1, boxShadow: 2 }}>
       <CardHeader title={title} />
-      <ImageComponent
-        height={200}
+      <Image
+        height="200"
         width={345}
-        image={image}
-        // alt={title}
-        // style={{ objectFit: 'cover', objectPosition: 'center' }}
+        src={urlFor(image).image(image).auto('format').url()}
+        alt={title}
+        style={{ objectFit: 'cover', objectPosition: 'center' }}
       />
       <CardContent>
         <Box sx={{ mt: 1, mb: 1 }}>
@@ -205,12 +210,20 @@ const NewLittersCard = (props: NewLittersProps) => {
         />
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+        <Button
+          aria-label="add to favorites"
+          sx={{ textTransform: 'capitalize' }}
+        >
+          Reserve
+        </Button>
+        <Button
+          aria-label="add to favorites"
+          sx={{ textTransform: 'capitalize' }}
+        >
+          Share
+          {/* <ShareIcon sx={{ ml: 1 }} /> */}
+        </Button>
+
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
