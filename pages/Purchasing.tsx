@@ -1,5 +1,5 @@
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded'
-import { Box, Container, Typography } from '@mui/material'
+import { Box, Container, Typography, useTheme } from '@mui/material'
 import { PortableText } from '@portabletext/react'
 import { GetStaticProps, PreviewData } from 'next'
 import Image from 'next/image'
@@ -31,6 +31,7 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
   }
 }
 const Purchasing = ({ purchasing, faqQuestions }) => {
+  const theme = useTheme()
   return (
     <>
       {/* <MetaTags
@@ -68,100 +69,29 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
           title={purchasing[0].title_purchasingGoingHome}
           content={purchasing[0].content_purchasingGoingHome}
         />
-        <CMSSection
-          title={purchasing[0].title_AdoptionForm}
-          content={purchasing[0].content_AdoptionForm}
-        />
+        <Box
+          sx={{
+            display: 'grid',
+            gridAutoFlow: 'column',
+            gridTemplateColumns: '1fr 1fr',
+            alignItems: 'center',
+            gap: 2,
+            [theme.breakpoints.down('sm')]: {
+              // gridAutoFlow: 'row',
+              display: 'flex',
+              flexDirection: 'column',
+            },
+          }}
+        >
+          <CMSSection
+            title={purchasing[0].title_AdoptionForm}
+            content={purchasing[0].content_AdoptionForm}
+          />
 
-        <section id="form-info">
-          <div className="form-container">
+          <section id="form-info">
             <PurchaseForm />
-            {/* <form action="https://submit-form.com/AqUcFuf1" method="" id="form">
-              <label htmlFor="firstName">Full Name</label>
-              <div className="input-grid">
-                <input
-                  type="hidden"
-                  name="_feedback.success.title"
-                  value="Thanks for your interest in out kittens, we will be in touch as soon as we can!"
-                />
-                <input
-                  required
-                  type="text"
-                  name="First Name"
-                  id="firstName"
-                  placeholder="First"
-                />
-                <input
-                  required
-                  type="text"
-                  name="Last Name"
-                  id="lastName"
-                  placeholder="Last"
-                />
-              </div>
-              <div className="input-grid">
-                <label htmlFor="phone">Phone</label>
-                <label htmlFor="email">Email</label>
-                <input required type="phone" name="phone" id="phone" />
-                <input required type="email" name="Email" id="email" />
-              </div>
-              <label htmlFor="address">Address</label>
-              <div className="input-grid">
-                <input
-                  type="street"
-                  name="address"
-                  required
-                  id="street"
-                  placeholder="Street"
-                />
-                <input
-                  type="city"
-                  name="address"
-                  required
-                  id="city"
-                  placeholder="City"
-                />
-                <input
-                  type="province"
-                  name="address"
-                  required
-                  id="province"
-                  placeholder="Province"
-                />
-                <input
-                  type="postal"
-                  name="address"
-                  required
-                  id="postal"
-                  placeholder="Postal code"
-                />
-              </div>
-              <div className="input-grid">
-                <div className="email-help">
-                  We will <span className="underline">never</span> share your
-                  information with anyone else.
-                </div>
-                <div className="email-help">
-                  We need verifiable info to prove that you are a person, and
-                  not a cat mill.
-                </div>
-              </div>
-              <label className="family" htmlFor="family">
-                Tell us about you, your family, and your home.
-              </label>
-
-              <textarea
-                required
-                name="About us"
-                id="family"
-                cols={30}
-                rows={6}
-                placeholder="-What occupations do your household members hold?&#10;-Tell us about any children, and what ages they are?&#10;-Any other pets in your home?&#10;-Have you owned a cat/Ragdoll/purebred cat or pets before?&#10;-Who is the kitten for?&#10;-Who will be responsible for caring for the kitten?"
-              ></textarea>
-              <button type="submit">Submit</button>
-            </form> */}
-          </div>
-        </section>
+          </section>
+        </Box>
 
         <section id="faq">
           <div className="faq-subheader">

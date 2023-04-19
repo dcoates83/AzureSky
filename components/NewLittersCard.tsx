@@ -220,12 +220,12 @@ const NewLittersCard = (props: NewLittersProps) => {
         >
           Reserve
         </Button>
-        <Button
+        {/* <Button
           aria-label="add to favorites"
           sx={{ textTransform: 'capitalize' }}
         >
           Share
-        </Button>
+        </Button> */}
 
         <ExpandMore
           expand={expanded}
