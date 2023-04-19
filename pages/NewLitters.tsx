@@ -1,9 +1,13 @@
+import dayjs from 'dayjs'
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import { GetStaticProps, PreviewData } from 'next'
 import Image from 'next/image'
 
 import { client, Query } from '.'
 import CMSSection from '../components/CMSSection'
 import NewLittersCard from '../components/NewLittersCard'
+
+dayjs.extend(isSameOrBefore)
 export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
   ctx
 ) => {
@@ -30,25 +34,26 @@ const NewLitters = ({ newLitters, newLittersPosts }) => {
         />
 
         <section id="posted-litters">
-          <NewLittersCard
-            key={new Date().getMilliseconds()}
-            title={'Athena & Tao - 2nd litter'}
-            image={undefined}
-            description={
-              'Queen Sapphire and King Tzar are seal bicolor so according to the genetic Punnett Square (a device used to predict kitten colors and markings) 25%- 50% of these kittens will mitted and 50-75% will be Bicolor. All will be seal. These kittens will have the easy care traditional Ragdoll coat where the undercoat is less heavy than other long hair breeds.Sapphire quite bonded to Tzar. They have lovely affectionate kittens every time.'
-            }
-            expected={new Date()}
-            colors={'Seal Bicolor and Mitted Kittens.'}
-            quantityRemaining={3}
-            reservedPreConception={0}
-            reservedPostConception={0}
-          />
-          {newLittersPosts.map((newLittersPost) => (
-            <NewLittersCard
-              key={new Date().getMilliseconds()}
-              {...newLittersPost}
-            />
-          ))}
+          {newLittersPosts?.map((newLittersPost) => {
+            return dayjs().isSameOrBefore(
+              new Date(),
+              newLittersPost.expirationDate
+            ) ? (
+              <NewLittersCard
+                key={new Date().getMilliseconds()}
+                title={newLittersPost.title}
+                image={newLittersPost.image}
+                description={newLittersPost.description}
+                expected={newLittersPost.expected}
+                colors={newLittersPost.colors}
+                quantityRemaining={newLittersPost.quantityRemaining}
+                reservedPreConception={newLittersPost.reservedPreConception}
+                reservedPostConception={newLittersPost.reservedPostConception}
+              />
+            ) : (
+              <></>
+            )
+          })}
         </section>
         {/* </div> */}
       </section>

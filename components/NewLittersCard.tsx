@@ -3,10 +3,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import ShareIcon from '@mui/icons-material/Share'
 import {
-  Avatar,
   Box,
-  Button,
-  CardActionArea,
   CardActions,
   CardHeader,
   Collapse,
@@ -24,6 +21,8 @@ import Image from 'next/image'
 import React from 'react'
 
 import cat from '../assets/cat-in-basket.jpg'
+import ImageComponent from './ImageComponent'
+
 interface ReservedOrAvailableProps {
   quantityRemaining?: number
   reservedPreConception?: number
@@ -32,9 +31,8 @@ interface ReservedOrAvailableProps {
 interface NewLittersProps extends ReservedOrAvailableProps {
   title: string
   image: any
-  description: string
+  description?: string
   expected: Date
-  expirationDate?: Date
   colors: string
 }
 interface ExpandMoreProps extends IconButtonProps {
@@ -164,6 +162,8 @@ const NewLittersCard = (props: NewLittersProps) => {
     expected,
     reservedPreConception,
     reservedPostConception,
+    description,
+    image,
   } = props
   const [expanded, setExpanded] = React.useState(false)
 
@@ -174,12 +174,12 @@ const NewLittersCard = (props: NewLittersProps) => {
   return (
     <Card sx={{ maxWidth: 345, m: 1, boxShadow: 1 }}>
       <CardHeader title={title} />
-      <Image
-        height="200"
+      <ImageComponent
+        height={200}
         width={345}
-        src={cat}
-        alt={title}
-        style={{ objectFit: 'cover', objectPosition: 'bottom' }}
+        image={image}
+        // alt={title}
+        // style={{ objectFit: 'cover', objectPosition: 'center' }}
       />
       <CardContent>
         <Box sx={{ mt: 1, mb: 1 }}>
@@ -187,7 +187,7 @@ const NewLittersCard = (props: NewLittersProps) => {
             Expected:
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            {dayjs(expected).format('MMMM-DD-YYYY').toString()}
+            {dayjs(expected).format('MMMM - YYYY').toString()}
           </Typography>
         </Box>
         <Box sx={{ mt: 1, mb: 1 }}>
@@ -222,34 +222,10 @@ const NewLittersCard = (props: NewLittersProps) => {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and
-            set aside for 10 minutes.
-          </Typography>
+          <Typography paragraph>{description}</Typography>
         </CardContent>
       </Collapse>
     </Card>
   )
-  // return (
-  //   <Card sx={{ maxWidth: 345, boxShadow: 1, m: 2 }}>
-  //     <CardActionArea>
-  //
-  //       <CardContent>
-  //         <Typography gutterBottom variant="h5" component="div">
-  //           {name}
-  //         </Typography>
-  //         <Typography variant="body2" color="text.secondary">
-  //           Lizards are a widespread group of squamate reptiles, with over 6,000
-  //           species, ranging across all continents except Antarctica
-  //         </Typography>
-  //       </CardContent>
-  //     </CardActionArea>
-  //     <CardActions>
-  //       <Button size="small" color="primary">
-  //         Share
-  //       </Button>
-  //     </CardActions>
-  //   </Card>
-  // )
 }
 export default NewLittersCard

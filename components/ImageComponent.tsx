@@ -7,29 +7,26 @@ import { SvgBlob } from 'react-svg-blob'
 
 import { client } from '../pages'
 
-const ImageComponent = ({ image }) => {
-  const { width, height } = getImageDimensions(image)
+const ImageComponent = ({ image, width, height }) => {
+  // const { width, height } = getImageDimensions(image)
   const builder = imageUrlBuilder(client)
   function urlFor(source) {
     return builder.image(source)
   }
-  const theme = useTheme()
 
   return (
     <Image
       src={urlFor(image).image(image).auto('format').url()}
       alt={image.alt || ' '}
       loading="lazy"
-      width={300}
-      height={300}
+      width={height || 300}
+      height={width || 300}
       style={{
-        display: image.isInline ? 'inline-block' : 'block',
+        // display: image.isInline ? 'inline-block' : 'block',
         aspectRatio: width / height,
         objectFit: 'cover',
         margin: '0 auto',
-        borderRadius: '100%',
-        // border: `5px solid ${theme.palette.primary.light}`,
-        // boxShadow: theme.shadows[5],
+        // borderRadius: '100%',
       }}
     />
   )

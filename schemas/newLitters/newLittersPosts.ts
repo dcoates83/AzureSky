@@ -8,16 +8,59 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'title_AboutUs',
-      title: 'Header - "Post new litters" ',
+      name: 'title',
+      title: 'Title',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'content_AboutUs',
-      title: 'Content - "About us" ',
-      type: 'array',
-      of: [{ type: 'block' }],
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'expected',
+      title: 'Expected date',
+      type: 'date',
+
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'colors',
+      title: 'Colors',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'reservedPreConception',
+      title: 'Reserved pre-conception',
+      type: 'number',
+    }),
+    defineField({
+      name: 'reservedPostConception',
+      title: 'Reserved post-conception',
+      type: 'number',
+    }),
+    defineField({
+      name: 'quantityRemaining',
+      title: 'Kittens remaining',
+      type: 'number',
+    }),
+
+    defineField({
+      name: 'description',
+      title: 'Description',
+      description: '(Optional)',
+      type: 'text',
+    }),
+    defineField({
+      name: 'expirationDate',
+      title: 'Expiration date',
+      description:
+        'When to remove this post from the website - 1 month after expected date is recommended',
+      type: 'date',
       validation: (rule) => rule.required(),
     }),
   ],
