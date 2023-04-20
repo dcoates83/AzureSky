@@ -6,15 +6,15 @@ import IntroTemplate from 'intro-template'
 import * as demo from 'lib/demo.data'
 import type { Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps, PreviewData } from 'next'
+import uuid from 'react-uuid'
 
+import { Query, client } from '.'
 import CMSSection from '../components/CMSSection'
 import ImageComponent from '../components/ImageComponent'
 import ImageContainer from '../components/ImageContainer'
 import { HeroLanding } from '../components/LandingPage/HeroLanding'
+import LandingPage from '../components/LandingPage/LandingPage'
 import SectionSubHeader from '../components/SectionSubHeader'
-import { client, Query } from '.'
-// import LandingPage from './LandingPage/LandingPage'
-
 export interface IndexPageProps {
   preview?: boolean
   loading?: boolean
@@ -40,7 +40,7 @@ export default function IndexPage(props: IndexPageProps) {
 
   return (
     <>
-      <IndexPageHead settings={settings} />
+      {/* <IndexPageHead settings={settings} /> */}
       <Container>
         {/* <LandingPage homePage={homePage} /> */}
         <>
@@ -68,7 +68,6 @@ export default function IndexPage(props: IndexPageProps) {
             />
           </Container>
 
-          {/* blue for male #279AF1 */}
           <Container maxWidth="lg">
             <ImageContainer>
               {homePage[0]?.content_KingsQueensImages.map((image) => (
@@ -78,14 +77,16 @@ export default function IndexPage(props: IndexPageProps) {
                       m: 1,
                       textAlign: 'center',
                     }}
+                    key={uuid()}
                   >
                     <ImageComponent
                       image={image}
-                      key={encodeURI(image)}
+                      key={uuid()}
                       width={undefined}
                       height={undefined}
                     />
                     <Typography
+                      key={uuid()}
                       variant="h5"
                       sx={{
                         color: image?.gender
@@ -200,7 +201,7 @@ export default function IndexPage(props: IndexPageProps) {
               {homePage[0]?.content_ImageAssistants?.map((image) => (
                 <ImageComponent
                   image={image}
-                  key={image}
+                  key={uuid()}
                   width={undefined}
                   height={undefined}
                 />
