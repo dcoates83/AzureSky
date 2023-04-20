@@ -1,6 +1,8 @@
 import { Box, Container, Typography, useMediaQuery } from '@mui/material'
+import { GetStaticProps, PreviewData } from 'next'
 import React from 'react'
 
+import { client, Query } from '..'
 import CMSSection from '../../components/CMSSection'
 import ImageComponent from '../../components/ImageComponent'
 import ImageContainer from '../../components/ImageContainer'
@@ -11,6 +13,19 @@ interface LandingPageProps {
   aboutSection: any
 }
 
+// export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
+//   ctx
+// ) => {
+//   const { preview = false, previewData = {} } = ctx
+
+//   const aboutPage = await client.fetch(`*[_type == "aboutPage"]`)
+//   return {
+//     props: {
+//       aboutPage,
+//       // token: previewData?.token ?? null,
+//     },
+//   }
+// }
 const LandingPage = (props: LandingPageProps) => {
   const { aboutSection } = props
 
@@ -18,7 +33,7 @@ const LandingPage = (props: LandingPageProps) => {
     <>
       {/* <MetaTags title="Home" description="Home page" /> */}
       <HeroLanding />
-      <Box sx={{ width: '100vw', mb: 20 }}>
+      {/* <Box sx={{ width: '100vw', mb: 20 }}>
         <div className="custom-shape-divider-top-1681342266">
           <svg
             data-name="Layer 1"
@@ -32,7 +47,7 @@ const LandingPage = (props: LandingPageProps) => {
             ></path>
           </svg>
         </div>
-      </Box>
+      </Box> */}
       <Container maxWidth="md">
         <CMSSection
           title={aboutSection[0]?.title_KingsQueens}

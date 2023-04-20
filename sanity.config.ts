@@ -49,6 +49,8 @@ export default defineConfig({
   plugins: [
     deskTool({
       structure: pagesStructure([
+        faqType,
+        aboutPage,
         purchasing,
         homeType,
         purchasingPage,

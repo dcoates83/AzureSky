@@ -44,7 +44,7 @@ export default function Page(props: PageProps) {
             preview
             posts={posts}
             settings={settings}
-            pages={homePage}
+            homePage={homePage}
           />
         }
       >
@@ -53,7 +53,7 @@ export default function Page(props: PageProps) {
     )
   }
 
-  return <IndexPage posts={posts} settings={settings} pages={homePage} />
+  return <IndexPage posts={posts} settings={settings} homePage={homePage} />
 }
 
 export const getStaticProps: GetStaticProps<
