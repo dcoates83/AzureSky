@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Container } from '@mui/material'
 import React from 'react'
 
 interface ImageContainerProps {
@@ -10,12 +10,12 @@ const ImageContainer = (props) => {
   return (
     <Box
       sx={{
-        display: 'grid',
-        wordBreak: 'keep-all',
+        display: 'flex',
         justifyItems: 'center',
         alignItems: 'center',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-        columnGap: '4em',
+        gap: '1em',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
       }}
     >
       {children}

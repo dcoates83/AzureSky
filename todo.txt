@@ -1,7 +1,6 @@
 
 Send a email when the litters page is outdated
-is there anything on this website that you feel is missing that you would like to know more about?
-fix faq section
+Report a issue 
 fix image container
 fix Typography in portabletext
 no Records

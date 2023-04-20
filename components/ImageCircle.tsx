@@ -9,6 +9,8 @@ const ImageCircle = ({ image }) => {
       sx={{
         m: 1,
         textAlign: 'center',
+        width: '300px',
+        height: '500px',
       }}
     >
       {' '}
@@ -21,7 +23,7 @@ const ImageCircle = ({ image }) => {
       >
         {image?.name ?? image?.color}
       </Typography>
-      <ImageComponent image={image} />
+      <ImageComponent image={image} width={undefined} height={undefined} />
       <Typography
         sx={{
           p: 1,

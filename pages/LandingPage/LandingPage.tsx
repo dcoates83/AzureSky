@@ -41,7 +41,7 @@ const LandingPage = (props: LandingPageProps) => {
       </Container>
 
       {/* blue for male #279AF1 */}
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <ImageContainer>
           {aboutSection[0]?.content_KingsQueensImages.map((image) => (
             <>
@@ -51,7 +51,12 @@ const LandingPage = (props: LandingPageProps) => {
                   textAlign: 'center',
                 }}
               >
-                <ImageComponent image={image} key={encodeURI(image)} />
+                <ImageComponent
+                  image={image}
+                  key={encodeURI(image)}
+                  width={undefined}
+                  height={undefined}
+                />
                 <Typography
                   variant="h5"
                   sx={{
@@ -163,7 +168,12 @@ const LandingPage = (props: LandingPageProps) => {
         />
         <ImageContainer>
           {aboutSection[0]?.content_ImageAssistants?.map((image) => (
-            <ImageComponent image={image} key={image} />
+            <ImageComponent
+              image={image}
+              key={image}
+              width={undefined}
+              height={undefined}
+            />
           ))}
         </ImageContainer>
       </Container>

@@ -13,7 +13,7 @@ const ImageComponent = ({ image, width, height }) => {
   function urlFor(source) {
     return builder.image(source)
   }
-
+  const theme = useTheme()
   return (
     <Image
       src={urlFor(image).image(image).auto('format').url()}
@@ -26,7 +26,9 @@ const ImageComponent = ({ image, width, height }) => {
         aspectRatio: width / height,
         objectFit: 'cover',
         margin: '0 auto',
-        // borderRadius: '100%',
+        borderRadius: '100%',
+        border: `2px solid ${theme.palette.grey[500]}`,
+        // boxShadow: 1,
       }}
     />
   )

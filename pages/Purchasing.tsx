@@ -96,7 +96,9 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
 
         <section id="faq">
           <div className="faq-subheader">
-            <h2 className="questions">Questions? Check out our FAQ's below!</h2>
+            <h2 className="questions">
+              Questions? Check out our FAQ&apos;s below!
+            </h2>
             <h5 className="questions-contact">
               If its not on the list, feel free to{' '}
               <a href="mailto:azureskyragdolls@gmail.com"> email</a> us!

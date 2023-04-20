@@ -1,4 +1,4 @@
-import { Box, Button, Card, TextField, useTheme } from '@mui/material'
+import { Box, Button, Card, TextField } from '@mui/material'
 import { useFormik } from 'formik'
 import React from 'react'
 import * as Yup from 'yup'
@@ -17,7 +17,6 @@ const PurchaseForm = () => {
     about: Yup.string().required('About is required'),
   })
 
-  const theme = useTheme()
   const formik = useFormik({
     validateOnBlur: true,
     // validateOnChange: true,
