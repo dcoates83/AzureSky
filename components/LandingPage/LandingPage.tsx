@@ -13,21 +13,21 @@ interface LandingPageProps {
   aboutSection: any
 }
 
-// export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
-//   ctx
-// ) => {
-//   const { preview = false, previewData = {} } = ctx
+export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
+  ctx
+) => {
+  const { preview = false, previewData = {} } = ctx
 
-//   const aboutPage = await client.fetch(`*[_type == "aboutPage"]`)
-//   return {
-//     props: {
-//       aboutPage,
-//       // token: previewData?.token ?? null,
-//     },
-//   }
-// }
-const LandingPage = (props: LandingPageProps) => {
-  const { aboutSection } = props
+  const homePage = await client.fetch(`*[_type == "homePage"]`)
+  return {
+    props: {
+      homePage,
+      // token: previewData?.token ?? null,
+    },
+  }
+}
+const LandingPage = ({ aboutSection }) => {
+  // const { aboutSection } = props
 
   return (
     <>
