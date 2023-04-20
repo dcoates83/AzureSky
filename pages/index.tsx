@@ -8,7 +8,7 @@ import { lazy } from 'react'
 
 import homePage from '../schemas/homePage'
 
-const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
+// const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 
 interface PageProps {
   posts: Post[]
@@ -35,23 +35,23 @@ export const client = createClient({
 export default function Page(props: PageProps) {
   const { posts, settings, preview, token, homePage } = props
 
-  if (preview) {
-    return (
-      <PreviewSuspense
-        fallback={
-          <IndexPage
-            loading
-            preview
-            posts={posts}
-            settings={settings}
-            homePage={homePage}
-          />
-        }
-      >
-        <PreviewIndexPage token={token} />
-      </PreviewSuspense>
-    )
-  }
+  // if (preview) {
+  //   return (
+  //     <PreviewSuspense
+  //       fallback={
+  //         <IndexPage
+  //           loading
+  //           preview
+  //           posts={posts}
+  //           settings={settings}
+  //           homePage={homePage}
+  //         />
+  //       }
+  //     >
+  //       <PreviewIndexPage token={token} />
+  //     </PreviewSuspense>
+  //   )
+  // }
 
   return <IndexPage posts={posts} settings={settings} homePage={homePage} />
 }
