@@ -2,15 +2,15 @@ import { Box, Container, Typography, useMediaQuery } from '@mui/material'
 import { GetStaticProps, PreviewData } from 'next'
 import React from 'react'
 
-import { client, Query } from '..'
-import CMSSection from '../../components/CMSSection'
-import ImageComponent from '../../components/ImageComponent'
-import ImageContainer from '../../components/ImageContainer'
-import SectionSubHeader from '../../components/SectionSubHeader'
+import { client, Query } from '../../pages'
+import CMSSection from '../CMSSection'
+import ImageComponent from '../ImageComponent'
+import ImageContainer from '../ImageContainer'
+import SectionSubHeader from '../SectionSubHeader'
 import { HeroLanding } from './HeroLanding'
 
 interface LandingPageProps {
-  aboutSection: any
+  homePage: any
 }
 
 export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
@@ -26,8 +26,8 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
     },
   }
 }
-const LandingPage = ({ aboutSection }) => {
-  // const { aboutSection } = props
+const LandingPage = ({ homePage }) => {
+  // const { homePage } = props
 
   return (
     <>
@@ -50,15 +50,15 @@ const LandingPage = ({ aboutSection }) => {
       </Box> */}
       <Container maxWidth="md">
         <CMSSection
-          title={aboutSection[0]?.title_KingsQueens}
-          content={aboutSection[0]?.content_KingsQueens}
+          title={homePage[0]?.title_KingsQueens}
+          content={homePage[0]?.content_KingsQueens}
         />
       </Container>
 
       {/* blue for male #279AF1 */}
       <Container maxWidth="lg">
         <ImageContainer>
-          {aboutSection[0]?.content_KingsQueensImages.map((image) => (
+          {homePage[0]?.content_KingsQueensImages.map((image) => (
             <>
               <Box
                 sx={{
@@ -172,17 +172,17 @@ const LandingPage = ({ aboutSection }) => {
         </div>
       </section> */}
         <CMSSection
-          title={aboutSection[0]?.title_AboutUs}
-          content={aboutSection[0]?.content_AboutUs}
+          title={homePage[0]?.title_AboutUs}
+          content={homePage[0]?.content_AboutUs}
         />
 
         <SectionSubHeader text="All of our cats live with us as part of our family" />
         <CMSSection
-          title={aboutSection[0]?.title_Assistants}
-          content={aboutSection[0]?.content_Assistants}
+          title={homePage[0]?.title_Assistants}
+          content={homePage[0]?.content_Assistants}
         />
         <ImageContainer>
-          {aboutSection[0]?.content_ImageAssistants?.map((image) => (
+          {homePage[0]?.content_ImageAssistants?.map((image) => (
             <ImageComponent
               image={image}
               key={image}

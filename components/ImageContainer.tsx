@@ -5,7 +5,7 @@ interface ImageContainerProps {
   children: React.ReactNode
 }
 
-const ImageContainer = (props) => {
+const ImageContainer = (props: ImageContainerProps) => {
   const { children } = props
   return (
     <Box

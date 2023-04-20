@@ -77,7 +77,7 @@ const CMSSection = (props: CMSSectionProps) => {
     <>
       <Container disableGutters sx={{ mt: 2, mb: 2 }}>
         <Typography variant={headerVariant || 'h4'} sx={titleSx || headerSx}>
-          {title}
+          {title ?? title}
         </Typography>
 
         <Box sx={{ color: 'text.primary' }}>

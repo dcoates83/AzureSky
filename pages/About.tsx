@@ -58,7 +58,7 @@ const AboutPage = ({ aboutPage }) => {
             title={aboutPage[0]?.title_RagdollHistory}
             content={aboutPage[0]?.content_RagdollHistory}
           />
-          <ImageContainer className="ragdoll-history-img">
+          <ImageContainer>
             <Image
               src={fugianna}
               alt="fugianna cat"
