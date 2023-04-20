@@ -14,7 +14,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 
-import Logo from '../../public/images/logo.svg'
+import Logo from '../../assets/Logo.svg'
 interface INavItems {
   name: string
   icon: React.ReactNode
