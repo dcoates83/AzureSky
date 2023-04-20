@@ -2,11 +2,11 @@ import { Box, Container, Typography, useMediaQuery } from '@mui/material'
 import { GetStaticProps, PreviewData } from 'next'
 import React from 'react'
 
-import { client, Query } from '..'
-import CMSSection from '../../components/CMSSection'
-import ImageComponent from '../../components/ImageComponent'
-import ImageContainer from '../../components/ImageContainer'
-import SectionSubHeader from '../../components/SectionSubHeader'
+import { client, Query } from '../../pages'
+import CMSSection from '../CMSSection'
+import ImageComponent from '../ImageComponent'
+import ImageContainer from '../ImageContainer'
+import SectionSubHeader from '../SectionSubHeader'
 import { HeroLanding } from './HeroLanding'
 
 interface LandingPageProps {

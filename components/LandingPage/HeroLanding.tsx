@@ -2,7 +2,7 @@ import { Box, Button, Theme, Typography, useMediaQuery } from '@mui/material'
 import Image from 'next/image'
 
 import cat from '../../assets/Vectorcat.jpg'
-import WaveDivider from '../../components/WaveDivider'
+import WaveDivider from '../WaveDivider'
 
 const containerSx = (theme: Theme) => ({
   width: '100%',

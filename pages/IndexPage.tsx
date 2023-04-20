@@ -10,7 +10,7 @@ import type { Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps, PreviewData } from 'next'
 
 import { client, Query } from '.'
-import LandingPage from './LandingPage/LandingPage'
+import LandingPage from '../components/LandingPage/LandingPage'
 
 export interface IndexPageProps {
   preview?: boolean
