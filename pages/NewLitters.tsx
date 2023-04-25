@@ -10,6 +10,18 @@ import CMSSection from '../components/CMSSection'
 import NewLittersCard from '../components/NewLittersCard'
 import NoRecords from '../components/NoRecords'
 
+interface INewLitters {
+  expirationDate: string | number | dayjs.Dayjs | Date
+  title: string
+  image: any
+  description: string
+  expected: Date
+  colors: string
+  quantityRemaining: number
+  reservedPreConception: number
+  reservedPostConception: number
+}
+
 dayjs.extend(isSameOrBefore)
 export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
   ctx
@@ -26,44 +38,39 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
     },
   }
 }
-const NewLitters = ({ newLitters, newLittersPosts }) => {
-  return (
-    <>
-      {/* <MetaTags title="NewLitters" description="NewLitters page" /> */}
-      <section id="upcoming">
-        <CMSSection
-          title={newLitters[0].title_newLitters}
-          content={newLitters[0].content_newLitters}
-        />
-        <Typography variant="h5" sx={{ mt: 2, mb: 2 }}>
-          Posted Litters
-        </Typography>
-        <Divider sx={{ mt: 2, mb: 2 }}></Divider>
-        <Container id="posted-litters" disableGutters sx={{ mt: 2 }}>
-          <NoRecords />
-
-          {/* {newLittersPosts?.map((newLittersPost) => {
-            return dayjs().isSameOrBefore(newLittersPost.expirationDate) ? (
-              <NewLittersCard
-                key={new Date().getMilliseconds()}
-                title={newLittersPost.title}
-                image={newLittersPost.image}
-                description={newLittersPost.description}
-                expected={newLittersPost.expected}
-                colors={newLittersPost.colors}
-                quantityRemaining={newLittersPost.quantityRemaining}
-                reservedPreConception={newLittersPost.reservedPreConception}
-                reservedPostConception={newLittersPost.reservedPostConception}
-              />
-            ) : (
-              <NoRecords />
-            )
-          })} */}
-        </Container>
-        {/* </div> */}
-      </section>
-    </>
-  )
-}
+const NewLitters = ({ newLitters, newLittersPosts }) => (
+  <>
+    {/* <MetaTags title="NewLitters" description="NewLitters page" /> */}
+    <section id="upcoming">
+      <CMSSection
+        title={newLitters[0].title_newLitters}
+        content={newLitters[0].content_newLitters}
+      />
+      <Typography variant="h5" sx={{ mt: 2, mb: 2 }}>
+        Posted Litters
+      </Typography>
+      <Divider sx={{ mt: 2, mb: 2 }}></Divider>
+      <Container id="posted-litters" disableGutters sx={{ mt: 2 }}>
+        {newLittersPosts?.map((newLittersPost: INewLitters) => {
+          return dayjs().isSameOrBefore(newLittersPost.expirationDate) ? (
+            <NewLittersCard
+              key={new Date().getMilliseconds()}
+              title={newLittersPost.title}
+              image={newLittersPost.image}
+              description={newLittersPost.description}
+              expected={newLittersPost.expected}
+              colors={newLittersPost.colors}
+              quantityRemaining={newLittersPost.quantityRemaining}
+              reservedPreConception={newLittersPost.reservedPreConception}
+              reservedPostConception={newLittersPost.reservedPostConception}
+            />
+          ) : (
+            <NoRecords />
+          )
+        })}
+      </Container>
+    </section>
+  </>
+)
 
 export default NewLitters
