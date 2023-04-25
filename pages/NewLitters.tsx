@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import { client, Query } from '.'
 import CMSSection from '../components/CMSSection'
 import NewLittersCard from '../components/NewLittersCard'
+import NoRecords from '../components/NoRecords'
 
 dayjs.extend(isSameOrBefore)
 export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
@@ -26,7 +27,6 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
   }
 }
 const NewLitters = ({ newLitters, newLittersPosts }) => {
-
   return (
     <>
       {/* <MetaTags title="NewLitters" description="NewLitters page" /> */}
@@ -40,7 +40,9 @@ const NewLitters = ({ newLitters, newLittersPosts }) => {
         </Typography>
         <Divider sx={{ mt: 2, mb: 2 }}></Divider>
         <Container id="posted-litters" disableGutters sx={{ mt: 2 }}>
-          {newLittersPosts?.map((newLittersPost) => {
+          <NoRecords />
+
+          {/* {newLittersPosts?.map((newLittersPost) => {
             return dayjs().isSameOrBefore(newLittersPost.expirationDate) ? (
               <NewLittersCard
                 key={new Date().getMilliseconds()}
@@ -54,9 +56,9 @@ const NewLitters = ({ newLitters, newLittersPosts }) => {
                 reservedPostConception={newLittersPost.reservedPostConception}
               />
             ) : (
-              <>No Records</>
+              <NoRecords />
             )
-          })}
+          })} */}
         </Container>
         {/* </div> */}
       </section>

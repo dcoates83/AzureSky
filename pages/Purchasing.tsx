@@ -4,7 +4,9 @@ import { PortableText } from '@portabletext/react'
 import { GetStaticProps, PreviewData } from 'next'
 import Image from 'next/image'
 
-import { client, Query } from '.'
+import { JSXElementConstructor, Key, ReactElement, ReactFragment } from 'react'
+import uuid from 'react-uuid'
+import { Query, client } from '.'
 import aasia from '../assets/aasia-kitten.jpg'
 import catTower from '../assets/cat-cattower.jpg'
 import deposit from '../assets/kittens-deposit.jpg'
@@ -48,22 +50,29 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
 
         <Box sx={{ mt: 2 }}>
           <Typography variant={'h4'} sx={{}}>
-            {/* <Typography variant={'h4'} sx={{ color: 'primary.main' }}> */}
             {purchasing[0].title_purchasingComesWith}
           </Typography>
 
           <Box sx={{ color: 'text.primary', mt: 2 }}>
-            {purchasing[0]?.list_purchasingComesWith?.map((item) => {
-              return (
-                <Box key={item} sx={{ display: 'flex', m: 1 }}>
-                  <CheckCircleOutlineRoundedIcon
-                    color="primary"
-                    sx={{ mr: 1, ml: 2 }}
-                  />
-                  <Typography>{item}</Typography>
-                </Box>
-              )
-            })}
+            {purchasing[0]?.list_purchasingComesWith?.map(
+              (
+                item:
+                  | boolean
+                  | ReactElement<any, string | JSXElementConstructor<any>>
+                  | ReactFragment
+                  | Key
+              ) => {
+                return (
+                  <Box key={uuid()} sx={{ display: 'flex', m: 1 }}>
+                    <CheckCircleOutlineRoundedIcon
+                      color="primary"
+                      sx={{ mr: 1, ml: 2 }}
+                    />
+                    <Typography>{item}</Typography>
+                  </Box>
+                )
+              }
+            )}
             {<PortableText value={purchasing[0].content_purchasingComesWith} />}
           </Box>
         </Box>
@@ -120,15 +129,31 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
                 },
               }}
             >
-              {faqQuestions.map((q) => (
-                <Box key={q.title} sx={{ width: '100%' }}>
-                  <FaqQuestion
-                    question={q.title_faqs}
-                    answer={q.content_faqs}
-                    key={q.answer + q.answer}
-                  />
-                </Box>
-              ))}
+              {faqQuestions.map(
+                (q: {
+                  title: Key
+                  title_faqs: string
+                  content_faqs: string
+                  answer: any
+                }) => (
+                  <Box
+                    key={q.title}
+                    sx={{
+                      width: '100%',
+                      [theme.breakpoints.down('md')]: {
+                        gridTemplateColumns: '1fr',
+                        gridAutoFlow: 'row',
+                      },
+                    }}
+                  >
+                    <FaqQuestion
+                      question={q.title_faqs}
+                      answer={q.content_faqs}
+                      key={q.answer + q.answer}
+                    />
+                  </Box>
+                )
+              )}
             </Box>
           </div>
         </section>

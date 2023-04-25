@@ -1,8 +1,13 @@
 
 Send a email when the litters page is outdated
 Report a issue 
-fix image container
 fix Typography in portabletext
-no Records
 share button - share https://github.com/nygardk/react-share
 email valid
+quick link to adoption from
+improve footer
+link to king and queens
+expected - date of birth
+colors and markings seperate section
+sex color marking - break down per kitten 
+change reserved from pre conception/ post conception

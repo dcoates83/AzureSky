@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material'
+import { Box, Container, useTheme } from '@mui/material'
 import { GetStaticProps, PreviewData } from 'next'
 import Image from 'next/image'
 
@@ -26,6 +26,7 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
   }
 }
 const AboutPage = ({ aboutPage }) => {
+  const theme = useTheme()
   return (
     <>
       {/* <MetaTags
@@ -60,25 +61,44 @@ const AboutPage = ({ aboutPage }) => {
           />
           <ImageContainer>
             <Image
+              width={250}
+              height={250}
               src={fugianna}
               alt="fugianna cat"
               className="history-img"
-              style={{ borderRadius: 8 }}
+              style={{
+                borderRadius: 8,
+                objectFit: 'cover',
+                paddingLeft: 1,
+                overflow: 'hidden',
+              }}
             />
             <Image
+              width={250}
+              height={250}
               src={daddyWarbucks}
               alt="daddy warbucks cat"
               className="history-img"
               style={{ borderRadius: 8 }}
             />
             <Image
+              width={250}
+              height={250}
               style={{ borderRadius: 8 }}
               src={buckwheat}
               alt="buckwheat cat"
               className="history-img"
             />
           </ImageContainer>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              [theme.breakpoints.down('md')]: {
+                flexDirection: 'column',
+              },
+            }}
+          >
             <CMSSection
               title={aboutPage[0]?.title_GrumpyCat}
               content={aboutPage[0]?.content_GrumpyCat}
