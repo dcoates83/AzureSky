@@ -115,6 +115,7 @@ export default defineType({
               name: 'description',
               type: 'string',
               title: 'Description',
+              validation: (rule) => rule.required(),
             },
           ],
         },

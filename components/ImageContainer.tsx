@@ -16,6 +16,8 @@ const ImageContainer = (props: ImageContainerProps) => {
         gap: '1em',
         flexWrap: 'wrap',
         justifyContent: 'center',
+        mt: 2,
+        mb: 2,
       }}
     >
       {children}

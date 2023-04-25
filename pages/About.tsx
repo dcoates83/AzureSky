@@ -119,10 +119,15 @@ const AboutPage = ({ aboutPage }) => {
             title={aboutPage[0]?.title_ColorPatterns}
             content={aboutPage[0]?.content_ColorPatterns}
           />
+          <CMSSection
+            title={aboutPage[0].title_ColorPoints}
+            content={aboutPage[0].content_ColorPoints}
+          />
         </Container>
+
         <Container maxWidth="lg">
           <ImageContainer>
-            {aboutPage[0]?.content_ColorPointsImages?.map((image) => (
+            {aboutPage[1]?.content_ColorPointsImages?.map((image) => (
               <ImageCircle key={image} image={image} />
             ))}
           </ImageContainer>
