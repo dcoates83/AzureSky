@@ -23,7 +23,6 @@ const Footer = () => {
         <nav className="footer-links">
           <ul className="footer-items">
             <li>
-              {' '}
               <a href="mailto:devonbcoates@gmail.com" target="_blank">
                 Web Design
               </a>
@@ -32,7 +31,7 @@ const Footer = () => {
               <Link href="/Purchasing">Purchasing</Link>
             </li>
             <li>
-              <a href="/Purchasing#faq">FAQ</a>
+              <Link href="/Purchasing#faq">FAQ</Link>
             </li>
             <li>
               <a href="mailto:AzureSkyRagdolls@gmail.com" target="_blank">

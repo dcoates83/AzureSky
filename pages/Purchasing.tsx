@@ -88,7 +88,6 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
             alignItems: 'start',
             gap: 2,
             [theme.breakpoints.down('sm')]: {
-              // gridAutoFlow: 'row',
               display: 'flex',
               flexDirection: 'column',
             },

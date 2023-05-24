@@ -1,6 +1,7 @@
 import { Box, Button, Theme, Typography, useMediaQuery } from '@mui/material'
 import Image from 'next/image'
 
+import { useRouter } from 'next/router'
 import cat from '../../assets/Vectorcat.jpg'
 import WaveDivider from '../WaveDivider'
 
@@ -26,6 +27,7 @@ export const HeroLanding = () => {
   const smallScreens = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down('sm')
   )
+  const router = useRouter()
   return (
     <>
       <Box
@@ -33,7 +35,6 @@ export const HeroLanding = () => {
           height: '94dvh',
           display: 'grid',
           gridTemplateRows: '9fr 1fr',
-          // width: '100vw',
         }}
       >
         <Box sx={containerSx}>
@@ -46,7 +47,6 @@ export const HeroLanding = () => {
                 sx={{
                   display: 'flex',
                   alignItems: 'center',
-                  // justifyContent: 'space-between',
                   mt: 2,
                 }}
               >
@@ -61,6 +61,7 @@ export const HeroLanding = () => {
                     color: '#fff',
                     lineHeight: smallScreens ? '1.15em' : 'undefined',
                   }}
+                  onClick={() => router.push(`/Purchasing#purchasing-form`)}
                 >
                   Contact Us
                 </Button>

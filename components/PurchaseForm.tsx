@@ -38,7 +38,7 @@ const PurchaseForm = () => {
   return (
     <Card sx={{ p: 2, height: '100%' }}>
       <Box
-        id="form-info"
+        id="purchasing-form"
         method="POST"
         component="form"
         sx={{
