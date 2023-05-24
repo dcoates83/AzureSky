@@ -37,6 +37,18 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
 }
 export default function IndexPage(props: IndexPageProps) {
   const { preview, loading, posts, settings, homePage } = props
+  const copy = [...homePage]
+
+  const {
+    title_KingsQueens,
+    content_KingsQueens,
+    content_KingsQueensImages,
+    title_AboutUs,
+    content_AboutUs,
+    title_Assistants,
+    content_Assistants,
+    content_ImageAssistants,
+  } = copy.pop()
 
   return (
     <>
@@ -63,14 +75,14 @@ export default function IndexPage(props: IndexPageProps) {
       </Box> */}
           <Container maxWidth="md">
             <CMSSection
-              title={homePage[1]?.title_KingsQueens}
-              content={homePage[1]?.content_KingsQueens}
+              title={title_KingsQueens}
+              content={content_KingsQueens}
             />
           </Container>
 
           <Container maxWidth="lg">
             <ImageContainer>
-              {homePage[1]?.content_KingsQueensImages.map((image) => (
+              {content_KingsQueensImages.map((image) => (
                 <>
                   <Box
                     sx={{
@@ -187,18 +199,12 @@ export default function IndexPage(props: IndexPageProps) {
           </p>
         </div>
       </section> */}
-            <CMSSection
-              title={homePage[1]?.title_AboutUs}
-              content={homePage[1]?.content_AboutUs}
-            />
+            <CMSSection title={title_AboutUs} content={content_AboutUs} />
 
             <SectionSubHeader text="All of our cats live with us as part of our family" />
-            <CMSSection
-              title={homePage[1]?.title_Assistants}
-              content={homePage[1]?.content_Assistants}
-            />
+            <CMSSection title={title_Assistants} content={content_Assistants} />
             <ImageContainer>
-              {homePage[1]?.content_ImageAssistants?.map((image) => (
+              {content_ImageAssistants?.map((image) => (
                 <ImageComponent
                   image={image}
                   key={uuid()}

@@ -36,40 +36,43 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
     },
   }
 }
-const NewLitters = ({ newLitters, newLittersPosts }) => (
-  <>
-    {/* <MetaTags title="NewLitters" description="NewLitters page" /> */}
-    <section id="upcoming">
-      <CMSSection
-        title={newLitters[0].title_newLitters}
-        content={newLitters[0].content_newLitters}
-      />
-      <Typography variant="h5" sx={{ mt: 2, mb: 2 }}>
-        Posted Litters
-      </Typography>
-      <Divider sx={{ mt: 2, mb: 2 }}></Divider>
-      <Container id="posted-litters" disableGutters sx={{ mt: 2 }}>
-        {newLittersPosts?.map((newLittersPost: INewLitters) => {
-          return dayjs().isSameOrBefore(newLittersPost.expirationDate) ? (
-            <NewLittersCard
-              key={new Date().getMilliseconds()}
-              title={newLittersPost.title}
-              image={newLittersPost.image}
-              description={newLittersPost.description}
-              expected={newLittersPost.expected}
-              colors={newLittersPost.colors}
-              quantityRemaining={newLittersPost.quantityRemaining}
-              reservedPreConception={newLittersPost.reservedPreConception}
-              reservedPostConception={newLittersPost.reservedPostConception}
-            />
-          ) : (
-            <></>
-          )
-        })}
-        {newLittersPosts?.length === 0 && <NoRecords />}
-      </Container>
-    </section>
-  </>
-)
+const NewLitters = ({ newLitters, newLittersPosts }) => {
+  const copy = [...newLitters]
+
+  const { title_newLitters, content_newLitters } = copy.pop()
+
+  return (
+    <>
+      {/* <MetaTags title="NewLitters" description="NewLitters page" /> */}
+      <section id="upcoming">
+        <CMSSection title={title_newLitters} content={content_newLitters} />
+        <Typography variant="h5" sx={{ mt: 2, mb: 2 }}>
+          Posted Litters
+        </Typography>
+        <Divider sx={{ mt: 2, mb: 2 }}></Divider>
+        <Container id="posted-litters" disableGutters sx={{ mt: 2 }}>
+          {newLittersPosts?.map((newLittersPost: INewLitters) => {
+            return dayjs().isSameOrBefore(newLittersPost.expirationDate) ? (
+              <NewLittersCard
+                key={new Date().getMilliseconds()}
+                title={newLittersPost.title}
+                image={newLittersPost.image}
+                description={newLittersPost.description}
+                expected={newLittersPost.expected}
+                colors={newLittersPost.colors}
+                quantityRemaining={newLittersPost.quantityRemaining}
+                reservedPreConception={newLittersPost.reservedPreConception}
+                reservedPostConception={newLittersPost.reservedPostConception}
+              />
+            ) : (
+              <></>
+            )
+          })}
+          {newLittersPosts?.length === 0 && <NoRecords />}
+        </Container>
+      </section>
+    </>
+  )
+}
 
 export default NewLitters

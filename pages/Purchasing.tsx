@@ -36,6 +36,18 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
 }
 const Purchasing = ({ purchasing, faqQuestions }) => {
   const theme = useTheme()
+  const copy = [...purchasing]
+  const {
+    title_purchasingAgreement,
+    content_purchasingAgreement,
+    title_purchasingComesWith,
+    list_purchasingComesWith,
+    content_purchasingComesWith,
+    title_purchasingGoingHome,
+    content_purchasingGoingHome,
+    title_AdoptionForm,
+    content_AdoptionForm,
+  } = copy.pop()
   return (
     <>
       {/* <MetaTags
@@ -44,17 +56,17 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
       /> */}
       <Container maxWidth="md" sx={{ mb: 1 }}>
         <CMSSection
-          title={purchasing[0].title_purchasingAgreement}
-          content={purchasing[0].content_purchasingAgreement}
+          title={title_purchasingAgreement}
+          content={content_purchasingAgreement}
         />
 
         <Box sx={{ mt: 2 }}>
           <Typography variant={'h4'} sx={{}}>
-            {purchasing[0].title_purchasingComesWith}
+            {title_purchasingComesWith}
           </Typography>
 
           <Box sx={{ color: 'text.primary', mt: 2 }}>
-            {purchasing[0]?.list_purchasingComesWith?.map(
+            {list_purchasingComesWith?.map(
               (
                 item:
                   | boolean
@@ -73,12 +85,12 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
                 )
               }
             )}
-            {<PortableText value={purchasing[0].content_purchasingComesWith} />}
+            {<PortableText value={content_purchasingComesWith} />}
           </Box>
         </Box>
         <CMSSection
-          title={purchasing[0].title_purchasingGoingHome}
-          content={purchasing[0].content_purchasingGoingHome}
+          title={title_purchasingGoingHome}
+          content={content_purchasingGoingHome}
         />
         <Box
           sx={{
@@ -95,8 +107,8 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
         >
           <Box>
             <CMSSection
-              title={purchasing[0].title_AdoptionForm}
-              content={purchasing[0].content_AdoptionForm}
+              title={title_AdoptionForm}
+              content={content_AdoptionForm}
             />
           </Box>
           <PurchaseForm />
