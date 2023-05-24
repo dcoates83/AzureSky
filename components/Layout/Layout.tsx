@@ -6,6 +6,8 @@ import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded'
 import { Box, Container } from '@mui/material'
 import AlertBanner from 'components/AlertBanner'
 
+import { useRouter } from 'next/router'
+import path from 'path'
 import Footer from './Footer'
 import NavBar from './NavBar'
 export default function BlogLayout({
@@ -17,11 +19,27 @@ export default function BlogLayout({
   // loading?: boolean
   children: React.ReactNode
 }) {
+  const router = useRouter()
+  const pathname = router.pathname
+  if (/\/studio\//.test(pathname)) {
+    return (
+      <>
+        <NavBar
+          navItems={[
+            { name: 'Home', icon: <HomeRoundedIcon /> },
+            { name: 'About', icon: <InfoRoundedIcon /> },
+            { name: 'Purchasing', icon: <ShoppingBasketRoundedIcon /> },
+            { name: 'New Litters', icon: <FiberNewRoundedIcon /> },
+            // { name: 'Shop', icon: <ShoppingCartRoundedIcon /> },
+          ]}
+        />
+        <Box sx={{ pt: 8 }}>{children}</Box>
+      </>
+    )
+  }
   return (
     <>
       <div className="min-h-screen">
-        {/* <AlertBanner preview={preview} loading={loading} /> */}
-        {/* <AlertBanner preview={preview} loading={loading} /> */}
         <NavBar
           navItems={[
             { name: 'Home', icon: <HomeRoundedIcon /> },
@@ -32,7 +50,6 @@ export default function BlogLayout({
           ]}
         />
         <Container maxWidth="lg" sx={{ overflow: 'hidden', pt: 7 }}>
-          {/* <Container className="page-container" maxWidth="md"> */}
           {children}
         </Container>
         <Footer />
