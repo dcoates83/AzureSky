@@ -2,8 +2,6 @@ import { Container, Divider, Typography } from '@mui/material'
 import dayjs from 'dayjs'
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import { GetStaticProps, PreviewData } from 'next'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
 
 import { client, Query } from '.'
 import CMSSection from '../components/CMSSection'
@@ -65,9 +63,10 @@ const NewLitters = ({ newLitters, newLittersPosts }) => (
               reservedPostConception={newLittersPost.reservedPostConception}
             />
           ) : (
-            <NoRecords />
+            <></>
           )
         })}
+        {newLittersPosts?.length === 0 && <NoRecords />}
       </Container>
     </section>
   </>

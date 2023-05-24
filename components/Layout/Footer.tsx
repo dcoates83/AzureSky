@@ -28,7 +28,9 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <Link href="/Purchasing">Purchasing</Link>
+              <Link href="/Purchasing#purchasing-form">
+                Purchasing a Kitten
+              </Link>
             </li>
             <li>
               <Link href="/Purchasing#faq">FAQ</Link>
