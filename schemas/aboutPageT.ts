@@ -123,19 +123,19 @@ export default defineType({
     }),
     defineField({
       name: 'title_ColorVariations',
-      title: 'Header - "Color Variations" ',
+      title: 'Header - "White Variations" ',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'content_ColorVariations',
-      title: 'Content - "Color Variations (Optional)" ',
+      title: 'Content - "White Variations (Optional)" ',
       type: 'array',
       of: [{ type: 'block' }],
     }),
     defineField({
       name: 'content_ColorVariationsImages',
-      title: 'Current - "Color Points Images" ',
+      title: 'Current - "White Variations Images" ',
       type: 'array',
       of: [
         {
@@ -146,7 +146,7 @@ export default defineType({
             {
               name: 'name',
               type: 'string',
-              title: 'Name',
+              title: 'Color Type',
               validation: (rule) => rule.required(),
             },
             {

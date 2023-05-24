@@ -2,6 +2,7 @@ import { Box, Container, useTheme } from '@mui/material'
 import { GetStaticProps, PreviewData } from 'next'
 import Image from 'next/image'
 
+import uuid from 'react-uuid'
 import { client, Query } from '.'
 import buckwheat from '../assets/buckwheat.jpg'
 import daddyWarbucks from '../assets/Daddy warbucks.jpg'
@@ -11,13 +12,64 @@ import historyLanding from '../assets/history-landing.jpg'
 import CMSSection from '../components/CMSSection'
 import ImageCircle from '../components/ImageCircle'
 import ImageContainer from '../components/ImageContainer'
+interface AboutPage {
+  _id: string
+  _rev: string
+  _type: string
+  _updatedAt: string
+  title_AboutRagdolls: string
+  content_AboutRagdolls: string
+  title_AppearanceRagdolls: string
+  content_AppearanceRagdolls: AppearanceRagdoll[]
+  title_ColorPatterns: string
+  title_ColorPoints: string
+  content_ColorPointsImages: ColorPointsImage[]
+  title_ColorVariations: string
+  content_ColorVariationsImages: ColorVariationsImage[]
+  title_Minks: string
+}
 
+interface ColorPointsImage {
+  color: string
+  _type: string
+  description: string
+  _key: string
+  asset: AssetReference
+}
+
+interface ColorVariationsImage {
+  _type: string
+  name: string
+  description: string
+  _key: string
+  asset: AssetReference
+}
+
+interface AssetReference {
+  _ref: string
+  _type: string
+}
+
+interface AppearanceRagdoll {
+  style: string
+  _key: string
+  markDefs: any[]
+  children: AppearanceRagdollChild[]
+  _type: string
+}
+
+interface AppearanceRagdollChild {
+  _type: string
+  marks: any[]
+  text: string
+  _key: string
+}
 export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
   ctx
 ) => {
   const { preview = false, previewData = {} } = ctx
 
-  const aboutPage = await client.fetch(`*[_type == "aboutPage"]`)
+  const aboutPage: AboutPage[] = await client.fetch(`*[_type == "aboutPage"]`)
   return {
     props: {
       aboutPage,
@@ -25,8 +77,11 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
     },
   }
 }
-const AboutPage = ({ aboutPage }) => {
+// const AboutPage = ({ aboutPage }) => {
+const AboutPage = ({ aboutPage }: { aboutPage: AboutPage[] }) => {
   const theme = useTheme()
+  const copy = [...aboutPage]
+  const { title_AboutRagdolls, content_AboutRagdolls } = copy.pop()
   return (
     <>
       {/* <MetaTags
@@ -52,12 +107,12 @@ const AboutPage = ({ aboutPage }) => {
         </Container> */}
         <Container maxWidth="md">
           <CMSSection
-            title={aboutPage[0]?.title_AboutRagdolls}
-            content={aboutPage[0]?.content_AboutRagdolls}
+            title={title_AboutRagdolls}
+            content={content_AboutRagdolls}
           />
           <CMSSection
-            title={aboutPage[0]?.title_RagdollHistory}
-            content={aboutPage[0]?.content_RagdollHistory}
+            title={aboutPage[1]?.title_RagdollHistory}
+            content={aboutPage[1]?.content_RagdollHistory}
           />
           <ImageContainer>
             <Image
@@ -100,8 +155,8 @@ const AboutPage = ({ aboutPage }) => {
             }}
           >
             <CMSSection
-              title={aboutPage[0]?.title_GrumpyCat}
-              content={aboutPage[0]?.content_GrumpyCat}
+              title={aboutPage[1]?.title_GrumpyCat}
+              content={aboutPage[1]?.content_GrumpyCat}
             />{' '}
             <Image
               src={grumpyCat}
@@ -112,51 +167,51 @@ const AboutPage = ({ aboutPage }) => {
             />
           </Box>
           <CMSSection
-            title={aboutPage[0]?.title_AppearanceRagdolls}
-            content={aboutPage[0]?.content_AppearanceRagdolls}
+            title={aboutPage[1]?.title_AppearanceRagdolls}
+            content={aboutPage[1]?.content_AppearanceRagdolls}
           />
           <CMSSection
-            title={aboutPage[0]?.title_ColorPatterns}
-            content={aboutPage[0]?.content_ColorPatterns}
+            title={aboutPage[1]?.title_ColorPatterns}
+            content={aboutPage[1]?.content_ColorPatterns}
           />
           <CMSSection
-            title={aboutPage[0].title_ColorPoints}
-            content={aboutPage[0].content_ColorPoints}
+            title={aboutPage[1].title_ColorPoints}
+            content={aboutPage[1].content_ColorPoints}
           />
         </Container>
 
         <Container maxWidth="lg">
           <ImageContainer>
             {aboutPage[1]?.content_ColorPointsImages?.map((image) => (
-              <ImageCircle key={image} image={image} />
+              <ImageCircle key={uuid()} image={image} />
             ))}
           </ImageContainer>
           <Container maxWidth="md">
             <CMSSection
-              title={aboutPage[0]?.title_ColorVariations}
-              content={aboutPage[0]?.content_ColorVariations}
+              title={aboutPage[1]?.title_ColorVariations}
+              content={aboutPage[1]?.content_ColorVariations}
             />
           </Container>
           <ImageContainer>
-            {aboutPage[0]?.content_ColorVariationsImages?.map((image) => (
-              <ImageCircle key={image} image={image} />
+            {aboutPage[1]?.content_ColorVariationsImages?.map((image) => (
+              <ImageCircle key={uuid()} image={image} />
             ))}
           </ImageContainer>
           <Container maxWidth="md">
             <CMSSection
-              title={aboutPage[0]?.title_Minks}
-              content={aboutPage[0]?.content_MinksDescription}
+              title={aboutPage[1]?.title_Minks}
+              content={aboutPage[1]?.content_MinksDescription}
             />
           </Container>
           <ImageContainer>
-            {aboutPage[0]?.content_MinksImages?.map((image) => (
-              <ImageCircle key={image} image={image} />
+            {aboutPage[1]?.content_MinksImages?.map((image) => (
+              <ImageCircle key={uuid()} image={image} />
             ))}
           </ImageContainer>
           <Container maxWidth="md">
             <CMSSection
-              title={aboutPage[0]?.title_BeCareful}
-              content={aboutPage[0]?.content_BeCareful}
+              title={aboutPage[1]?.title_BeCareful}
+              content={aboutPage[1]?.content_BeCareful}
             />
           </Container>
         </Container>

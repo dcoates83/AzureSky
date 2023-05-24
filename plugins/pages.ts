@@ -1,10 +1,12 @@
 /**
  * This plugin contains all the logic for setting up the `Settings` singleton
  */
-
+import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded'
+import InfoRoundedIcon from '@mui/icons-material/InfoRounded'
+import PetsRoundedIcon from '@mui/icons-material/PetsRounded'
+import { HomeIcon } from '@sanity/icons'
 import { definePlugin, type DocumentDefinition } from 'sanity'
 import { type StructureResolver } from 'sanity/desk'
-
 // export const settingsPlugin = definePlugin<{ type: string }>(({ type }) => {
 //   return {
 //     name: 'newLitters',
@@ -53,6 +55,7 @@ export const pagesStructure = (
 
     const newLittersPage = S.listItem()
       .title('New Litters Page')
+      .icon(PetsRoundedIcon)
       .child(
         S.list()
           .title('Manage new litters page')
@@ -71,6 +74,7 @@ export const pagesStructure = (
 
     const purchasingPage = S.listItem()
       .title('Purchasing Page')
+      .icon(AttachMoneyRoundedIcon)
       .child(
         S.list()
           .title('Manage purchasing page')
@@ -98,9 +102,11 @@ export const pagesStructure = (
       .items([
         S.listItem()
           .title('Home Page')
+          .icon(HomeIcon)
           .child(S.document().schemaType('homePage').documentId('homePage')),
         S.listItem()
           .title('About Page')
+          .icon(InfoRoundedIcon)
           .child(S.document().schemaType('aboutPage').documentId('aboutPage')),
         purchasingPage,
         newLittersPage,

@@ -63,14 +63,14 @@ export default function IndexPage(props: IndexPageProps) {
       </Box> */}
           <Container maxWidth="md">
             <CMSSection
-              title={homePage[0]?.title_KingsQueens}
-              content={homePage[0]?.content_KingsQueens}
+              title={homePage[1]?.title_KingsQueens}
+              content={homePage[1]?.content_KingsQueens}
             />
           </Container>
 
           <Container maxWidth="lg">
             <ImageContainer>
-              {homePage[0]?.content_KingsQueensImages.map((image) => (
+              {homePage[1]?.content_KingsQueensImages.map((image) => (
                 <>
                   <Box
                     sx={{
@@ -188,17 +188,17 @@ export default function IndexPage(props: IndexPageProps) {
         </div>
       </section> */}
             <CMSSection
-              title={homePage[0]?.title_AboutUs}
-              content={homePage[0]?.content_AboutUs}
+              title={homePage[1]?.title_AboutUs}
+              content={homePage[1]?.content_AboutUs}
             />
 
             <SectionSubHeader text="All of our cats live with us as part of our family" />
             <CMSSection
-              title={homePage[0]?.title_Assistants}
-              content={homePage[0]?.content_Assistants}
+              title={homePage[1]?.title_Assistants}
+              content={homePage[1]?.content_Assistants}
             />
             <ImageContainer>
-              {homePage[0]?.content_ImageAssistants?.map((image) => (
+              {homePage[1]?.content_ImageAssistants?.map((image) => (
                 <ImageComponent
                   image={image}
                   key={uuid()}

@@ -58,11 +58,11 @@ export default defineType({
               validation: (rule) => rule.required(),
             },
 
-            {
-              name: 'description',
-              type: 'string',
-              title: 'Description',
-            },
+            // {
+            //   name: 'description',
+            //   type: 'string',
+            //   title: 'Description',
+            // },
           ],
         },
       ],
