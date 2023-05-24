@@ -22,13 +22,31 @@ interface AboutPage {
   title_AppearanceRagdolls: string
   content_AppearanceRagdolls: AppearanceRagdoll[]
   title_ColorPatterns: string
+  content_ColorPatterns: string
   title_ColorPoints: string
+  content_ColorPoints: string
   content_ColorPointsImages: ColorPointsImage[]
   title_ColorVariations: string
+  content_ColorVariations: string
   content_ColorVariationsImages: ColorVariationsImage[]
+  title_RagdollHistory: string
+  content_RagdollHistory: string
+  title_GrumpyCat: string
+  content_GrumpyCat: string
   title_Minks: string
+  content_MinksDescription: string
+  content_MinksImages: MinksImage[]
+  title_BeCareful: string
+  content_BeCareful: string
 }
 
+interface MinksImage {
+  _type: string
+  name: string
+  description: string
+  _key: string
+  asset: AssetReference
+}
 interface ColorPointsImage {
   color: string
   _type: string
@@ -81,7 +99,29 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
 const AboutPage = ({ aboutPage }: { aboutPage: AboutPage[] }) => {
   const theme = useTheme()
   const copy = [...aboutPage]
-  const { title_AboutRagdolls, content_AboutRagdolls } = copy.pop()
+  const {
+    title_AboutRagdolls,
+    content_AboutRagdolls,
+    title_RagdollHistory,
+    content_RagdollHistory,
+    title_GrumpyCat,
+    content_GrumpyCat,
+    title_AppearanceRagdolls,
+    content_AppearanceRagdolls,
+    title_ColorPatterns,
+    content_ColorPatterns,
+    title_ColorPoints,
+    content_ColorPoints,
+    content_ColorPointsImages,
+    title_ColorVariations,
+    content_ColorVariations,
+    content_ColorVariationsImages,
+    title_Minks,
+    content_MinksDescription,
+    content_MinksImages,
+    title_BeCareful,
+    content_BeCareful,
+  } = copy.pop()
   return (
     <>
       {/* <MetaTags
@@ -111,8 +151,8 @@ const AboutPage = ({ aboutPage }: { aboutPage: AboutPage[] }) => {
             content={content_AboutRagdolls}
           />
           <CMSSection
-            title={aboutPage[1]?.title_RagdollHistory}
-            content={aboutPage[1]?.content_RagdollHistory}
+            title={title_RagdollHistory}
+            content={content_RagdollHistory}
           />
           <ImageContainer>
             <Image
@@ -154,10 +194,7 @@ const AboutPage = ({ aboutPage }: { aboutPage: AboutPage[] }) => {
               },
             }}
           >
-            <CMSSection
-              title={aboutPage[1]?.title_GrumpyCat}
-              content={aboutPage[1]?.content_GrumpyCat}
-            />{' '}
+            <CMSSection title={title_GrumpyCat} content={content_GrumpyCat} />
             <Image
               src={grumpyCat}
               style={{ borderRadius: 8, marginLeft: '1em' }}
@@ -167,52 +204,46 @@ const AboutPage = ({ aboutPage }: { aboutPage: AboutPage[] }) => {
             />
           </Box>
           <CMSSection
-            title={aboutPage[1]?.title_AppearanceRagdolls}
-            content={aboutPage[1]?.content_AppearanceRagdolls}
+            title={title_AppearanceRagdolls}
+            content={content_AppearanceRagdolls}
           />
           <CMSSection
-            title={aboutPage[1]?.title_ColorPatterns}
-            content={aboutPage[1]?.content_ColorPatterns}
+            title={title_ColorPatterns}
+            content={content_ColorPatterns}
           />
-          <CMSSection
-            title={aboutPage[1].title_ColorPoints}
-            content={aboutPage[1].content_ColorPoints}
-          />
+          <CMSSection title={title_ColorPoints} content={content_ColorPoints} />
         </Container>
 
         <Container maxWidth="lg">
           <ImageContainer>
-            {aboutPage[1]?.content_ColorPointsImages?.map((image) => (
+            {content_ColorPointsImages?.map((image) => (
               <ImageCircle key={uuid()} image={image} />
             ))}
           </ImageContainer>
           <Container maxWidth="md">
             <CMSSection
-              title={aboutPage[1]?.title_ColorVariations}
-              content={aboutPage[1]?.content_ColorVariations}
+              title={title_ColorVariations}
+              content={content_ColorVariations}
             />
           </Container>
           <ImageContainer>
-            {aboutPage[1]?.content_ColorVariationsImages?.map((image) => (
+            {content_ColorVariationsImages?.map((image) => (
               <ImageCircle key={uuid()} image={image} />
             ))}
           </ImageContainer>
           <Container maxWidth="md">
             <CMSSection
-              title={aboutPage[1]?.title_Minks}
-              content={aboutPage[1]?.content_MinksDescription}
+              title={title_Minks}
+              content={content_MinksDescription}
             />
           </Container>
           <ImageContainer>
-            {aboutPage[1]?.content_MinksImages?.map((image) => (
+            {content_MinksImages?.map((image) => (
               <ImageCircle key={uuid()} image={image} />
             ))}
           </ImageContainer>
           <Container maxWidth="md">
-            <CMSSection
-              title={aboutPage[1]?.title_BeCareful}
-              content={aboutPage[1]?.content_BeCareful}
-            />
+            <CMSSection title={title_BeCareful} content={content_BeCareful} />
           </Container>
         </Container>
       </section>
