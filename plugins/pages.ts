@@ -61,7 +61,7 @@ export const pagesStructure = (
           .title('Manage new litters page')
           .items([
             S.listItem()
-              .title('Upcoming litters')
+              .title('New litters page content')
               .child(
                 S.document().schemaType('newLitters').documentId('newLitters')
               ),

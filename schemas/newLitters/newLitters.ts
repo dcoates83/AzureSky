@@ -2,7 +2,7 @@ import PetsRoundedIcon from '@mui/icons-material/PetsRounded'
 import { defineField, defineType } from 'sanity'
 export default defineType({
   name: 'newLitters',
-  title: 'New Litters',
+  title: 'New Litters Page',
   icon: PetsRoundedIcon,
   type: 'document',
   fields: [

@@ -7,6 +7,7 @@ import { client, Query } from '.'
 import CMSSection from '../components/CMSSection'
 import NewLittersCard from '../components/NewLittersCard'
 import NoRecords from '../components/NoRecords'
+import SectionSubHeader from '../components/SectionSubHeader'
 
 interface INewLitters {
   expirationDate: string | number | dayjs.Dayjs | Date
@@ -46,6 +47,10 @@ const NewLitters = ({ newLitters, newLittersPosts }) => {
       {/* <MetaTags title="NewLitters" description="NewLitters page" /> */}
       <section id="upcoming">
         <CMSSection title={title_newLitters} content={content_newLitters} />
+        <SectionSubHeader
+          text="Predicted colors and dates of the kittens will be listed,
+but of course Mother Nature does her own thing!"
+        />
         <Typography variant="h5" sx={{ mt: 2, mb: 2 }}>
           Posted Litters
         </Typography>
