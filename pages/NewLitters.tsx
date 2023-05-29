@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import { GetStaticProps, PreviewData } from 'next'
 
+import Head from 'next/head'
 import { client, Query } from '.'
 import CMSSection from '../components/CMSSection'
 import NewLittersCard from '../components/NewLittersCard'
@@ -45,6 +46,14 @@ const NewLitters = ({ newLitters, newLittersPosts }) => {
   return (
     <>
       {/* <MetaTags title="NewLitters" description="NewLitters page" /> */}
+
+      <Head>
+        <title>Azure Sky - New Litters</title>
+        <meta
+          name="description"
+          content="Explore our New Litters page to stay up-to-date with the latest Ragdoll kittens. Discover the predicted colors and expected dates of upcoming litters, although Mother Nature has her own plans! Browse through the posted litters, each accompanied by captivating images, detailed descriptions, and information about the available colors. Check the quantity remaining and the number of pre-conception and post-conception reservations. Be sure to keep an eye on this page for exciting updates on our adorable Ragdoll kittens."
+        />
+      </Head>
       <section id="upcoming">
         <CMSSection title={title_newLitters} content={content_newLitters} />
         <SectionSubHeader

@@ -4,6 +4,7 @@ import { PortableText } from '@portabletext/react'
 import { GetStaticProps, PreviewData } from 'next'
 import Image from 'next/image'
 
+import Head from 'next/head'
 import { JSXElementConstructor, Key, ReactElement, ReactFragment } from 'react'
 import uuid from 'react-uuid'
 import { Query, client } from '.'
@@ -54,6 +55,14 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
         title="Purchasing"
         description="Before buying your Ragdolls kitten, get an idea of whether or not you can afford a cat for ... Purr-chase Prices – How Much Do Ragdolls Cost?"
       /> */}
+
+      <Head>
+        <title>Azure Sky - Purchasing</title>
+        <meta
+          name="description"
+          content="Explore our Purchasing page to learn more about buying a Ragdoll kitten. Read the purchasing agreement to understand the terms and conditions. Discover what comes with your purchase, including essential items and services, such as vaccinations, micro chipping, and a health guarantee. Find out what you need to do when your kitten is ready to go home, including preparation and care tips. Fill out the adoption form to initiate the purchasing process. Browse through our FAQ section to find answers to common questions. If you have any other inquiries, feel free to contact us via email. Make an informed decision and bring home a wonderful Ragdoll kitten today!"
+        />
+      </Head>
       <Container maxWidth="md" sx={{ mb: 1 }}>
         <CMSSection
           title={title_purchasingAgreement}

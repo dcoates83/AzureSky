@@ -8,6 +8,7 @@ import type { Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps, PreviewData } from 'next'
 import uuid from 'react-uuid'
 
+import Head from 'next/head'
 import { Query, client } from '.'
 import CMSSection from '../components/CMSSection'
 import ImageComponent from '../components/ImageComponent'
@@ -53,6 +54,13 @@ export default function IndexPage(props: IndexPageProps) {
   return (
     <>
       {/* <IndexPageHead settings={settings} /> */}
+      <Head>
+        <title>Azure Sky Ragdolls</title>
+        <meta
+          name="description"
+          content="Welcome to Azure Sky Ragdolls! Explore our website to discover a variety of content related to Ragdoll cats. Learn about Kings and Queens, get insights into our cattery, and find information about TICA (The International Cat Association). Discover why owning a purebred Ragdoll is a great choice and how our cats are raised with care. Find out more about our dedicated team, view captivating images of our cats, and immerse yourself in the world of Ragdolls. Join us on this wonderful journey and experience the joy of owning a Ragdoll cat."
+        />
+      </Head>
       <Container>
         {/* <LandingPage homePage={homePage} /> */}
         <>
