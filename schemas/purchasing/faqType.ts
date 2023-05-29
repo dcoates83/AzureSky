@@ -10,7 +10,7 @@ export default defineType({
       name: 'title_faqs',
       title: 'Question',
       type: 'string',
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required().max(100),
     }),
     defineField({
       name: 'content_faqs',

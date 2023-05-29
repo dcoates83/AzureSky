@@ -26,7 +26,7 @@ const ImageCircle = ({ image }) => {
       <ImageComponent image={image} width={undefined} height={undefined} />
       <Typography
         sx={{
-          p: 1,
+          p: 0,
         }}
       >
         {image?.description}
