@@ -54,7 +54,7 @@ const NewLitters = ({ newLitters, newLittersPosts }) => {
           content="Explore our New Litters page to stay up-to-date with the latest Ragdoll kittens. Discover the predicted colors and expected dates of upcoming litters, although Mother Nature has her own plans! Browse through the posted litters, each accompanied by captivating images, detailed descriptions, and information about the available colors. Check the quantity remaining and the number of pre-conception and post-conception reservations. Be sure to keep an eye on this page for exciting updates on our adorable Ragdoll kittens."
         />
       </Head>
-      <Container id="upcoming">
+      <Container id="upcoming" maxWidth="md">
         <CMSSection title={title_newLitters} content={content_newLitters} />
         <SectionSubHeader
           text="Predicted colors and dates of the kittens will be listed,

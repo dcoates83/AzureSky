@@ -94,11 +94,9 @@ const CMSSection = (props: CMSSectionProps) => {
           ...(Array.isArray(containerSx) ? containerSx : [containerSx]),
         ]}
       >
-        <Balancer>
-          <Typography variant={headerVariant || 'h4'} sx={titleSx || headerSx}>
-            {title ?? title}
-          </Typography>
-        </Balancer>
+        <Typography variant={headerVariant || 'h4'} sx={titleSx || headerSx}>
+          {title ?? title}
+        </Typography>
 
         {link}
         <Box
