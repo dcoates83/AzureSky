@@ -37,7 +37,8 @@ interface NewLittersProps extends ReservedOrAvailableProps {
   image: any
   description?: string
   expected: Date
-  colors: string
+  colors?: string
+  markings?: string
 }
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean
@@ -157,17 +158,38 @@ const ReservedOrAvailable = (props: ReservedOrAvailableProps) => {
   const result = renderReservedOrAvailable()
   return result
 }
+type TextWithSecondaryTextProps = {
+  text: string
+  secondaryText: string
+}
+
+const TextWithSecondaryText = ({
+  text,
+  secondaryText,
+}: TextWithSecondaryTextProps) => {
+  return (
+    <Box sx={{ mt: 1, mb: 1 }}>
+      <Typography variant="body1" color="text.primary">
+        {text}
+      </Typography>
+      <Typography variant="body1" color="text.secondary">
+        {secondaryText}
+      </Typography>
+    </Box>
+  )
+}
 
 const NewLittersCard = (props: NewLittersProps) => {
   const {
-    title,
-    quantityRemaining,
     colors,
-    expected,
-    reservedPreConception,
-    reservedPostConception,
     description,
+    expected,
     image,
+    markings,
+    quantityRemaining,
+    reservedPostConception,
+    reservedPreConception,
+    title,
   } = props
   const [expanded, setExpanded] = React.useState(false)
   const router = useRouter()
@@ -181,7 +203,7 @@ const NewLittersCard = (props: NewLittersProps) => {
   const theme = useTheme()
   return (
     <Card sx={{ maxWidth: 345, m: 1, boxShadow: 2 }}>
-      <CardHeader title={title}  />
+      <CardHeader title={title} />
       <Image
         height="200"
         width={345}
@@ -190,22 +212,17 @@ const NewLittersCard = (props: NewLittersProps) => {
         style={{ objectFit: 'cover', objectPosition: 'center' }}
       />
       <CardContent>
-        <Box sx={{ mt: 1, mb: 1 }}>
-          <Typography variant="body1" color="text.primary">
-            Expected:
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            {dayjs(expected).format('MMMM - YYYY').toString()}
-          </Typography>
-        </Box>
-        <Box sx={{ mt: 1, mb: 1 }}>
-          <Typography variant="body1" color="text.primary">
-            Colors:
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            {colors}
-          </Typography>
-        </Box>
+        <TextWithSecondaryText
+          text={'Expected:'}
+          secondaryText={dayjs(expected).format('MMMM - YYYY').toString()}
+        />
+        {colors && (
+          <TextWithSecondaryText text={'Colors:'} secondaryText={colors} />
+        )}
+        {markings && (
+          <TextWithSecondaryText text={'Markings:'} secondaryText={markings} />
+        )}
+
         <ReservedOrAvailable
           quantityRemaining={quantityRemaining}
           reservedPreConception={reservedPreConception}
