@@ -13,6 +13,7 @@ import Image from 'next/image'
 import React from 'react'
 import { SvgBlob } from 'react-svg-blob'
 
+import { Balancer } from 'react-wrap-balancer'
 import { client } from '../pages'
 interface CMSSectionProps {
   title: string
@@ -21,12 +22,14 @@ interface CMSSectionProps {
   headerVariant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   contentSx?: SxProps<Theme>
   containerSx?: SxProps<Theme>
+  link?: React.ReactNode
 }
 
 const headerSx = {
   // fontSize: '1.75rem',
   margin: '1em 0',
   textAlign: 'left',
+  textWrap: 'balance',
   // fontWeight: '600',
   // color: 'primary.light',
 }
@@ -66,8 +69,15 @@ const ImageComponent = (image) => {
 }
 
 const CMSSection = (props: CMSSectionProps) => {
-  const { title, content, contentSx, headerVariant, titleSx, containerSx } =
-    props
+  const {
+    containerSx,
+    content,
+    contentSx,
+    headerVariant,
+    link,
+    title,
+    titleSx,
+  } = props
 
   const components = {
     types: {
@@ -84,10 +94,13 @@ const CMSSection = (props: CMSSectionProps) => {
           ...(Array.isArray(containerSx) ? containerSx : [containerSx]),
         ]}
       >
-        <Typography variant={headerVariant || 'h4'} sx={titleSx || headerSx}>
-          {title ?? title}
-        </Typography>
+        <Balancer>
+          <Typography variant={headerVariant || 'h4'} sx={titleSx || headerSx}>
+            {title ?? title}
+          </Typography>
+        </Balancer>
 
+        {link}
         <Box
           sx={[
             { color: 'text.primary' },

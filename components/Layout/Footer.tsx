@@ -1,9 +1,12 @@
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined'
+import { Box, useMediaQuery } from '@mui/material'
 import Link from 'next/link'
 
 const Footer = () => {
+  const mobile = useMediaQuery((theme: any) => theme.breakpoints.down('sm'))
+
   return (
-    <footer>
+    <Box component="footer" sx={{ pb: mobile ? '4em' : 'unset' }}>
       <div className="social-links">
         <ul className="navbar-nav mb-lg-0 social-network social-circle mb-2 me-auto">
           <li className="nav-item">
@@ -47,7 +50,7 @@ const Footer = () => {
         Azure Sky Ragdolls &copy;{' '}
         <span id="date">{new Date().getFullYear()}</span>
       </div>
-    </footer>
+    </Box>
   )
 }
 

@@ -37,6 +37,7 @@
     "react-share": "^4.4.1",
     "react-svg-blob": "^0.3.1",
     "react-uuid": "^2.0.0",
+    "react-wrap-balancer": "^0.5.0",
     "sanity": "3.8.2",
     "sanity-plugin-asset-source-unsplash": "1.0.6",
     "sharp": "^0.32.0",

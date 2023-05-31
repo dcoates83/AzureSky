@@ -1,7 +1,15 @@
-import { Box, Button, Theme, Typography, useMediaQuery } from '@mui/material'
+import {
+  Box,
+  Button,
+  Theme,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material'
 import Image from 'next/image'
 
 import { useRouter } from 'next/router'
+import Balancer from 'react-wrap-balancer'
 import cat from '../../assets/Vectorcat.jpg'
 import WaveDivider from '../WaveDivider'
 
@@ -27,6 +35,7 @@ export const HeroLanding = () => {
   const smallScreens = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down('sm')
   )
+  const theme = useTheme()
   const router = useRouter()
   return (
     <>
@@ -39,15 +48,29 @@ export const HeroLanding = () => {
       >
         <Box sx={containerSx}>
           <Box sx={heroItemContainer}>
-            <Box sx={{ width: '80%' }}>
-              <Typography variant="h2" sx={{ textAlign: 'left' }}>
-                Fall in love with your new friend
-              </Typography>
+            <Box
+              sx={{
+                width: '80%',
+                justifySelf: smallScreens ? 'unset' : 'end',
+              }}
+            >
+              <Balancer>
+                <Typography
+                  variant="h2"
+                  sx={{ textAlign: smallScreens ? 'center' : 'left' }}
+                >
+                  Fall in love with your new friend
+                </Typography>
+              </Balancer>
               <Box
                 sx={{
                   display: 'flex',
                   alignItems: 'center',
                   mt: 2,
+                  [theme.breakpoints.down('md')]: {
+                    flexDirection: 'column',
+                    gap: 2,
+                  },
                 }}
               >
                 <Typography
@@ -59,7 +82,10 @@ export const HeroLanding = () => {
                   variant="contained"
                   sx={{
                     color: '#fff',
-                    lineHeight: smallScreens ? '1.15em' : 'undefined',
+                    lineHeight: smallScreens ? '1.5em' : 'undefined',
+                    [theme.breakpoints.down('md')]: {
+                      width: '100%',
+                    },
                   }}
                   onClick={() => router.push(`/Purchasing#purchasing-form`)}
                 >
@@ -69,12 +95,14 @@ export const HeroLanding = () => {
             </Box>
           </Box>
           <Box sx={heroItemContainer}>
-            <Image src={cat} alt="cat" width={smallScreens ? 380 : undefined} />
+            <Image src={cat} alt="cat" width={smallScreens ? 350 : undefined} />
           </Box>
         </Box>
-        <Box>
-          <WaveDivider />
-        </Box>
+        {!smallScreens && (
+          <Box>
+            <WaveDivider />
+          </Box>
+        )}
       </Box>
     </>
   )

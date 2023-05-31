@@ -1,10 +1,12 @@
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded'
-import { Box, Container, Typography, useTheme } from '@mui/material'
+import { Box, Button, Container, Typography, useTheme } from '@mui/material'
 import { PortableText } from '@portabletext/react'
 import { GetStaticProps, PreviewData } from 'next'
 import Image from 'next/image'
 
+import MoveDownIcon from '@mui/icons-material/MoveDown'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { JSXElementConstructor, Key, ReactElement, ReactFragment } from 'react'
 import uuid from 'react-uuid'
 import { Query, client } from '.'
@@ -19,7 +21,6 @@ import PurchaseForm from '../components/PurchaseForm'
 import SectionSubHeader from '../components/SectionSubHeader'
 import { title } from '../lib/demo.data'
 import Logo from '../public/Logo'
-
 export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
   ctx
 ) => {
@@ -50,6 +51,8 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
     title_AdoptionForm,
     content_AdoptionForm,
   } = copy.pop()
+
+  const router = useRouter()
   return (
     <>
       <Head>
@@ -61,6 +64,22 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
       </Head>
       <Container maxWidth="md" sx={{ mb: 1 }}>
         <CMSSection
+          link={
+            <>
+              <Button
+                variant="text"
+                size="large"
+                sx={{
+                  pl: 0,
+                  textTransform: 'capitalize',
+                }}
+                onClick={() => router.push(`/Purchasing#purchasing-form`)}
+              >
+                <MoveDownIcon sx={{ mr: 2 }}></MoveDownIcon> Jump to adoption
+                form
+              </Button>
+            </>
+          }
           title={title_purchasingAgreement}
           content={content_purchasingAgreement}
         />
@@ -137,7 +156,7 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
             <Box
               sx={{
                 display: 'grid',
-                // wordBreak: 'keep-all',
+                wordBreak: 'break-word',
                 justifyItems: 'center',
                 alignItems: 'center',
                 gridTemplateColumns: '1fr 1fr',
@@ -157,7 +176,7 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
                   answer: any
                 }) => (
                   <Box
-                    key={q.title}
+                    key={uuid()}
                     sx={{
                       width: '100%',
                       [theme.breakpoints.down('md')]: {
@@ -169,7 +188,7 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
                     <FaqQuestion
                       question={q.title_faqs}
                       answer={q.content_faqs}
-                      key={q.answer + q.answer}
+                      key={uuid()}
                     />
                   </Box>
                 )

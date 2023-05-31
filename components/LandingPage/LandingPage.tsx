@@ -48,12 +48,12 @@ const LandingPage = ({ homePage }) => {
           </svg>
         </div>
       </Box> */}
-      <Container maxWidth="md">
-        <CMSSection
-          title={homePage[0]?.title_KingsQueens}
-          content={homePage[0]?.content_KingsQueens}
-        />
-      </Container>
+      {/* <Container maxWidth="md"> */}
+      <CMSSection
+        title={homePage[0]?.title_KingsQueens}
+        content={homePage[0]?.content_KingsQueens}
+      />
+      {/* </Container> */}
 
       {/* blue for male #279AF1 */}
       <Container maxWidth="lg">
