@@ -97,6 +97,7 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
           title={title_purchasingGoingHome}
           content={content_purchasingGoingHome}
         />
+        <SectionSubHeader text="We make sure your kitten is well socialized" />
         <Box
           sx={{
             mt: 5,
@@ -124,7 +125,6 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
 
         <section id="faq">
           <Box className="faq-subheader" sx={{ mt: 4 }}>
-            {/* <SectionSubHeader text="Questions? Check out our FAQ's below!" /> */}
             <h2 className="questions">
               Questions? Check out our FAQ&apos;s about Ragdolls below!
             </h2>
