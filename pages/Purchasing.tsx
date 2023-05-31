@@ -51,11 +51,6 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
   } = copy.pop()
   return (
     <>
-      {/* <MetaTags
-        title="Purchasing"
-        description="Before buying your Ragdolls kitten, get an idea of whether or not you can afford a cat for ... Purr-chase Prices – How Much Do Ragdolls Cost?"
-      /> */}
-
       <Head>
         <title>Azure Sky - Purchasing</title>
         <meta
