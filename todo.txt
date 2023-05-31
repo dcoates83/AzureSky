@@ -12,3 +12,4 @@ not ready yet? but still want more info ?
 switch to react forms--- changing to recaptcha / email valid
 add reviews section
 @llM1n3@m3ch3ap
+subscribe when a new litter is posted

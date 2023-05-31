@@ -45,8 +45,6 @@ const NewLitters = ({ newLitters, newLittersPosts }) => {
 
   return (
     <>
-      {/* <MetaTags title="NewLitters" description="NewLitters page" /> */}
-
       <Head>
         <title>Azure Sky - New Litters</title>
         <meta
@@ -58,7 +56,7 @@ const NewLitters = ({ newLitters, newLittersPosts }) => {
         <CMSSection title={title_newLitters} content={content_newLitters} />
         <SectionSubHeader
           text="Predicted colors and dates of the kittens will be listed,
-but of course Mother Nature does her own thing!"
+                    but of course Mother Nature does her own thing!"
         />
         <Typography variant="h5" sx={{ mt: 2, mb: 2 }}>
           Posted Litters
