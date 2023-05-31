@@ -20,6 +20,7 @@ interface CMSSectionProps {
   titleSx?: SxProps<Theme>
   headerVariant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   contentSx?: SxProps<Theme>
+  containerSx?: SxProps<Theme>
 }
 
 const headerSx = {
@@ -65,7 +66,8 @@ const ImageComponent = (image) => {
 }
 
 const CMSSection = (props: CMSSectionProps) => {
-  const { title, content, contentSx, headerVariant, titleSx } = props
+  const { title, content, contentSx, headerVariant, titleSx, containerSx } =
+    props
 
   const components = {
     types: {
@@ -75,12 +77,23 @@ const CMSSection = (props: CMSSectionProps) => {
 
   return (
     <>
-      <Container disableGutters sx={{ mt: 2, mb: 2 }}>
+      <Container
+        disableGutters
+        sx={[
+          { mt: 2, mb: 2 },
+          ...(Array.isArray(containerSx) ? containerSx : [containerSx]),
+        ]}
+      >
         <Typography variant={headerVariant || 'h4'} sx={titleSx || headerSx}>
           {title ?? title}
         </Typography>
 
-        <Box sx={{ color: 'text.primary' }}>
+        <Box
+          sx={[
+            { color: 'text.primary' },
+            ...(Array.isArray(contentSx) ? contentSx : [contentSx]),
+          ]}
+        >
           {<PortableText value={content} components={components} />}
         </Box>
       </Container>

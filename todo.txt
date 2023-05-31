@@ -10,4 +10,5 @@ colors and markings separate section
 sex color marking - break down per kitten 
 change reserved from pre conception/ post conception
 not ready yet? but still want more info ?
-switch to react forms
+switch to react forms--- changing to recaptcha
+add reviews section

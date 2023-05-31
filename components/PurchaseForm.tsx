@@ -48,7 +48,7 @@ const PurchaseForm = () => {
   // 6LcYClQmAAAAALgDzpRvDvpY97NlPb17de-4aFhT
   return (
     <GoogleReCaptchaProvider reCaptchaKey="6LcYClQmAAAAALgDzpRvDvpY97NlPb17de-4aFhT">
-      <Card sx={{ p: 2, height: '100%', position: 'relative' }}>
+      <Card sx={{ p: 2, mt: 1, height: '100%', position: 'relative' }}>
         <Box
           id="purchasing-form"
           method="POST"

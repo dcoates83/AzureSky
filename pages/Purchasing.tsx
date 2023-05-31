@@ -16,6 +16,7 @@ import CMSSection from '../components/CMSSection'
 import FaqQuestion from '../components/FaqQuestion'
 import ImageContainer from '../components/ImageContainer'
 import PurchaseForm from '../components/PurchaseForm'
+import SectionSubHeader from '../components/SectionSubHeader'
 import { title } from '../lib/demo.data'
 import Logo from '../public/Logo'
 
@@ -98,6 +99,7 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
         />
         <Box
           sx={{
+            mt: 5,
             display: 'grid',
             gridAutoFlow: 'column',
             gridTemplateColumns: '1fr 1fr',
@@ -111,6 +113,8 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
         >
           <Box>
             <CMSSection
+              containerSx={{ m: 0 }}
+              titleSx={{ m: 0, pb: 1 }}
               title={title_AdoptionForm}
               content={content_AdoptionForm}
             />
@@ -119,15 +123,16 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
         </Box>
 
         <section id="faq">
-          <div className="faq-subheader">
+          <Box className="faq-subheader" sx={{ mt: 4 }}>
+            {/* <SectionSubHeader text="Questions? Check out our FAQ's below!" /> */}
             <h2 className="questions">
-              Questions? Check out our FAQ&apos;s below!
+              Questions? Check out our FAQ&apos;s about Ragdolls below!
             </h2>
             <h5 className="questions-contact">
               If its not on the list, feel free to{' '}
               <a href="mailto:azureskyragdolls@gmail.com"> email</a> us!
             </h5>
-          </div>
+          </Box>
           <div className="top">
             <Box
               sx={{
