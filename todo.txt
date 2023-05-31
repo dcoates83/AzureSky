@@ -12,3 +12,8 @@ change reserved from pre conception/ post conception
 not ready yet? but still want more info ?
 switch to react forms--- changing to recaptcha
 add reviews section
+fix footer in mobile
+fix landing in mobile
+remove wave in mobile
+fix faq in mobile
+@llM1n3@m3ch3ap
