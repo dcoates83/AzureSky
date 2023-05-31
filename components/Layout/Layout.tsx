@@ -3,7 +3,7 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded'
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded'
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded'
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded'
-import { Box, Container } from '@mui/material'
+import { Box, Container, useMediaQuery, useTheme } from '@mui/material'
 import AlertBanner from 'components/AlertBanner'
 
 import { useRouter } from 'next/router'

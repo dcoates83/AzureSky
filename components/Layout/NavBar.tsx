@@ -39,6 +39,25 @@ function NavBar(props: Props) {
     router.push(`/${item.replace(/\s+/, '')}`)
   }
 
+  React.useEffect(() => {
+    const path = window.location.pathname
+
+    switch (path) {
+      case '/':
+        return setValue(0)
+      case '/About':
+        return setValue(1)
+      case '/Purchasing':
+        return setValue(2)
+      case '/NewLitters':
+        return setValue(3)
+      // case '/shop':
+      //   return setValue(4)
+      default:
+        return setValue(0)
+    }
+  }, [navItems])
+
   return (
     <>
       <AppBar component="nav" color="inherit" sx={{ boxShadow: 'unset' }}>
@@ -93,7 +112,11 @@ function NavBar(props: Props) {
             {navItems.map((item) => (
               <BottomNavigationAction
                 key={item.name}
-                label={item.name}
+                label={
+                  item.name === 'New Litters' && isMobile
+                    ? 'Litters'
+                    : item.name
+                }
                 icon={item.icon}
                 onClick={() => _handleNavigate(item.name)}
               />

@@ -2,7 +2,6 @@
 Send a email when the litters page is outdated
 Report a issue 
 share button - share https://github.com/nygardk/react-share
-email valid
 improve footer
 link to king and queens
 expected - date of birth
@@ -10,10 +9,6 @@ colors and markings separate section
 sex color marking - break down per kitten 
 change reserved from pre conception/ post conception
 not ready yet? but still want more info ?
-switch to react forms--- changing to recaptcha
+switch to react forms--- changing to recaptcha / email valid
 add reviews section
-fix footer in mobile
-fix landing in mobile
-remove wave in mobile
-fix faq in mobile
 @llM1n3@m3ch3ap

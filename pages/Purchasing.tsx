@@ -9,6 +9,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { JSXElementConstructor, Key, ReactElement, ReactFragment } from 'react'
 import uuid from 'react-uuid'
+import { Balancer } from 'react-wrap-balancer'
 import { Query, client } from '.'
 import aasia from '../assets/aasia-kitten.jpg'
 import catTower from '../assets/cat-cattower.jpg'
@@ -99,12 +100,17 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
                   | Key
               ) => {
                 return (
-                  <Box key={uuid()} sx={{ display: 'flex', m: 1 }}>
+                  <Box
+                    key={uuid()}
+                    sx={{ display: 'flex', m: 1, alignItems: 'center' }}
+                  >
                     <CheckCircleOutlineRoundedIcon
                       color="primary"
                       sx={{ mr: 1, ml: 2 }}
                     />
-                    <Typography>{item}</Typography>
+                    <Balancer>
+                      <Typography>{item}</Typography>
+                    </Balancer>
                   </Box>
                 )
               }
