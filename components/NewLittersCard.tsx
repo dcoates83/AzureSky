@@ -233,7 +233,7 @@ const NewLittersCard = (props: NewLittersProps) => {
         <Button
           aria-label="add to favorites"
           sx={{ textTransform: 'capitalize' }}
-          onClick={() => router.replace(`/Purchasing#form-info`)}
+          onClick={() => router.replace(`/Purchasing#purchasing-form`)}
         >
           Reserve
         </Button>
