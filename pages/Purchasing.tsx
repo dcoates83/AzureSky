@@ -71,6 +71,7 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
                 variant="text"
                 size="large"
                 sx={{
+                  mt: -2,
                   pl: 0,
                   textTransform: 'capitalize',
                 }}
