@@ -14,7 +14,7 @@ import CMSSection from '../components/CMSSection'
 import ImageComponent from '../components/ImageComponent'
 import ImageContainer from '../components/ImageContainer'
 import { HeroLanding } from '../components/LandingPage/HeroLanding'
-import LandingPage from '../components/LandingPage/LandingPage'
+
 import SectionSubHeader from '../components/SectionSubHeader'
 export interface IndexPageProps {
   preview?: boolean
@@ -53,7 +53,6 @@ export default function IndexPage(props: IndexPageProps) {
 
   return (
     <>
-      {/* <IndexPageHead settings={settings} /> */}
       <Head>
         <title>Azure Sky Ragdolls</title>
         <meta
@@ -61,65 +60,48 @@ export default function IndexPage(props: IndexPageProps) {
           content="Welcome to Azure Sky Ragdolls! Explore our website to discover a variety of content related to Ragdoll cats. Learn about Kings and Queens, get insights into our cattery, and find information about TICA (The International Cat Association). Discover why owning a purebred Ragdoll is a great choice and how our cats are raised with care. Find out more about our dedicated team, view captivating images of our cats, and immerse yourself in the world of Ragdolls. Join us on this wonderful journey and experience the joy of owning a Ragdoll cat."
         />
       </Head>
-      {/* <Container> */}
-      {/* <LandingPage homePage={homePage} /> */}
-      <>
-        {/* <MetaTags title="Home" description="Home page" /> */}
-        <HeroLanding />
-        {/* <Box sx={{ width: '100vw', mb: 20 }}>
-        <div className="custom-shape-divider-top-1681342266">
-          <svg
-            data-name="Layer 1"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1200 120"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-              className="shape-fill"
-            ></path>
-          </svg>
-        </div>
-      </Box> */}
-        <Container maxWidth="md">
-          <CMSSection title={title_KingsQueens} content={content_KingsQueens} />
-        </Container>
 
-        <Container maxWidth="lg">
-          <ImageContainer>
-            {content_KingsQueensImages.map((image) => (
-              <>
-                <Box
-                  sx={{
-                    m: 1,
-                    textAlign: 'center',
-                  }}
+      <HeroLanding />
+
+      <Container maxWidth="md">
+        <CMSSection title={title_KingsQueens} content={content_KingsQueens} />
+      </Container>
+
+      <Container maxWidth="lg">
+        <ImageContainer>
+          {content_KingsQueensImages.map((image) => (
+            <>
+              <Box
+                sx={{
+                  m: 1,
+                  textAlign: 'center',
+                }}
+                key={uuid()}
+              >
+                <ImageComponent
+                  image={image}
                   key={uuid()}
+                  width={undefined}
+                  height={undefined}
+                />
+                <Typography
+                  key={uuid()}
+                  variant="h5"
+                  sx={{
+                    color: image?.gender ? 'secondary.main' : 'primary.main',
+                    m: 1,
+                  }}
                 >
-                  <ImageComponent
-                    image={image}
-                    key={uuid()}
-                    width={undefined}
-                    height={undefined}
-                  />
-                  <Typography
-                    key={uuid()}
-                    variant="h5"
-                    sx={{
-                      color: image?.gender ? 'secondary.main' : 'primary.main',
-                      m: 1,
-                    }}
-                  >
-                    {image?.name}
-                  </Typography>
-                </Box>
-              </>
-            ))}
-          </ImageContainer>
-        </Container>
-        <Container maxWidth="md">
-          {/* TODO - Move to About Ragdolls Section */}
-          {/* <section id="purebred">
+                  {image?.name}
+                </Typography>
+              </Box>
+            </>
+          ))}
+        </ImageContainer>
+      </Container>
+      <Container maxWidth="md">
+        {/* TODO - Move to About Ragdolls Section */}
+        {/* <section id="purebred">
         <div className="container-text">
           <h1 className="header-2 about">Why own a Purebred Ragdoll?</h1>
           <p>
@@ -173,7 +155,7 @@ export default function IndexPage(props: IndexPageProps) {
           </h2>
         </div>
       </section> */}
-          {/* <section id="tica">
+        {/* <section id="tica">
         <div className="container-text">
           <h4>Why Tica and what is it?</h4>
           <p>
@@ -202,23 +184,21 @@ export default function IndexPage(props: IndexPageProps) {
           </p>
         </div>
       </section> */}
-          <CMSSection title={title_AboutUs} content={content_AboutUs} />
+        <CMSSection title={title_AboutUs} content={content_AboutUs} />
 
-          <SectionSubHeader text="All of our cats live with us as part of our family" />
-          <CMSSection title={title_Assistants} content={content_Assistants} />
-          <ImageContainer>
-            {content_ImageAssistants?.map((image) => (
-              <ImageComponent
-                image={image}
-                key={uuid()}
-                width={undefined}
-                height={undefined}
-              />
-            ))}
-          </ImageContainer>
-        </Container>
-      </>
-      {/* </Container> */}
+        <SectionSubHeader text="All of our cats live with us as part of our family" />
+        <CMSSection title={title_Assistants} content={content_Assistants} />
+        <ImageContainer>
+          {content_ImageAssistants?.map((image) => (
+            <ImageComponent
+              image={image}
+              key={uuid()}
+              width={undefined}
+              height={undefined}
+            />
+          ))}
+        </ImageContainer>
+      </Container>
     </>
   )
 }

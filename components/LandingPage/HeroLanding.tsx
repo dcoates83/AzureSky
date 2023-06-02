@@ -37,6 +37,7 @@ export const HeroLanding = () => {
   )
   const theme = useTheme()
   const router = useRouter()
+  const maxWidth = theme.breakpoints.values.lg
   return (
     <>
       <Box
@@ -44,6 +45,8 @@ export const HeroLanding = () => {
           height: '94dvh',
           display: 'grid',
           gridTemplateRows: '9fr 1fr',
+          maxWidth,
+          margin: 'auto',
         }}
       >
         <Box sx={containerSx}>

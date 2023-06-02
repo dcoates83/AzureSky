@@ -124,6 +124,16 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
         />
         <SectionSubHeader text="We make sure your kitten is well socialized" />
         <Box
+          id="purchasing-form"
+          sx={{
+            position: 'absolute',
+            height: 64,
+            marginTop: -8,
+            visibility: 'hidden',
+          }}
+        ></Box>
+
+        <Box
           sx={{
             mt: 5,
             display: 'grid',
@@ -145,6 +155,7 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
               content={content_AdoptionForm}
             />
           </Box>
+
           <PurchaseForm />
         </Box>
 
@@ -153,10 +164,13 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
             <h2 className="questions">
               Questions? Check out our FAQ&apos;s about Ragdolls below!
             </h2>
-            <h5 className="questions-contact">
+            <Typography
+              className="questions-contact"
+              sx={{ m: 2, textAlign: 'center' }}
+            >
               If its not on the list, feel free to{' '}
               <a href="mailto:azureskyragdolls@gmail.com"> email</a> us!
-            </h5>
+            </Typography>
           </Box>
           <div className="top">
             <Box

@@ -50,7 +50,7 @@ export default function BlogLayout({
           ]}
         />
         <Box
-          sx={{ overflow: 'hidden', pt: 8 }}
+          sx={{ overflow: 'hidden', pt: 8, scrollMarginTop: '64px' }}
           // sx={{ overflow: 'hidden', pt: 8, pl: 0, pr: 0 }}
         >
           {children}
