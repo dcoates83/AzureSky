@@ -82,80 +82,39 @@ const PurchaseForm = () => {
             variant="standard"
             size="small"
             fullWidth
-            type="lastName"
-            name="lastName"
+            type="street"
+            name="street"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.lastName}
-            label={'Last Name'}
+            value={formik.values.street}
+            label={'First Name'}
           />
           <TextField
-            error={Boolean(formik.errors.email)}
-            helperText={formik.errors.email}
+            error={Boolean(formik.errors.city)}
+            helperText={formik.errors.city}
             variant="standard"
             size="small"
             fullWidth
-            type="email"
-            name="email"
-            label="Email"
+            name="city"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.email}
+            value={formik.values.city}
+            label={'City'}
           />
           <TextField
-            error={Boolean(formik.errors.phone)}
-            helperText={formik.errors.phone}
+            error={Boolean(formik.errors.province)}
+            helperText={formik.errors.province}
             variant="standard"
             size="small"
             fullWidth
-            type="number"
-            name="phone"
-            label="Phone"
+            name="province"
+            label="Province"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.phone}
+            value={formik.values.province}
           />
 
-          <Box>
-            {/* <TextField
-          error={Boolean(formik.errors.)}
-          helperText={formik.errors.}
-              variant="standard"
-              size='small'
-            fullWidth
-              type="street"
-              name="street"
-              onChange={handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.street}
-              label={'First Name'}
-            /> */}
-            <TextField
-              error={Boolean(formik.errors.city)}
-              helperText={formik.errors.city}
-              variant="standard"
-              size="small"
-              fullWidth
-              name="city"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.city}
-              label={'City'}
-            />
-            <TextField
-              error={Boolean(formik.errors.province)}
-              helperText={formik.errors.province}
-              variant="standard"
-              size="small"
-              fullWidth
-              name="province"
-              label="Province"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.province}
-            />
-
-            {/* <TextField
+          {/* <TextField
           error={Boolean(formik.errors.)}
           helperText={formik.errors.}
               variant="standard"
@@ -168,71 +127,106 @@ const PurchaseForm = () => {
               onBlur={formik.handleBlur}
               value={formik.values.password}
             /> */}
-            <TextField
-              error={Boolean(formik.errors.questions)}
-              helperText={formik.errors.questions}
-              variant="standard"
-              size="small"
-              type="text"
-              fullWidth
-              multiline
-              rows={2}
-              name="questions"
-              label="Questions?"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              value={formik.values.questions}
-            />
-            <TextField
-              error={Boolean(formik.errors.about)}
-              helperText={formik.errors.about}
-              variant="standard"
-              size="small"
-              type="text"
-              fullWidth
-              multiline
-              rows={4}
-              name="about"
-              label="About you and your home"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.about}
-            />
-          </Box>
-
-          <input
-            type="hidden"
-            name="fp_subject"
-            value="New Submission for a Kitten"
-          ></input>
-          <input type="hidden" name="fp_reply" value="true"></input>
-
-          <input
-            type="hidden"
-            name="fp_reply_from"
-            value="Azure sky ragdolls"
-          ></input>
-          <input
-            type="hidden"
-            name="fp_reply_message"
-            value="Thank you for contacting us! We will be in touch with you soon."
-          ></input>
-          <GoogleReCaptcha
-            onVerify={onVerify}
-            refreshReCaptcha={refreshReCaptcha}
+          <TextField
+            error={Boolean(formik.errors.questions)}
+            helperText={formik.errors.questions}
+            variant="standard"
+            size="small"
+            type="text"
+            fullWidth
+            multiline
+            rows={2}
+            name="questions"
+            label="Questions?"
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            value={formik.values.questions}
           />
-          <Button
-            type="submit"
-            variant="contained"
-            disabled={!formik.isValid}
-            onClick={() => {
-              setRefreshReCaptcha((r) => !r)
-            }}
-            sx={{ color: '#fff', gridColumn: 'span 2', width: '100%', mt: 2 }}
-          >
-            Submit
-          </Button>
+          <TextField
+            error={Boolean(formik.errors.about)}
+            helperText={formik.errors.about}
+            variant="standard"
+            size="small"
+            type="text"
+            fullWidth
+            multiline
+            rows={4}
+            name="about"
+            label="About you and your home"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.about}
+          />
         </Box>
+
+        <input
+          type="hidden"
+          name="fp_subject"
+          value="New Submission for a Kitten"
+        ></input>
+        <input type="hidden" name="fp_reply" value="true"></input>
+
+        <input
+          type="hidden"
+          name="fp_reply_from"
+          value="Azure sky ragdolls"
+        ></input>
+        <input
+          type="hidden"
+          name="fp_reply_message"
+          value="Thank you for contacting us! We will be in touch with you soon."
+        ></input>
+        <GoogleReCaptcha
+          onVerify={onVerify}
+          refreshReCaptcha={refreshReCaptcha}
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={!formik.isValid}
+          onClick={() => {
+            setRefreshReCaptcha((r) => !r)
+          }}
+          sx={{ color: '#fff', gridColumn: 'span 2', width: '100%', mt: 2 }}
+        >
+          Submit
+        </Button>
+        {/* </Box> */}
+
+        <input
+          type="hidden"
+          name="fp_subject"
+          value="New Submission for a Kitten"
+        ></input>
+        <input type="hidden" name="fp_reply" value="true"></input>
+
+        <input
+          type="hidden"
+          name="fp_reply_from"
+          value="Azure sky ragdolls"
+        ></input>
+        <input
+          type="hidden"
+          name="fp_reply_message"
+          value="Thank you for contacting us! We will be in touch with you soon."
+        ></input>
+        <GoogleReCaptcha
+          onVerify={onVerify}
+          refreshReCaptcha={refreshReCaptcha}
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={!formik.isValid}
+          onClick={() => {
+            setRefreshReCaptcha((r) => !r)
+            // formik.validateForm()
+          }}
+          sx={{ color: '#fff', gridColumn: 'span 2', width: '100%', mt: 2 }}
+        >
+          Submit
+        </Button>
+        {/* </Box> */}
       </Card>
     </GoogleReCaptchaProvider>
   )

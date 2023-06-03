@@ -6,21 +6,8 @@ import { GetStaticProps, PreviewData } from 'next'
 import Head from 'next/head'
 import { client, Query } from '.'
 import CMSSection from '../components/CMSSection'
-import NewLittersCard from '../components/NewLittersCard'
-import NoRecords from '../components/NoRecords'
+import PostedLitters from '../components/PostedLitters'
 import SectionSubHeader from '../components/SectionSubHeader'
-
-interface INewLitters {
-  expirationDate: string | number | dayjs.Dayjs | Date
-  title: string
-  image: any
-  description: string
-  expected: Date
-  colors: string
-  quantityRemaining: number
-  reservedPreConception: number
-  reservedPostConception: number
-}
 
 dayjs.extend(isSameOrBefore)
 export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
@@ -45,8 +32,6 @@ const NewLitters = ({ newLitters, newLittersPosts }) => {
 
   return (
     <>
-      {/* <MetaTags title="NewLitters" description="NewLitters page" /> */}
-
       <Head>
         <title>Azure Sky - New Litters</title>
         <meta
@@ -58,32 +43,9 @@ const NewLitters = ({ newLitters, newLittersPosts }) => {
         <CMSSection title={title_newLitters} content={content_newLitters} />
         <SectionSubHeader
           text="Predicted colors and dates of the kittens will be listed,
-but of course Mother Nature does her own thing!"
+                    but of course Mother Nature does her own thing!"
         />
-        <Typography variant="h5" sx={{ mt: 2, mb: 2 }}>
-          Posted Litters
-        </Typography>
-        <Divider sx={{ mt: 2, mb: 2 }}></Divider>
-        <Container id="posted-litters" disableGutters sx={{ mt: 2 }}>
-          {newLittersPosts?.map((newLittersPost: INewLitters) => {
-            return dayjs().isSameOrBefore(newLittersPost.expirationDate) ? (
-              <NewLittersCard
-                key={new Date().getMilliseconds()}
-                title={newLittersPost.title}
-                image={newLittersPost.image}
-                description={newLittersPost.description}
-                expected={newLittersPost.expected}
-                colors={newLittersPost.colors}
-                quantityRemaining={newLittersPost.quantityRemaining}
-                reservedPreConception={newLittersPost.reservedPreConception}
-                reservedPostConception={newLittersPost.reservedPostConception}
-              />
-            ) : (
-              <></>
-            )
-          })}
-          {newLittersPosts?.length === 0 && <NoRecords />}
-        </Container>
+        <PostedLitters newLittersPosts={newLittersPosts} />
       </Container>
     </>
   )
