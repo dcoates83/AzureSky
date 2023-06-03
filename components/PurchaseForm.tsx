@@ -64,7 +64,7 @@ const PurchaseForm = () => {
             justifyContent: 'space-between',
             pb: 2,
           }}
-          action="https://formpost.app/devonbcoates@gmail.com"
+          action="https://formpost.app/azureskyragdolls@gmail.com"
         >
           <TextField
             error={Boolean(formik.errors.firstName)}
@@ -155,6 +155,7 @@ const PurchaseForm = () => {
               name="questions"
               label="Questions?"
               onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               value={formik.values.questions}
             />
             <TextField
@@ -184,12 +185,12 @@ const PurchaseForm = () => {
           <input
             type="hidden"
             name="fp_reply_from"
-            value="Azure sky ragdolls"
+            value="Azure Sky Ragdolls"
           ></input>
           <input
             type="hidden"
             name="fp_reply_message"
-            value="Thank you for contacting us! We will be in touch with you soon."
+            value="Thank you for contacting us! We will be in touch with you soon. If you have any questions, please feel free to email us at azureskyragdolls@gmail.com"
           ></input>
           <GoogleReCaptcha
             onVerify={onVerify}
