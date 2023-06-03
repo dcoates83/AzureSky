@@ -11,17 +11,13 @@ import { JSXElementConstructor, Key, ReactElement, ReactFragment } from 'react'
 import uuid from 'react-uuid'
 import { Balancer } from 'react-wrap-balancer'
 import { Query, client } from '.'
-import aasia from '../assets/aasia-kitten.jpg'
-import catTower from '../assets/cat-cattower.jpg'
-import deposit from '../assets/kittens-deposit.jpg'
-import kittensInBasket from '../assets/kittensInBasket.png'
+
 import CMSSection from '../components/CMSSection'
 import FaqQuestion from '../components/FaqQuestion'
-import ImageContainer from '../components/ImageContainer'
+
 import PurchaseForm from '../components/PurchaseForm'
 import SectionSubHeader from '../components/SectionSubHeader'
-import { title } from '../lib/demo.data'
-import Logo from '../public/Logo'
+
 export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
   ctx
 ) => {
@@ -29,7 +25,7 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
 
   const purchasing = await client.fetch(`*[_type == "purchasing"]`)
   const faqQuestions = await client.fetch(`*[_type == "faqType"]`)
-  // const faqQuestions = await client.fetch(`*[_type == "faqType"]`) // new content here
+
   return {
     props: {
       purchasing,
@@ -77,8 +73,7 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
                 }}
                 onClick={() => router.push(`/Purchasing#purchasing-form`)}
               >
-                <MoveDownIcon sx={{ mr: 2 }}></MoveDownIcon> Jump to adoption
-                form
+                <MoveDownIcon sx={{ mr: 2 }} /> Jump to adoption form
               </Button>
             </>
           }
