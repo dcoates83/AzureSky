@@ -81,151 +81,129 @@ const PurchaseForm = () => {
             variant="standard"
             size="small"
             fullWidth
-            type="street"
-            name="street"
+            type="lastName"
+            name="lastName"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.street}
-            label={'First Name'}
+            value={formik.values.lastName}
+            label={'Last Name'}
           />
           <TextField
-            error={Boolean(formik.errors.city)}
-            helperText={formik.errors.city}
+            error={Boolean(formik.errors.email)}
+            helperText={formik.errors.email}
             variant="standard"
             size="small"
             fullWidth
-            name="city"
+            type="email"
+            name="email"
+            label="Email"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.city}
-            label={'City'}
+            value={formik.values.email}
           />
           <TextField
-            error={Boolean(formik.errors.province)}
-            helperText={formik.errors.province}
+            error={Boolean(formik.errors.phone)}
+            helperText={formik.errors.phone}
             variant="standard"
             size="small"
             fullWidth
-            name="province"
-            label="Province"
+            type="number"
+            name="phone"
+            label="Phone"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.province}
+            value={formik.values.phone}
           />
-
-          {/* <TextField
-          error={Boolean(formik.errors.)}
-          helperText={formik.errors.}
+          <Box>
+            <TextField
+              error={Boolean(formik.errors.city)}
+              helperText={formik.errors.city}
               variant="standard"
-              size='small'
-            fullWidth
-              type="number"
-              name="phone"
-              label="Phone"
-              onChange={handleChange}
+              size="small"
+              fullWidth
+              name="city"
+              onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.password}
-            /> */}
-          <TextField
-            error={Boolean(formik.errors.questions)}
-            helperText={formik.errors.questions}
-            variant="standard"
-            size="small"
-            type="text"
-            fullWidth
-            multiline
-            rows={2}
-            name="questions"
-            label="Questions?"
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            value={formik.values.questions}
+              value={formik.values.city}
+              label={'City'}
+            />
+            <TextField
+              error={Boolean(formik.errors.province)}
+              helperText={formik.errors.province}
+              variant="standard"
+              size="small"
+              fullWidth
+              name="province"
+              label="Province"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.province}
+            />
+
+            <TextField
+              error={Boolean(formik.errors.questions)}
+              helperText={formik.errors.questions}
+              variant="standard"
+              size="small"
+              type="text"
+              fullWidth
+              multiline
+              rows={2}
+              name="questions"
+              label="Questions?"
+              onBlur={formik.handleBlur}
+              value={formik.values.questions}
+            />
+            <TextField
+              error={Boolean(formik.errors.about)}
+              helperText={formik.errors.about}
+              variant="standard"
+              size="small"
+              type="text"
+              fullWidth
+              multiline
+              rows={4}
+              name="about"
+              label="About you and your home"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.about}
+            />
+          </Box>
+
+          <input
+            type="hidden"
+            name="fp_subject"
+            value="New Submission for a Kitten"
+          ></input>
+          <input type="hidden" name="fp_reply" value="true"></input>
+
+          <input
+            type="hidden"
+            name="fp_reply_from"
+            value="Azure sky ragdolls"
+          ></input>
+          <input
+            type="hidden"
+            name="fp_reply_message"
+            value="Thank you for contacting us! We will be in touch with you soon."
+          ></input>
+          <GoogleReCaptcha
+            onVerify={onVerify}
+            refreshReCaptcha={refreshReCaptcha}
           />
-          <TextField
-            error={Boolean(formik.errors.about)}
-            helperText={formik.errors.about}
-            variant="standard"
-            size="small"
-            type="text"
-            fullWidth
-            multiline
-            rows={4}
-            name="about"
-            label="About you and your home"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.about}
-          />
+          <Button
+            type="submit"
+            variant="contained"
+            disabled={!formik.isValid}
+            onClick={() => {
+              setRefreshReCaptcha((r) => !r)
+            }}
+            sx={{ color: '#fff', gridColumn: 'span 2', width: '100%', mt: 2 }}
+          >
+            Submit
+          </Button>
         </Box>
-
-        <input
-          type="hidden"
-          name="fp_subject"
-          value="New Submission for a Kitten"
-        ></input>
-        <input type="hidden" name="fp_reply" value="true"></input>
-
-        <input
-          type="hidden"
-          name="fp_reply_from"
-          value="Azure sky ragdolls"
-        ></input>
-        <input
-          type="hidden"
-          name="fp_reply_message"
-          value="Thank you for contacting us! We will be in touch with you soon."
-        ></input>
-        <GoogleReCaptcha
-          onVerify={onVerify}
-          refreshReCaptcha={refreshReCaptcha}
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          disabled={!formik.isValid}
-          onClick={() => {
-            setRefreshReCaptcha((r) => !r)
-          }}
-          sx={{ color: '#fff', gridColumn: 'span 2', width: '100%', mt: 2 }}
-        >
-          Submit
-        </Button>
-        {/* </Box> */}
-
-        <input
-          type="hidden"
-          name="fp_subject"
-          value="New Submission for a Kitten"
-        ></input>
-        <input type="hidden" name="fp_reply" value="true"></input>
-
-        <input
-          type="hidden"
-          name="fp_reply_from"
-          value="Azure sky ragdolls"
-        ></input>
-        <input
-          type="hidden"
-          name="fp_reply_message"
-          value="Thank you for contacting us! We will be in touch with you soon."
-        ></input>
-        <GoogleReCaptcha
-          onVerify={onVerify}
-          refreshReCaptcha={refreshReCaptcha}
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          disabled={!formik.isValid}
-          onClick={() => {
-            setRefreshReCaptcha((r) => !r)
-            // formik.validateForm()
-          }}
-          sx={{ color: '#fff', gridColumn: 'span 2', width: '100%', mt: 2 }}
-        >
-          Submit
-        </Button>
-        {/* </Box> */}
       </Card>
     </GoogleReCaptchaProvider>
   )
