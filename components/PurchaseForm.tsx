@@ -227,7 +227,6 @@ const PurchaseForm = () => {
             disabled={!formik.isValid}
             onClick={() => {
               setRefreshReCaptcha((r) => !r)
-              // formik.validateForm()
             }}
             sx={{ color: '#fff', gridColumn: 'span 2', width: '100%', mt: 2 }}
           >
