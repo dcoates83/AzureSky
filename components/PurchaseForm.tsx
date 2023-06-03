@@ -46,11 +46,11 @@ const PurchaseForm = () => {
   // https://www.google.com/recaptcha/admin/site/643041816
   // https://www.npmjs.com/package/react-google-recaptcha-v3
   // 6LcYClQmAAAAALgDzpRvDvpY97NlPb17de-4aFhT
+  // 6LdVlGUmAAAAACG3zAUE4o1HqP9-11z9dbUAidxN - vercel
   return (
-    <GoogleReCaptchaProvider reCaptchaKey="6LcYClQmAAAAALgDzpRvDvpY97NlPb17de-4aFhT">
+    <GoogleReCaptchaProvider reCaptchaKey="6LdVlGUmAAAAACG3zAUE4o1HqP9-11z9dbUAidxN">
       <Card sx={{ p: 2, mt: 1, height: '100%', position: 'relative' }}>
         <Box
-          // id="purchasing-form"
           method="POST"
           component="form"
           sx={{

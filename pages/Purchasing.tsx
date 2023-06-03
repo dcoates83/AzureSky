@@ -87,9 +87,7 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
         />
 
         <Box sx={{ mt: 2 }}>
-          <Typography variant={'h4'} sx={{}}>
-            {title_purchasingComesWith}
-          </Typography>
+          <Typography variant={'h4'}>{title_purchasingComesWith}</Typography>
 
           <Box sx={{ color: 'text.primary', mt: 2 }}>
             {list_purchasingComesWith?.map(
