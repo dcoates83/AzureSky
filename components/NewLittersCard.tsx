@@ -25,7 +25,13 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { EmailShareButton, FacebookShareButton } from 'react-share'
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  InstapaperShareButton,
+  OKShareButton,
+  WhatsappShareButton,
+} from 'react-share'
 import uuid from 'react-uuid'
 import cat from '../assets/cat-in-basket.jpg'
 import { client } from '../pages'
@@ -233,17 +239,20 @@ const NewLittersCard = (props: NewLittersProps) => {
         />
       </CardContent>
       <CardActions disableSpacing sx={{ justifyContent: 'space-between' }}>
-        <Box>
-          <Typography>Share to</Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Box sx={{ ml: 1, mb: 2 }}>
+          <Typography>Share via</Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
             <FacebookShareButton
-              url={`https://azure-sky.vercel.app/NewLitters#${cardId}`}
-              style={{ color: 'blue' }}
+              quote="Check out this kitten from Azure Sky Ragdolls!"
+              url={`https://azureskyragdolls.com//NewLitters#${cardId}`}
+              style={{ color: '#1093F4' }}
             >
               <FacebookRoundedIcon />
             </FacebookShareButton>
-            <EmailShareButton url={''}>
-              <EmailRoundedIcon />
+            <EmailShareButton
+              url={`https://azureskyragdolls.com//NewLitters#${cardId}`}
+            >
+              <EmailRoundedIcon color="action" />
             </EmailShareButton>
           </Box>
         </Box>
