@@ -9,7 +9,9 @@ import {
 import * as Yup from 'yup'
 const PurchaseForm = () => {
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Enter a valid email'),
+    email: Yup.string()
+      .email('Enter a valid email')
+      .required('Email is required'),
     firstName: Yup.string().required('First Name is required'),
     lastName: Yup.string().required('Last Name is required'),
     phone: Yup.string().required('Phone is required'),
@@ -178,6 +180,7 @@ const PurchaseForm = () => {
               name="questions"
               label="Questions?"
               onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               value={formik.values.questions}
             />
             <TextField
