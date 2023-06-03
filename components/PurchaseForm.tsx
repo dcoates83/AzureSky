@@ -24,7 +24,6 @@ const PurchaseForm = () => {
 
   const formik = useFormik({
     validateOnBlur: true,
-    // validateOnChange: true,
     initialValues: {
       firstName: '',
       lastName: '',
