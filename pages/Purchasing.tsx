@@ -163,10 +163,7 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
             <h2 className="questions">
               Questions? Check out our FAQ&apos;s about Ragdolls below!
             </h2>
-            <Typography
-              className="questions-contact"
-              sx={{ m: 2, textAlign: 'center' }}
-            >
+            <Typography className="questions-contact" sx={{ m: 2, ml: 0 }}>
               If its not on the list, feel free to{' '}
               <a href="mailto:azureskyragdolls@gmail.com"> email</a> us!
             </Typography>

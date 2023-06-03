@@ -57,9 +57,12 @@ const PurchaseForm = () => {
           sx={{
             '& .MuiTextField-root': { p: 1 },
             height: '100%',
+            width: '85%',
+            margin: 'auto',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
+            pb: 2,
           }}
           action="https://formpost.app/devonbcoates@gmail.com"
         >
