@@ -60,7 +60,10 @@ export const HeroLanding = () => {
               <Balancer>
                 <Typography
                   variant="h2"
-                  sx={{ textAlign: smallScreens ? 'center' : 'left' }}
+                  sx={{
+                    textAlign: smallScreens ? 'center' : 'left',
+                    pl: smallScreens ? '16px' : 0,
+                  }}
                 >
                   Fall in love with your new friend
                 </Typography>
