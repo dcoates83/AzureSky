@@ -34,6 +34,7 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
       homePage,
       // token: previewData?.token ?? null,
     },
+    revalidate: 180,
   }
 }
 export default function IndexPage(props: IndexPageProps) {

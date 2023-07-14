@@ -32,6 +32,7 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
       faqQuestions,
       // token: previewData?.token ?? null,
     },
+    revalidate: 180,
   }
 }
 const Purchasing = ({ purchasing, faqQuestions }) => {

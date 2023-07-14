@@ -23,6 +23,7 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
       newLittersPosts,
       // token: previewData?.token ?? null,
     },
+    revalidate: 180,
   }
 }
 const NewLitters = ({ newLitters, newLittersPosts }) => {

@@ -95,6 +95,7 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
       aboutPage,
       // token: previewData?.token ?? null,
     },
+    revalidate: 180,
   }
 }
 
