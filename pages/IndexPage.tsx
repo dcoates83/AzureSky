@@ -1,9 +1,4 @@
 import { Box, Container, Typography } from '@mui/material'
-import IndexPageHead from 'components/IndexPageHead'
-import Layout from 'components/Layout/Layout'
-import MoreStories from 'components/MoreStories'
-import IntroTemplate from 'intro-template'
-import * as demo from 'lib/demo.data'
 import type { Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps, PreviewData } from 'next'
 import uuid from 'react-uuid'
@@ -16,6 +11,7 @@ import ImageContainer from '../components/ImageContainer'
 import { HeroLanding } from '../components/LandingPage/HeroLanding'
 
 import SectionSubHeader from '../components/SectionSubHeader'
+import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 export interface IndexPageProps {
   preview?: boolean
   loading?: boolean
@@ -70,7 +66,7 @@ export default function IndexPage(props: IndexPageProps) {
 
       <Container maxWidth="lg">
         <ImageContainer>
-          {content_KingsQueensImages.map((image) => (
+          {content_KingsQueensImages.map((image: SanityImageSource) => (
             <>
               <Box
                 sx={{
@@ -89,11 +85,13 @@ export default function IndexPage(props: IndexPageProps) {
                   key={uuid()}
                   variant="h5"
                   sx={{
-                    color: image?.gender ? 'secondary.main' : 'primary.main',
+                    color: (image as any)?.gender
+                      ? 'secondary.main'
+                      : 'primary.main',
                     m: 1,
                   }}
                 >
-                  {image?.name}
+                  {(image as any)?.name}
                 </Typography>
               </Box>
             </>

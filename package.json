@@ -41,6 +41,7 @@
     "sanity": "3.8.2",
     "sanity-plugin-asset-source-unsplash": "1.0.6",
     "sharp": "^0.32.0",
+    "styled-components": "^6.1.15",
     "suspend-react": "0.0.9",
     "swr": "2.1.1",
     "yup": "^1.1.1"

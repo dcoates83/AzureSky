@@ -1,23 +1,32 @@
-import { Box, Theme, useTheme } from '@mui/material'
-import { getImageDimensions } from '@sanity/asset-utils'
+import { useTheme } from '@mui/material'
 import imageUrlBuilder from '@sanity/image-url'
 import Image from 'next/image'
 import React from 'react'
-import { SvgBlob } from 'react-svg-blob'
 
 import { client } from '../pages'
+import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 
-const ImageComponent = ({ image, width, height }) => {
+interface ImageComponentProps {
+  image: SanityImageSource
+  width?: number
+  height?: number
+}
+
+const ImageComponent: React.FC<ImageComponentProps> = ({
+  image,
+  width,
+  height,
+}) => {
   // const { width, height } = getImageDimensions(image)
   const builder = imageUrlBuilder(client)
-  function urlFor(source) {
+  function urlFor(source: SanityImageSource) {
     return builder.image(source)
   }
   const theme = useTheme()
   return (
     <Image
       src={urlFor(image).image(image).auto('format').url()}
-      alt={image.alt || ' '}
+      alt={' '}
       loading="lazy"
       width={height || 300}
       height={width || 300}

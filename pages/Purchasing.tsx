@@ -86,30 +86,22 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
           <Typography variant={'h4'}>{title_purchasingComesWith}</Typography>
 
           <Box sx={{ color: 'text.primary', mt: 2 }}>
-            {list_purchasingComesWith?.map(
-              (
-                item:
-                  | boolean
-                  | ReactElement<any, string | JSXElementConstructor<any>>
-                  | ReactFragment
-                  | Key
-              ) => {
-                return (
-                  <Box
-                    key={uuid()}
-                    sx={{ display: 'flex', m: 1, alignItems: 'center' }}
-                  >
-                    <CheckCircleOutlineRoundedIcon
-                      color="primary"
-                      sx={{ mr: 1, ml: 2 }}
-                    />
-                    <Balancer>
-                      <Typography>{item}</Typography>
-                    </Balancer>
-                  </Box>
-                )
-              }
-            )}
+            {list_purchasingComesWith?.map((item: any) => {
+              return (
+                <Box
+                  key={uuid()}
+                  sx={{ display: 'flex', m: 1, alignItems: 'center' }}
+                >
+                  <CheckCircleOutlineRoundedIcon
+                    color="primary"
+                    sx={{ mr: 1, ml: 2 }}
+                  />
+                  <Balancer>
+                    <Typography>{item}</Typography>
+                  </Balancer>
+                </Box>
+              )
+            })}
             {<PortableText value={content_purchasingComesWith} />}
           </Box>
         </Box>
@@ -131,10 +123,9 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
         <Box
           sx={{
             mt: 5,
-            display: 'grid',
-            gridAutoFlow: 'column',
-            gridTemplateColumns: '1fr 1fr',
-            alignItems: 'start',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
             gap: 2,
             [theme.breakpoints.down('sm')]: {
               display: 'flex',
@@ -150,7 +141,6 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
               content={content_AdoptionForm}
             />
           </Box>
-
           <PurchaseForm />
         </Box>
 

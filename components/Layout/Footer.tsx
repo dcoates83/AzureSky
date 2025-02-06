@@ -26,11 +26,6 @@ const Footer = () => {
         <nav className="footer-links">
           <ul className="footer-items">
             <li>
-              <a href="mailto:devonbcoates@gmail.com" target="_blank">
-                Web Design
-              </a>
-            </li>
-            <li>
               <Link href="/Purchasing#purchasing-form">
                 Purchasing a Kitten
               </Link>
