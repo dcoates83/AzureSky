@@ -71,7 +71,7 @@ const PurchaseForm = () => {
         <TextField
           error={Boolean(formik.errors.firstName)}
           helperText={formik.errors.firstName}
-          variant="standard"
+          variant="filled"
           size="small"
           fullWidth
           name="firstName"
@@ -83,7 +83,7 @@ const PurchaseForm = () => {
         <TextField
           error={Boolean(formik.errors.lastName)}
           helperText={formik.errors.lastName}
-          variant="standard"
+          variant="filled"
           size="small"
           fullWidth
           type="lastName"
@@ -96,7 +96,7 @@ const PurchaseForm = () => {
         <TextField
           error={Boolean(formik.errors.email)}
           helperText={formik.errors.email}
-          variant="standard"
+          variant="filled"
           size="small"
           fullWidth
           type="email"
@@ -109,7 +109,7 @@ const PurchaseForm = () => {
         <TextField
           error={Boolean(formik.errors.phone)}
           helperText={formik.errors.phone}
-          variant="standard"
+          variant="filled"
           size="small"
           fullWidth
           type="number"
@@ -123,7 +123,7 @@ const PurchaseForm = () => {
           <TextField
             error={Boolean(formik.errors.city)}
             helperText={formik.errors.city}
-            variant="standard"
+            variant="filled"
             size="small"
             fullWidth
             name="city"
@@ -135,14 +135,15 @@ const PurchaseForm = () => {
           <TextField
             error={Boolean(formik.errors.about)}
             helperText={formik.errors.about}
-            variant="standard"
+            variant="filled"
             size="small"
             type="text"
             fullWidth
             multiline
             rows={4}
             name="about"
-            label="About you and your home"
+            label="About"
+            placeholder="Tell us about yourself and why you want a kitten. Include any other information you think is important."
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.about}
