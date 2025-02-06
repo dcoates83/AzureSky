@@ -32,7 +32,7 @@ const ImageComponent: React.FC<ImageComponentProps> = ({
       height={width || 300}
       style={{
         // display: image.isInline ? 'inline-block' : 'block',
-        aspectRatio: width / height,
+        aspectRatio: width || 300 / height || 300,
         objectFit: 'cover',
         margin: '0 auto',
         borderRadius: '100%',

@@ -26,7 +26,16 @@ const PostedLitters = ({ newLittersPosts }) => {
         Posted Litters
       </Typography>
       <Divider sx={{ mt: 2, mb: 2 }} />
-      <Container id="posted-litters" disableGutters sx={{ mt: 2 }}>
+      <Container
+        id="posted-litters"
+        disableGutters
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 2,
+          justifyContent: 'space-between',
+        }}
+      >
         {newLittersPosts?.map((newLittersPost: INewLitters) => {
           return dayjs().isSameOrBefore(newLittersPost.expirationDate) ? (
             <NewLittersCard

@@ -239,7 +239,7 @@ const NewLittersCard = (props: NewLittersProps) => {
         />
       </CardContent>
       <CardActions disableSpacing sx={{ justifyContent: 'space-between' }}>
-        <Box sx={{ ml: 1, mb: 2 }}>
+        <Box sx={{ ml: 1, mb: 0 }}>
           <Typography>Share via</Typography>
           <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
             <FacebookShareButton
@@ -265,21 +265,25 @@ const NewLittersCard = (props: NewLittersProps) => {
           >
             Reserve
           </Button>
-          <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </ExpandMore>
+          {description && (
+            <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </ExpandMore>
+          )}
         </Box>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>{description}</Typography>
-        </CardContent>
-      </Collapse>
+      {description && (
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography paragraph>{description}</Typography>
+          </CardContent>
+        </Collapse>
+      )}
     </Card>
   )
 }
