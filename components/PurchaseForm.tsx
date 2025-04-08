@@ -1,11 +1,7 @@
 import { Box, Button, Card, TextField } from '@mui/material'
 import { useFormik } from 'formik'
-import React, { useCallback, useState } from 'react'
-import {
-  GoogleReCaptcha,
-  GoogleReCaptchaProvider,
-  useGoogleReCaptcha,
-} from 'react-google-recaptcha-v3'
+import React from 'react'
+
 import * as Yup from 'yup'
 const PurchaseForm = () => {
   const validationSchema = Yup.object().shape({
@@ -14,7 +10,10 @@ const PurchaseForm = () => {
       .required('Email is required'),
     firstName: Yup.string().required('First Name is required'),
     lastName: Yup.string().required('Last Name is required'),
-    phone: Yup.number().required('Phone is required'),
+    phone: Yup.string().matches(
+      /^(\+?\d{1,3}[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/,
+      'Enter a valid phone number'
+    ).required('Phone is required'),
     // street: Yup.string().required('Street is required'),
     city: Yup.string().required('City is required'),
     about: Yup.string().required('About is required'),
@@ -31,6 +30,7 @@ const PurchaseForm = () => {
       about: '',
     },
     validationSchema: validationSchema,
+    validateOnBlur: true,
     onSubmit: async (values) => {},
   })
 
@@ -53,8 +53,8 @@ const PurchaseForm = () => {
           justifyContent: 'space-between',
           pb: 2,
         }}
-        // action="https://formsubmit.co/devonbcoates@gmail.com"
-        action="https://formsubmit.co/azureskyragdolls@gmail.com"
+        action="https://formsubmit.co/devonbcoates@gmail.com"
+        // action="https://formsubmit.co/Meg@azureskyragdolls.com"
       >
         <input
           type="hidden"
@@ -66,8 +66,10 @@ const PurchaseForm = () => {
           name="_next"
           value="https://www.azureskyragdolls.com/Purchasing#purchasing-form"
         ></input>
-        <input type="hidden" name="_cc" value="devonbcoates@email.com"></input>
+        <input type="hidden" name="_cc" value="devonbcoates@gmail.com"></input>
         <input type="hidden" name="_template" value="table"></input>
+        <input type="hidden" name="_subject" value={`New submission from ${formik.values.firstName} ${formik.values.lastName}!`}></input>
+        
         <TextField
           error={Boolean(formik.errors.firstName)}
           helperText={formik.errors.firstName}
@@ -75,6 +77,7 @@ const PurchaseForm = () => {
           size="small"
           fullWidth
           name="firstName"
+          type='text'
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.firstName}
@@ -86,7 +89,7 @@ const PurchaseForm = () => {
           variant="filled"
           size="small"
           fullWidth
-          type="lastName"
+          type="text"
           name="lastName"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -112,7 +115,7 @@ const PurchaseForm = () => {
           variant="filled"
           size="small"
           fullWidth
-          type="number"
+          type="tel"
           name="phone"
           label="Phone"
           onChange={formik.handleChange}
@@ -150,28 +153,10 @@ const PurchaseForm = () => {
           />
         </Box>
 
-        <input
-          type="hidden"
-          name="fp_subject"
-          value="New Submission for a Kitten"
-        ></input>
-        <input type="hidden" name="fp_reply" value="true"></input>
-
-        <input
-          type="hidden"
-          name="fp_reply_from"
-          value="Azure Sky Ragdolls"
-        ></input>
-        <input
-          type="hidden"
-          name="fp_reply_message"
-          value="Thank you for contacting us! We will be in touch with you soon. If you have any questions, please feel free to email us at azureskyragdolls@gmail.com"
-        ></input>
-
         <Button
           type="submit"
           variant="contained"
-          disabled={!formik.isValid}
+          disabled={!formik.isValid || formik.isSubmitting}
           sx={{ color: '#fff', gridColumn: 'span 2', width: '100%', mt: 2 }}
         >
           Submit

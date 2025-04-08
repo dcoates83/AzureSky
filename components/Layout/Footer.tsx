@@ -33,11 +33,6 @@ const Footer = () => {
             <li>
               <Link href="/Purchasing#faq">FAQ</Link>
             </li>
-            <li>
-              <a href="mailto:AzureSkyRagdolls@gmail.com" target="_blank">
-                Contact
-              </a>
-            </li>
           </ul>
         </nav>
       </div>
