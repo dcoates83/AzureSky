@@ -6,14 +6,12 @@ import { GetStaticProps, PreviewData } from 'next'
 import Head from 'next/head'
 import { client, Query } from '.'
 import CMSSection from '../components/CMSSection'
-import PostedLitters from '../components/PostedLitters'
-import SectionSubHeader from '../components/SectionSubHeader'
+
 
 dayjs.extend(isSameOrBefore)
 export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
   ctx
 ) => {
-  const { preview = false, previewData = {} } = ctx
 
   const newLitters = await client.fetch(`*[_type == "newLitters"]`)
   const newLittersPosts = await client.fetch(`*[_type == "newLittersPost"]`)
@@ -42,11 +40,11 @@ const NewLitters = ({ newLitters, newLittersPosts }) => {
       </Head>
       <Container id="upcoming" maxWidth="md">
         <CMSSection title={title_newLitters} content={content_newLitters} />
-        <SectionSubHeader
+        {/* <SectionSubHeader
           text="Predicted colors and dates of the kittens will be listed,
                     but of course Mother Nature does her own thing!"
-        />
-        <PostedLitters newLittersPosts={newLittersPosts} />
+        /> */}
+        {/* <PostedLitters newLittersPosts={newLittersPosts} /> */}
       </Container>
     </>
   )

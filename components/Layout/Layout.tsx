@@ -30,6 +30,7 @@ export default function BlogLayout({
             { name: 'About', icon: <InfoRoundedIcon /> },
             { name: 'Purchasing', icon: <ShoppingBasketRoundedIcon /> },
             { name: 'New Litters', icon: <FiberNewRoundedIcon /> },
+            { name: "Socials", icon: <FiberNewRoundedIcon /> },
             // { name: 'Shop', icon: <ShoppingCartRoundedIcon /> },
           ]}
         />
@@ -46,6 +47,7 @@ export default function BlogLayout({
             { name: 'About', icon: <InfoRoundedIcon /> },
             { name: 'Purchasing', icon: <ShoppingBasketRoundedIcon /> },
             { name: 'New Litters', icon: <FiberNewRoundedIcon /> },
+            { name: "Socials", icon: <FiberNewRoundedIcon /> },
             // { name: 'Shop', icon: <ShoppingCartRoundedIcon /> },
           ]}
         />

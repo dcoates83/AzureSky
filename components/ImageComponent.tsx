@@ -23,9 +23,10 @@ const ImageComponent: React.FC<ImageComponentProps> = ({
     return builder.image(source)
   }
   const theme = useTheme()
+  if(!image) return null;
   return (
     <Image
-      src={urlFor(image).image(image).auto('format').url()}
+      src={urlFor(image)?.image(image)?.auto('format')?.url()}
       alt={' '}
       loading="lazy"
       width={height || 300}

@@ -7,21 +7,7 @@ const Footer = () => {
 
   return (
     <Box component="footer" sx={{ pb: mobile ? '4em' : 'unset' }}>
-      <div className="social-links">
-        <ul className="navbar-nav mb-lg-0 social-network social-circle mb-2 me-auto">
-          <li className="nav-item">
-            <a
-              rel="noopener"
-              href="https://www.facebook.com/Azure-Sky-Ragdolls-2203345016408284/"
-              target="_blank"
-              className="nav-link icoFacebook"
-              title="Facebook"
-            >
-              <FacebookOutlinedIcon sx={{ color: '#0A82ED' }} />
-            </a>
-          </li>
-        </ul>
-      </div>
+    
       <div className="links">
         <nav className="footer-links">
           <ul className="footer-items">
