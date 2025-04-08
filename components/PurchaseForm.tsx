@@ -53,8 +53,8 @@ const PurchaseForm = () => {
           justifyContent: 'space-between',
           pb: 2,
         }}
-        action="https://formsubmit.co/devonbcoates@gmail.com"
-        // action="https://formsubmit.co/Meg@azureskyragdolls.com"
+        // action="https://formsubmit.co/devonbcoates@gmail.com"
+        action="https://formsubmit.co/Meg@azureskyragdolls.com"
       >
         <input
           type="hidden"
