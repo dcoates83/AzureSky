@@ -14,7 +14,6 @@ const PurchaseForm = () => {
       /^(\+?\d{1,3}[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/,
       'Enter a valid phone number'
     ).required('Phone is required'),
-    // street: Yup.string().required('Street is required'),
     city: Yup.string().required('City is required'),
     about: Yup.string().required('About is required'),
   })
@@ -34,10 +33,7 @@ const PurchaseForm = () => {
     onSubmit: async (values) => {},
   })
 
-  // https://www.google.com/recaptcha/admin/site/643041816
-  // https://www.npmjs.com/package/react-google-recaptcha-v3
-  // 6LcYClQmAAAAALgDzpRvDvpY97NlPb17de-4aFhT
-  // 6LdVlGUmAAAAACG3zAUE4o1HqP9-11z9dbUAidxN - vercel
+
   return (
     <Card sx={{ p: 2, mt: 1, height: '100%', position: 'relative' }}>
       <Box
@@ -54,7 +50,9 @@ const PurchaseForm = () => {
           pb: 2,
         }}
         // action="https://formsubmit.co/devonbcoates@gmail.com"
-        action="https://formsubmit.co/Meg@azureskyragdolls.com"
+        action="https://formsubmit.co/bmjbiz@icloud.com"
+        // action="https://formsubmit.co/Meg@azureskyragdolls.com"
+        // action="https://formsubmit.co/Meg@azureskyragdolls.com"
       >
         <input
           type="hidden"
