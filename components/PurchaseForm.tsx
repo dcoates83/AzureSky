@@ -50,8 +50,8 @@ const PurchaseForm = () => {
           pb: 2,
         }}
         // action="https://formsubmit.co/devonbcoates@gmail.com"
-        action="https://formsubmit.co/bmjbiz@icloud.com"
-        // action="https://formsubmit.co/Meg@azureskyragdolls.com"
+        // action="https://formsubmit.co/bmjbiz@icloud.com"
+        action="https://formsubmit.co/Meg@azureskyragdolls.com"
         // action="https://formsubmit.co/Meg@azureskyragdolls.com"
       >
         <input
@@ -64,7 +64,7 @@ const PurchaseForm = () => {
           name="_next"
           value="https://www.azureskyragdolls.com/Purchasing#purchasing-form"
         ></input>
-        <input type="hidden" name="_cc" value="devonbcoates@gmail.com"></input>
+        <input type="hidden" name="_cc" value="devonbcoates@gmail.com,bmjbiz@icloud.com"></input>
         <input type="hidden" name="_template" value="table"></input>
         <input type="hidden" name="_subject" value={`New submission from ${formik.values.firstName} ${formik.values.lastName}!`}></input>
         
