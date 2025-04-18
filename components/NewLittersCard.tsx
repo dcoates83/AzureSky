@@ -1,9 +1,6 @@
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import ShareIcon from '@mui/icons-material/Share'
 import {
   Box,
   Button,
@@ -15,10 +12,8 @@ import {
 } from '@mui/material'
 import { default as Card } from '@mui/material/Card'
 import { default as CardContent } from '@mui/material/CardContent'
-import { default as CardMedia } from '@mui/material/CardMedia'
 import { IconButtonProps } from '@mui/material/IconButton'
 import { default as Typography } from '@mui/material/Typography'
-import { red } from '@mui/material/colors'
 import { styled } from '@mui/material/styles'
 import imageUrlBuilder from '@sanity/image-url'
 import dayjs from 'dayjs'
@@ -28,12 +23,8 @@ import React from 'react'
 import {
   EmailShareButton,
   FacebookShareButton,
-  InstapaperShareButton,
-  OKShareButton,
-  WhatsappShareButton,
 } from 'react-share'
 import uuid from 'react-uuid'
-import cat from '../assets/cat-in-basket.jpg'
 import { client } from '../pages'
 interface ReservedOrAvailableProps {
   quantityRemaining?: number
@@ -202,7 +193,7 @@ const NewLittersCard = (props: NewLittersProps) => {
   const [expanded, setExpanded] = React.useState(false)
   const router = useRouter()
   const handleExpandClick = () => {
-    setExpanded(!expanded)
+    setExpanded(!expanded)  
   }
   const builder = imageUrlBuilder(client)
   function urlFor(source) {
