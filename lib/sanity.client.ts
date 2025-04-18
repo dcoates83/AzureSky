@@ -9,13 +9,14 @@ import {
   settingsQuery,
 } from 'lib/sanity.queries'
 import { createClient } from 'next-sanity'
+import { client } from 'pages'
 
 /**
  * Checks if it's safe to create a client instance, as `@sanity/client` will throw an error if `projectId` is false
  */
-const client = projectId
-  ? createClient({ projectId, dataset, apiVersion, useCdn })
-  : null
+// const client = projectId
+//   ? createClient({ projectId, dataset, apiVersion, useCdn })
+//   : null
 
 export async function getSettings(): Promise<Settings> {
   if (client) {
@@ -51,13 +52,13 @@ export async function getPostAndMoreStories(
   token?: string | null
 ): Promise<{ post: Post; morePosts: Post[] }> {
   if (projectId) {
-    const client = createClient({
-      projectId,
-      dataset,
-      apiVersion,
-      useCdn,
-      token: token || undefined,
-    })
+    // const client = createClient({
+    //   projectId,
+    //   dataset,
+    //   apiVersion,
+    //   useCdn,
+    //   token: token || undefined,
+    // })
     return await client.fetch(postAndMoreStoriesQuery, { slug })
   }
   return { post: null, morePosts: [] }

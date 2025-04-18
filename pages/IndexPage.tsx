@@ -73,11 +73,11 @@ export default function IndexPage(props: IndexPageProps) {
                   m: 1,
                   textAlign: 'center',
                 }}
-                key={uuid()}
+                key={`${uuid()}-kingsQueensContainer`}
               >
                 <ImageComponent
                   image={image}
-                  key={uuid()}
+                  key={`${uuid()}-kingsQueens`}
                   width={undefined}
                   height={undefined}
                 />
@@ -191,7 +191,7 @@ export default function IndexPage(props: IndexPageProps) {
           {content_ImageAssistants?.map((image) => (
             <ImageComponent
               image={image}
-              key={uuid()}
+              key={`${uuid()}-assistants`}
               width={undefined}
               height={undefined}
             />
