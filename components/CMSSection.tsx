@@ -7,13 +7,9 @@ import {
   useTheme,
 } from '@mui/material'
 import { PortableText } from '@portabletext/react'
-import { getImageDimensions } from '@sanity/asset-utils'
 import imageUrlBuilder from '@sanity/image-url'
-import Image from 'next/image'
 import React from 'react'
 import { SvgBlob } from 'react-svg-blob'
-
-import { Balancer } from 'react-wrap-balancer'
 import { client } from '../pages'
 interface CMSSectionProps {
   title: string
@@ -37,12 +33,10 @@ const headerSx = {
 // Maybe generate this from a random blob generator?
 // https://www.npmjs.com/package/unique-blob
 const ImageComponent = (image) => {
-  const { width, height } = getImageDimensions(image.value)
   const builder = imageUrlBuilder(client)
   function urlFor(source) {
     return builder.image(source)
   }
-  const theme = useTheme()
 
   return (
     <Box sx={{ height: '500px', width: '500px', display: 'flex' }}>

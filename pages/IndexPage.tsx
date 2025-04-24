@@ -66,23 +66,23 @@ export default function IndexPage(props: IndexPageProps) {
 
       <Container maxWidth="lg">
         <ImageContainer>
-          {content_KingsQueensImages.map((image: SanityImageSource) => (
+          {content_KingsQueensImages.map((image: SanityImageSource,i) => (
             <>
               <Box
                 sx={{
                   m: 1,
                   textAlign: 'center',
                 }}
-                key={`${uuid()}-kingsQueensContainer`}
+                key={`${uuid()}-kingsQueensContainer-${i}` }
               >
                 <ImageComponent
                   image={image}
-                  key={`${uuid()}-kingsQueens`}
+                  key={`${uuid()}-kingsQueens-${i}`}
                   width={undefined}
                   height={undefined}
                 />
                 <Typography
-                  key={uuid()}
+                  key={`${uuid()}-typography-${i}`}
                   variant="h5"
                   sx={{
                     color: (image as any)?.gender
@@ -188,10 +188,10 @@ export default function IndexPage(props: IndexPageProps) {
         <SectionSubHeader text="All of our cats live with us as part of our family" />
         <CMSSection title={title_Assistants} content={content_Assistants} />
         <ImageContainer>
-          {content_ImageAssistants?.map((image) => (
+          {content_ImageAssistants?.map((image, i) => (
             <ImageComponent
               image={image}
-              key={`${uuid()}-assistants`}
+              key={`${uuid()}-assistants-${i}`}
               width={undefined}
               height={undefined}
             />

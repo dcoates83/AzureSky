@@ -4,19 +4,33 @@ import React from 'react'
 
 import * as Yup from 'yup'
 const PurchaseForm = () => {
+    
+  const urlRegex = /https?:\/\/[^\s]+|www\.[^\s]+/i;
+  const noLinks = (field: string) =>
+    Yup.string()
+      .test(
+        'no-links',
+        `${field} must not contain links`,
+        value => !value || !urlRegex.test(value)
+      )
+      .required(`${field} is required`);
+
+  
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email('Enter a valid email')
       .required('Email is required'),
-    firstName: Yup.string().required('First Name is required'),
-    lastName: Yup.string().required('Last Name is required'),
-    phone: Yup.string().matches(
-      /^(\+?\d{1,3}[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/,
-      'Enter a valid phone number'
-    ).required('Phone is required'),
-    city: Yup.string().required('City is required'),
-    about: Yup.string().required('About is required'),
-  })
+    firstName: noLinks('First Name'),
+    lastName: noLinks('Last Name'),
+    phone: Yup.string()
+      .matches(
+        /^(\+?\d{1,3}[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/,
+        'Enter a valid phone number'
+      )
+      .required('Phone is required'),
+    city: noLinks('City'),
+    about: noLinks('About'),
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -27,10 +41,15 @@ const PurchaseForm = () => {
       street: '',
       city: '',
       about: '',
+      _honey: undefined,
     },
     validationSchema: validationSchema,
     validateOnBlur: true,
-    onSubmit: async (values) => {},
+  
+    onSubmit: async (values) => {
+  
+
+    },
   })
 
 
@@ -50,8 +69,8 @@ const PurchaseForm = () => {
           pb: 2,
         }}
         // action="https://formsubmit.co/devonbcoates@gmail.com"
-        // action="https://formsubmit.co/bmjbiz@icloud.com"
-        action="https://formsubmit.co/Meg@azureskyragdolls.com"
+        action="https://formsubmit.co/bmjbiz@icloud.com"
+        // action="https://formsubmit.co/Meg@azureskyragdolls.com"
         // action="https://formsubmit.co/Meg@azureskyragdolls.com"
       >
         <input
@@ -64,10 +83,16 @@ const PurchaseForm = () => {
           name="_next"
           value="https://www.azureskyragdolls.com/Purchasing#purchasing-form"
         ></input>
-        <input type="hidden" name="_cc" value="devonbcoates@gmail.com,bmjbiz@icloud.com"></input>
+        <input type="hidden" name="_cc" 
+        value="devonbcoates@gmail.com"
+        // value="devonbcoates@gmail.com,bmjbiz@icloud.com"
+        >
+        </input>
         <input type="hidden" name="_template" value="table"></input>
         <input type="hidden" name="_subject" value={`New submission from ${formik.values.firstName} ${formik.values.lastName}!`}></input>
-        
+        <TextField type="text" name="_honey" 
+        sx={{display:'none'}}
+        ></TextField>
         <TextField
           error={Boolean(formik.errors.firstName)}
           helperText={formik.errors.firstName}
