@@ -69,8 +69,8 @@ const PurchaseForm = () => {
           pb: 2,
         }}
         // action="https://formsubmit.co/devonbcoates@gmail.com"
-        action="https://formsubmit.co/bmjbiz@icloud.com"
-        // action="https://formsubmit.co/Meg@azureskyragdolls.com"
+        // action="https://formsubmit.co/bmjbiz@icloud.com"
+        action="https://formsubmit.co/Meg@azureskyragdolls.com"
         // action="https://formsubmit.co/Meg@azureskyragdolls.com"
       >
         <input
