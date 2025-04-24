@@ -11,6 +11,5 @@ change reserved from pre conception/ post conception
 not ready yet? but still want more info ?
 switch to react forms--- changing to recaptcha / email valid
 add reviews section
-@llM1n@m3ch3@p23
 subscribe/email when a new litter is posted
 break down into smaller components
