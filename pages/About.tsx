@@ -1,10 +1,8 @@
 import { Box, Container, useTheme } from '@mui/material'
 import { GetStaticProps, PreviewData } from 'next'
 import Image from 'next/image'
-
-import { Metadata } from 'next'
-import Head from 'next/head'
 import uuid from 'react-uuid'
+
 import { client, Query } from '.'
 import buckwheat from '../assets/buckwheat.jpg'
 import daddyWarbucks from '../assets/Daddy warbucks.jpg'
@@ -14,6 +12,8 @@ import historyLanding from '../assets/history-landing.jpg'
 import CMSSection from '../components/CMSSection'
 import ImageCircle from '../components/ImageCircle'
 import ImageContainer from '../components/ImageContainer'
+import Seo from '../components/Seo'
+import siteMetadata from '../lib/seoConfig'
 interface AboutPage {
   _id: string
   _rev: string
@@ -99,10 +99,6 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
   }
 }
 
-export const metadata: Metadata = {
-  title: '...',
-  description: '...',
-}
 // const AboutPage = ({ aboutPage }) => {
 const AboutPage = ({ aboutPage }: { aboutPage: AboutPage[] }) => {
   const theme = useTheme()
@@ -138,13 +134,30 @@ const AboutPage = ({ aboutPage }: { aboutPage: AboutPage[] }) => {
   Ragdolls are known worldwide for their affectionate nature, beautiful appearance, and
   intelligence. Stunning eyes, soft luxurious fur and a variety of coat colors and marking’s hallmark the Ragdoll of today, making them extremely popular."
       /> */}
-      <Head>
-        <title>Azure Sky - About Ragdolls</title>
-        <meta
-          name="description"
-          content="Learn everything about Ragdoll cats with this comprehensive guide. Discover their history, appearance, color patterns, and variations. Explore fascinating facts about Grumpy Cat and Mink Ragdolls. Find useful tips and precautions for Ragdoll owners."
-        ></meta>
-      </Head>
+      <Seo
+        title="About Ragdoll Cats"
+        description="Learn about the Ragdoll breed from Azure Sky Ragdolls - exploring history, color patterns, coat variations, and the traits that make these kittens affectionate family pets."
+        keywords={[
+          'ragdoll cat history',
+          'ragdoll colors and patterns',
+          'mink ragdoll guide',
+        ]}
+        structuredData={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'AboutPage',
+            name: 'About Ragdoll Cats',
+            description:
+              'Comprehensive overview of Ragdoll cat history, appearance, color patterns, colorpoints, and mink variations published by Azure Sky Ragdolls.',
+            url: `${siteMetadata.siteUrl}/About`,
+            about: [
+              { '@type': 'Thing', name: 'Ragdoll cat history' },
+              { '@type': 'Thing', name: 'Ragdoll color patterns' },
+              { '@type': 'Thing', name: 'Mink Ragdolls' },
+            ],
+          },
+        ]}
+      />
       <section id="about" className="section">
         {/* <Container maxWidth="xl" sx={{ position: 'relative', height: 500 }}>
           <Image

@@ -1,14 +1,12 @@
-import { Container, Divider, Typography } from '@mui/material'
-import dayjs from 'dayjs'
-import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
+import { Container } from '@mui/material'
 import { GetStaticProps, PreviewData } from 'next'
 
-import Head from 'next/head'
 import { client, Query } from '.'
 import CMSSection from '../components/CMSSection'
+import Seo from '../components/Seo'
+import siteMetadata from '../lib/seoConfig'
 
 
-dayjs.extend(isSameOrBefore)
 export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
   ctx
 ) => {
@@ -31,13 +29,54 @@ const NewLitters = ({ newLitters, newLittersPosts }) => {
 
   return (
     <>
-      <Head>
-        <title>Azure Sky - New Litters</title>
-        <meta
-          name="description"
-          content="Explore our New Litters page to stay up-to-date with the latest Ragdoll kittens. Discover the predicted colors and expected dates of upcoming litters, although Mother Nature has her own plans! Browse through the posted litters, each accompanied by captivating images, detailed descriptions, and information about the available colors. Check the quantity remaining and the number of pre-conception and post-conception reservations. Be sure to keep an eye on this page for exciting updates on our adorable Ragdoll kittens."
-        />
-      </Head>
+      <Seo
+        title="New Litters"
+        description="Track upcoming Azure Sky Ragdolls litters, see expected colors and timelines, and learn how many reservations remain for each pairing."
+        keywords={[
+          'upcoming ragdoll litters',
+          'ragdoll kittens availability',
+          'reserve ragdoll kitten',
+        ]}
+        structuredData={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: 'Upcoming Ragdoll Litters',
+            url: `${siteMetadata.siteUrl}/NewLitters`,
+            description:
+              'Projected litter dates, color possibilities, and reservation counts for Azure Sky Ragdolls.',
+          },
+          ...(newLittersPosts?.length
+            ? [
+                {
+                  '@context': 'https://schema.org',
+                  '@type': 'ItemList',
+                  itemListElement: newLittersPosts.map(
+                    (
+                      post: {
+                        title: string
+                        description: string
+                        colors: string
+                        expected: string
+                        quantityRemaining: number
+                      },
+                      index: number
+                    ) => ({
+                      '@type': 'ListItem',
+                      position: index + 1,
+                      name: post.title,
+                      description: `${post.description || ''} Colors: ${
+                        post.colors || 'varied'
+                      }. Expected: ${post.expected || 'TBA'}.`,
+                      url: `${siteMetadata.siteUrl}/NewLitters#posted-litters`,
+                      numberOfItems: post.quantityRemaining,
+                    })
+                  ),
+                },
+              ]
+            : []),
+        ]}
+      />
       <Container id="upcoming" maxWidth="md">
         <CMSSection title={title_newLitters} content={content_newLitters} />
         {/* <SectionSubHeader

@@ -15,8 +15,12 @@ import { useFormik } from 'formik'
 import React from 'react'
 
 import * as Yup from 'yup'
+const JOTFORM_FORM_ID = '253177374686066'
+const JOTFORM_SRC = `https://form.jotform.com/${JOTFORM_FORM_ID}?isIframeEmbed=1`
 const PurchaseForm = () => {
   const [isReadyDialogOpen, setIsReadyDialogOpen] = React.useState(false)
+  const [shouldLoadJotform, setShouldLoadJotform] = React.useState(false)
+  const [jotformHeight, setJotformHeight] = React.useState(820)
   const urlRegex = /https?:\/\/[^\s]+|www\.[^\s]+/i
   const noLinks = (field: string) =>
     Yup.string()
@@ -53,7 +57,7 @@ const PurchaseForm = () => {
       city: '',
       about: '',
       interestedInKittenOrOlderCat: null,
-      contactMeForDeposit: null,
+      contactMe: null,
       _honey: undefined,
     },
     validationSchema: validationSchema,
@@ -61,6 +65,47 @@ const PurchaseForm = () => {
 
     onSubmit: async (values) => {},
   })
+
+  const handleReadyToAdoptClick = () => {
+    setShouldLoadJotform(true)
+    setIsReadyDialogOpen(true)
+  }
+
+  React.useEffect(() => {
+    if (!shouldLoadJotform) return
+
+    const handleIFrameMessage = (event: MessageEvent) => {
+      if (typeof event.data !== 'string') return
+      if (
+        event.origin &&
+        !event.origin.includes('jotform') &&
+        !event.origin.includes('jotform.com')
+      )
+        return
+
+      const args = event.data.split(':')
+      if (args.length < 2) return
+
+      const [command, formId, value] = args
+      if (formId !== JOTFORM_FORM_ID) return
+
+      if (command === 'setHeight' && value) {
+        const parsed = parseInt(value, 10)
+        if (!Number.isNaN(parsed)) {
+          setJotformHeight(parsed)
+        }
+      }
+
+      if (command === 'scrollIntoView') {
+        document
+          .getElementById(`JotFormIFrame-${formId}`)
+          ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+
+    window.addEventListener('message', handleIFrameMessage)
+    return () => window.removeEventListener('message', handleIFrameMessage)
+  }, [shouldLoadJotform])
 
   return (
     <Card sx={{ p: 2, mt: 1, height: '100%', position: 'relative' }}>
@@ -85,8 +130,8 @@ const PurchaseForm = () => {
         <Button
           variant="contained"
           color="success"
-          onClick={() => setIsReadyDialogOpen(true)}
-          sx={{ maxWidth: 300 }}
+          onClick={handleReadyToAdoptClick}
+          sx={{ maxWidth: 225 }}
         >
           I&apos;m ready to adopt now
         </Button>
@@ -219,9 +264,9 @@ const PurchaseForm = () => {
           />
         </Box>
         <FormControlLabel
-          name="contactMeForDeposit"
+          name="contactMe"
           control={<Checkbox />}
-          label="Please contact me to be added to the wait list for upcoming litters and provide the $500 deposit"
+          label="Please contact me to be added to the wait list for upcoming litters"
         />
         <FormControlLabel
           name="interestedInKittenOrOlderCat"
@@ -233,7 +278,13 @@ const PurchaseForm = () => {
           type="submit"
           variant="contained"
           disabled={!formik.isValid || formik.isSubmitting}
-          sx={{ color: '#fff', gridColumn: 'span 2', width: '100%', mt: 2 }}
+          sx={{
+            color: '#fff',
+            gridColumn: 'span 2',
+            width: '100%',
+            maxWidth: 225,
+            margin: '0 auto',
+          }}
         >
           Submit
         </Button>
@@ -242,16 +293,59 @@ const PurchaseForm = () => {
         open={isReadyDialogOpen}
         onClose={() => setIsReadyDialogOpen(false)}
         aria-labelledby="ready-to-adopt-dialog-title"
+        fullWidth
+        maxWidth="md"
       >
-        <DialogTitle id="ready-to-adopt-dialog-title">
-          We are excited to hear that!
-        </DialogTitle>
-        <DialogContent sx={{ pt: 0 }}>
-          <Typography variant="body2">
-            Thanks for your enthusiasm. Please submit the form and we&apos;ll
-            connect quickly with current availability and the fastest way to
-            reserve your kitten.
-          </Typography>
+        <DialogContent sx={{ p: 0, overflow: 'hidden' }}>
+          <Box
+            sx={{
+              width: '100%',
+              minHeight: { xs: 500, md: 820 },
+              position: 'relative',
+              overflow: 'hidden',
+              borderRadius: 1,
+            }}
+          >
+            {shouldLoadJotform ? (
+              <>
+                <Box
+                  component="iframe"
+                  id={`JotFormIFrame-${JOTFORM_FORM_ID}`}
+                  title="Azure Sky Ragdolls Adoption Application"
+                  src={JOTFORM_SRC}
+                  width="100%"
+                  loading="eager"
+                  sx={{ border: 0, height: `${jotformHeight + 80}px` }}
+                  allow="geolocation; microphone; camera"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <Box
+                  aria-hidden
+                  sx={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    width: '100%',
+                    height: 80,
+                    background: (theme) => `white`,
+                    pointerEvents: 'none',
+                  }}
+                >
+                  {' '}
+                  <Typography variant="body2" sx={{ px: 3, pt: 2.5 }}>
+                    Thanks for your enthusiasm. Please submit the form and
+                    we&apos;ll connect quickly with current availability and the
+                    fastest way to reserve your kitten.
+                  </Typography>
+                </Box>
+              </>
+            ) : (
+              <Typography variant="body2" sx={{ mt: 2 }}>
+                Loading the adoption application&hellip;
+              </Typography>
+            )}
+          </Box>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setIsReadyDialogOpen(false)}>Close</Button>

@@ -1,11 +1,10 @@
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded'
+import MoveDownIcon from '@mui/icons-material/MoveDown'
 import { Box, Button, Container, Typography, useTheme } from '@mui/material'
 import { PortableText } from '@portabletext/react'
 import { GetStaticProps, PreviewData } from 'next'
 import Image from 'next/image'
 
-import MoveDownIcon from '@mui/icons-material/MoveDown'
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { JSXElementConstructor, Key, ReactElement, ReactFragment } from 'react'
 import uuid from 'react-uuid'
@@ -14,9 +13,10 @@ import { Query, client } from '.'
 
 import CMSSection from '../components/CMSSection'
 import FaqQuestion from '../components/FaqQuestion'
-
 import PurchaseForm from '../components/PurchaseForm'
 import SectionSubHeader from '../components/SectionSubHeader'
+import Seo from '../components/Seo'
+import siteMetadata from '../lib/seoConfig'
 
 export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
   ctx
@@ -51,15 +51,52 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
   } = copy.pop()
 
   const router = useRouter()
+  const sanitizeAnswer = (value?: string) =>
+    value
+      ? value
+          .replace(/<[^>]*>/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim()
+      : ''
   return (
     <>
-      <Head>
-        <title>Azure Sky - Purchasing</title>
-        <meta
-          name="description"
-          content="Explore our Purchasing page to learn more about buying a Ragdoll kitten. Read the purchasing agreement to understand the terms and conditions. Discover what comes with your purchase, including essential items and services, such as vaccinations, micro chipping, and a health guarantee. Find out what you need to do when your kitten is ready to go home, including preparation and care tips. Fill out the adoption form to initiate the purchasing process. Browse through our FAQ section to find answers to common questions. If you have any other inquiries, feel free to contact us via email. Make an informed decision and bring home a wonderful Ragdoll kitten today!"
-        />
-      </Head>
+      <Seo
+        title="Purchasing"
+        description="Review our adoption agreement, see what every Azure Sky Ragdolls kitten includes, and submit the adoption form to reserve your spot on the wait list."
+        keywords={[
+          'ragdoll adoption process',
+          'ragdoll kitten deposit',
+          'azure sky ragdolls waitlist',
+        ]}
+        structuredData={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'WebPage',
+            name: 'Azure Sky Ragdolls Purchasing',
+            description:
+              'Adoption agreement, inclusions, going-home preparation tips, and contact options for Azure Sky Ragdolls kittens.',
+            url: `${siteMetadata.siteUrl}/Purchasing`,
+          },
+          ...(faqQuestions?.length
+            ? [
+                {
+                  '@context': 'https://schema.org',
+                  '@type': 'FAQPage',
+                  mainEntity: faqQuestions.map(
+                    (q: { title_faqs: string; content_faqs: string }) => ({
+                      '@type': 'Question',
+                      name: q.title_faqs,
+                      acceptedAnswer: {
+                        '@type': 'Answer',
+                        text: sanitizeAnswer(q.content_faqs),
+                      },
+                    })
+                  ),
+                },
+              ]
+            : []),
+        ]}
+      />
       <Container maxWidth="md" sx={{ mb: 1 }}>
         <CMSSection
           link={
@@ -139,9 +176,9 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
               titleSx={{ m: 0, pb: 1 }}
               title={title_AdoptionForm}
               content={content_AdoptionForm}
+              titleChildren={<PurchaseForm />}
             />
           </Box>
-          <PurchaseForm />
         </Box>
 
         <section id="faq">

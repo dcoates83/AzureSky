@@ -19,6 +19,7 @@ interface CMSSectionProps {
   contentSx?: SxProps<Theme>
   containerSx?: SxProps<Theme>
   link?: React.ReactNode
+  titleChildren?: React.ReactNode
 }
 
 const headerSx = {
@@ -71,6 +72,7 @@ const CMSSection = (props: CMSSectionProps) => {
     link,
     title,
     titleSx,
+    titleChildren,
   } = props
 
   const components = {
@@ -91,7 +93,7 @@ const CMSSection = (props: CMSSectionProps) => {
         <Typography variant={headerVariant || 'h4'} sx={titleSx || headerSx}>
           {title ?? title}
         </Typography>
-
+        {titleChildren}
         {link}
         <Box
           sx={[

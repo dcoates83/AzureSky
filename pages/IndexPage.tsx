@@ -1,17 +1,17 @@
 import { Box, Container, Typography } from '@mui/material'
+import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import type { Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps, PreviewData } from 'next'
 import uuid from 'react-uuid'
 
-import Head from 'next/head'
 import { Query, client } from '.'
 import CMSSection from '../components/CMSSection'
 import ImageComponent from '../components/ImageComponent'
 import ImageContainer from '../components/ImageContainer'
 import { HeroLanding } from '../components/LandingPage/HeroLanding'
-
 import SectionSubHeader from '../components/SectionSubHeader'
-import { SanityImageSource } from '@sanity/image-url/lib/types/types'
+import Seo from '../components/Seo'
+import siteMetadata, { kamloopsAdoptionKeywords } from '../lib/seoConfig'
 export interface IndexPageProps {
   preview?: boolean
   loading?: boolean
@@ -48,15 +48,31 @@ export default function IndexPage(props: IndexPageProps) {
     content_ImageAssistants,
   } = copy.pop()
 
+  const homeDescription =
+    'TICA-registered Azure Sky Ragdolls raises health-tested kittens in Arizona. Meet our kings, queens, and assistants while learning about the care each kitten receives.'
+  const homeStructuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Azure Sky Ragdolls Home',
+      description: homeDescription,
+      url: siteMetadata.siteUrl,
+    },
+  ]
+
   return (
     <>
-      <Head>
-        <title>Azure Sky Ragdolls</title>
-        <meta
-          name="description"
-          content="Welcome to Azure Sky Ragdolls! Explore our website to discover a variety of content related to Ragdoll cats. Learn about Kings and Queens, get insights into our cattery, and find information about TICA (The International Cat Association). Discover why owning a purebred Ragdoll is a great choice and how our cats are raised with care. Find out more about our dedicated team, view captivating images of our cats, and immerse yourself in the world of Ragdolls. Join us on this wonderful journey and experience the joy of owning a Ragdoll cat."
-        />
-      </Head>
+      <Seo
+        title="Home"
+        description={homeDescription}
+        keywords={[
+          'ragdoll kittens Arizona',
+          'tica registered ragdoll breeder',
+          'family raised ragdoll cats',
+          ...kamloopsAdoptionKeywords,
+        ]}
+        structuredData={homeStructuredData}
+      />
 
       <HeroLanding />
 
