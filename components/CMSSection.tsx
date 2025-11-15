@@ -23,16 +23,11 @@ interface CMSSectionProps {
 }
 
 const headerSx = {
-  // fontSize: '1.75rem',
   margin: '1em 0',
   textAlign: 'left',
   textWrap: 'balance',
-  // fontWeight: '600',
-  // color: 'primary.light',
 }
 
-// Maybe generate this from a random blob generator?
-// https://www.npmjs.com/package/unique-blob
 const ImageComponent = (image) => {
   const builder = imageUrlBuilder(client)
   function urlFor(source) {
@@ -41,19 +36,6 @@ const ImageComponent = (image) => {
 
   return (
     <Box sx={{ height: '500px', width: '500px', display: 'flex' }}>
-      {/* <Image
-        src={urlFor(image).image(image.value).auto('format').url()}
-        alt={image.value.alt || ' '}
-        loading="lazy"
-        width={width}
-        height={height}
-        style={{
-          display: image.isInline ? 'inline-block' : 'block',
-          borderRadius: theme.shape.borderRadius,
-          // Avoid jumping around with aspect-ratio CSS property
-          // aspectRatio: width / height,
-        }}
-      /> */}
       <SvgBlob
         variant="image"
         image={urlFor(image).image(image.value).auto('format').url()}

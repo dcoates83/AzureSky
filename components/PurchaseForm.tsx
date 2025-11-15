@@ -70,6 +70,18 @@ const PurchaseForm = () => {
     setIsReadyDialogOpen(true)
   }
 
+  const handleContactFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const nativeEvent = event.nativeEvent as SubmitEvent
+    console.log(nativeEvent)
+    if (!nativeEvent.isTrusted) {
+      event.preventDefault()
+      event.stopPropagation()
+      return
+    }
+
+    formik.submitForm()
+  }
+
   return (
     <Card sx={{ p: 2, mt: 1, height: '100%', position: 'relative' }}>
       <Box
@@ -102,6 +114,8 @@ const PurchaseForm = () => {
       <Box
         method="POST"
         component="form"
+        noValidate
+        onSubmit={handleContactFormSubmit}
         sx={{
           '& .MuiTextField-root': { p: 1 },
           height: '100%',

@@ -30,7 +30,6 @@ export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
     props: {
       purchasing,
       faqQuestions,
-      // token: previewData?.token ?? null,
     },
     revalidate: 180,
   }
