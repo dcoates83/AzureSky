@@ -1,21 +1,32 @@
-import { Box, Button, Card, TextField } from '@mui/material'
+import {
+  Box,
+  Button,
+  Card,
+  Checkbox,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControlLabel,
+  TextField,
+  Typography,
+} from '@mui/material'
 import { useFormik } from 'formik'
 import React from 'react'
 
 import * as Yup from 'yup'
 const PurchaseForm = () => {
-    
-  const urlRegex = /https?:\/\/[^\s]+|www\.[^\s]+/i;
+  const [isReadyDialogOpen, setIsReadyDialogOpen] = React.useState(false)
+  const urlRegex = /https?:\/\/[^\s]+|www\.[^\s]+/i
   const noLinks = (field: string) =>
     Yup.string()
       .test(
         'no-links',
         `${field} must not contain links`,
-        value => !value || !urlRegex.test(value)
+        (value) => !value || !urlRegex.test(value)
       )
-      .required(`${field} is required`);
+      .required(`${field} is required`)
 
-  
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email('Enter a valid email')
@@ -30,7 +41,7 @@ const PurchaseForm = () => {
       .required('Phone is required'),
     city: noLinks('City'),
     about: noLinks('About'),
-  });
+  })
 
   const formik = useFormik({
     initialValues: {
@@ -41,20 +52,45 @@ const PurchaseForm = () => {
       street: '',
       city: '',
       about: '',
+      interestedInKittenOrOlderCat: null,
+      contactMeForDeposit: null,
       _honey: undefined,
     },
     validationSchema: validationSchema,
     validateOnBlur: true,
-  
-    onSubmit: async (values) => {
-  
 
-    },
+    onSubmit: async (values) => {},
   })
-
 
   return (
     <Card sx={{ p: 2, mt: 1, height: '100%', position: 'relative' }}>
+      <Box
+        sx={{
+          mb: 3,
+          p: 2,
+          borderRadius: 2,
+          backgroundColor: 'rgba(34, 197, 94, 0.08)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+          Ready to adopt now?
+        </Typography>
+        <Typography variant="body1" sx={{ mb: 2 }}>
+          If you are hoping to adopt right away, please click the button below
+          and fill out the following form!
+        </Typography>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={() => setIsReadyDialogOpen(true)}
+          sx={{ maxWidth: 300 }}
+        >
+          I&apos;m ready to adopt now
+        </Button>
+      </Box>
       <Box
         method="POST"
         component="form"
@@ -83,15 +119,22 @@ const PurchaseForm = () => {
           name="_next"
           value="https://www.azureskyragdolls.com/Purchasing#purchasing-form"
         ></input>
-        <input type="hidden" name="_cc" 
-        value="devonbcoates@gmail.com"
-        // value="devonbcoates@gmail.com,bmjbiz@icloud.com"
-        >
-        </input>
+        <input
+          type="hidden"
+          name="_cc"
+          value="devonbcoates@gmail.com"
+          // value="devonbcoates@gmail.com,bmjbiz@icloud.com"
+        ></input>
         <input type="hidden" name="_template" value="table"></input>
-        <input type="hidden" name="_subject" value={`New submission from ${formik.values.firstName} ${formik.values.lastName}!`}></input>
-        <TextField type="text" name="_honey" 
-        sx={{display:'none'}}
+        <input
+          type="hidden"
+          name="_subject"
+          value={`New submission from ${formik.values.firstName} ${formik.values.lastName}!`}
+        ></input>
+        <TextField
+          type="text"
+          name="_honey"
+          sx={{ display: 'none' }}
         ></TextField>
         <TextField
           error={Boolean(formik.errors.firstName)}
@@ -100,7 +143,7 @@ const PurchaseForm = () => {
           size="small"
           fullWidth
           name="firstName"
-          type='text'
+          type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.firstName}
@@ -175,6 +218,16 @@ const PurchaseForm = () => {
             value={formik.values.about}
           />
         </Box>
+        <FormControlLabel
+          name="contactMeForDeposit"
+          control={<Checkbox />}
+          label="Please contact me to be added to the wait list for upcoming litters and provide the $500 deposit"
+        />
+        <FormControlLabel
+          name="interestedInKittenOrOlderCat"
+          control={<Checkbox />}
+          label="I am interested in an older kitten or retired breeder."
+        />
 
         <Button
           type="submit"
@@ -185,6 +238,25 @@ const PurchaseForm = () => {
           Submit
         </Button>
       </Box>
+      <Dialog
+        open={isReadyDialogOpen}
+        onClose={() => setIsReadyDialogOpen(false)}
+        aria-labelledby="ready-to-adopt-dialog-title"
+      >
+        <DialogTitle id="ready-to-adopt-dialog-title">
+          We are excited to hear that!
+        </DialogTitle>
+        <DialogContent sx={{ pt: 0 }}>
+          <Typography variant="body2">
+            Thanks for your enthusiasm. Please submit the form and we&apos;ll
+            connect quickly with current availability and the fastest way to
+            reserve your kitten.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setIsReadyDialogOpen(false)}>Close</Button>
+        </DialogActions>
+      </Dialog>
     </Card>
   )
 }
