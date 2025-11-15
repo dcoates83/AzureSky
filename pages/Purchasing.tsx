@@ -155,7 +155,12 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
             visibility: 'hidden',
           }}
         ></Box>
-
+        <Typography variant="body2" sx={{ mt: 2, textAlign: 'center' }}>
+          Having trouble with the form? Email us directly at{' '}
+          <Box component="span" fontWeight={600}>
+            meg@azureskyragdolls.com
+          </Box>
+        </Typography>
         <Box
           sx={{
             mt: 5,
