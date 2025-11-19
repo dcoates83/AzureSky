@@ -55,8 +55,8 @@ const PurchaseForm = () => {
       street: '',
       city: '',
       about: '',
-      interestedInKittenOrOlderCat: null,
-      contactMe: null,
+      interested_In_Kitten_Or_OlderCat: null,
+      add_Me_To_The_Wait_List: null,
       _honey: undefined,
     },
     validationSchema: validationSchema,
@@ -241,12 +241,12 @@ const PurchaseForm = () => {
           />
         </Box>
         <FormControlLabel
-          name="contactMe"
+          name="add_Me_To_The_Wait_List"
           control={<Checkbox />}
           label="Please contact me to be added to the wait list for upcoming litters"
         />
         <FormControlLabel
-          name="interestedInKittenOrOlderCat"
+          name="interested_In_Kitten_Or_OlderCat"
           control={<Checkbox />}
           label="I am interested in an older kitten or retired breeder."
         />
