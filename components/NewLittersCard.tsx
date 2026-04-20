@@ -4,276 +4,246 @@ import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
 import {
   Box,
   Button,
+  Card,
   CardActions,
+  CardContent,
   CardHeader,
+  Chip,
   Collapse,
   IconButton,
-  useTheme,
+  Typography,
 } from '@mui/material'
-import { default as Card } from '@mui/material/Card'
-import { default as CardContent } from '@mui/material/CardContent'
-import { IconButtonProps } from '@mui/material/IconButton'
-import { default as Typography } from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
 import imageUrlBuilder from '@sanity/image-url'
 import dayjs from 'dayjs'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 import React from 'react'
 import { EmailShareButton, FacebookShareButton } from 'react-share'
-import uuid from 'react-uuid'
 
 import { client } from '../lib/sanity.client'
-interface ReservedOrAvailableProps {
+import siteMetadata from '../lib/seoConfig'
+
+interface NewLittersCardProps {
+  id: string
+  colors?: string
+  description?: string
+  expected?: string
+  image?: any
+  markings?: string
   quantityRemaining?: number
   reservedPreConception?: number
   reservedPostConception?: number
-}
-interface NewLittersProps extends ReservedOrAvailableProps {
   title: string
-  image: any
-  description?: string
-  expected: Date
-  colors?: string
-  markings?: string
 }
-interface ExpandMoreProps extends IconButtonProps {
+
+interface ExpandMoreProps {
   expand: boolean
 }
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props
-  return <IconButton {...other} />
-})(({ theme, expand }) => ({
+
+const builder = imageUrlBuilder(client)
+
+const ExpandMore = styled(
+  ({
+    expand,
+    ...props
+  }: ExpandMoreProps & React.ComponentProps<typeof IconButton>) => (
+    <IconButton {...props} />
+  )
+)(({ theme, expand }) => ({
   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
   transition: theme.transitions.create('transform', {
     duration: theme.transitions.duration.shortest,
   }),
 }))
-const ReservedPostConception = (props: ReservedOrAvailableProps) => {
-  const { quantityRemaining, reservedPostConception } = props
-  if (reservedPostConception && quantityRemaining !== 0) {
-    return (
-      <>
-        <Box sx={{ mt: 1, mb: 1 }}>
-          <Typography variant="body1" color="text.primary">
-            Kittens left:
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            {quantityRemaining ? String(quantityRemaining) : ''}
-          </Typography>
-        </Box>
-        <Box sx={{ mt: 1 }}>
-          <Typography variant="body1" color="text.primary">
-            Reserved:
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            {reservedPostConception
-              ? String(reservedPostConception)
-              : 'All are available'}
-          </Typography>
-        </Box>
-      </>
-    )
-  }
-}
-const ReservedPreConception = (props: ReservedOrAvailableProps) => {
-  const { reservedPreConception } = props
-  if (reservedPreConception) {
-    return (
-      <Box sx={{ mt: 1 }}>
-        <Typography variant="body1" color="text.primary">
-          Reserved before conception:
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          {reservedPreConception
-            ? String(reservedPreConception)
-            : 'All are available'}
-        </Typography>
-      </Box>
-    )
-  }
-}
 
-const NoRemaining = (props: ReservedOrAvailableProps) => {
-  const { quantityRemaining } = props
+const getImageUrl = (image: any) =>
+  image ? builder.image(image).width(700).height(430).fit('crop').url() : ''
+
+const getAvailability = ({
+  quantityRemaining,
+  reservedPostConception,
+  reservedPreConception,
+}: Pick<
+  NewLittersCardProps,
+  'quantityRemaining' | 'reservedPostConception' | 'reservedPreConception'
+>) => {
   if (quantityRemaining === 0) {
-    return (
-      <Box sx={{ mt: 1 }}>
-        <Typography variant="body1" color="error">
-          All reserved
-        </Typography>
-      </Box>
-    )
-  }
-}
-const ReservedOrAvailable = (props: ReservedOrAvailableProps) => {
-  const { quantityRemaining, reservedPreConception, reservedPostConception } =
-    props
-
-  const renderReservedOrAvailable = () => {
-    if (reservedPostConception && quantityRemaining !== 0) {
-      return (
-        <>
-          <ReservedPostConception
-            quantityRemaining={quantityRemaining}
-            reservedPostConception={reservedPostConception}
-          />
-        </>
-      )
-    }
-    if (reservedPostConception && quantityRemaining === 0) {
-      return (
-        <>
-          <NoRemaining quantityRemaining={quantityRemaining} />
-        </>
-      )
-    }
-    if (reservedPreConception) {
-      return (
-        <>
-          <ReservedPreConception
-            quantityRemaining={quantityRemaining}
-            reservedPreConception={reservedPreConception}
-          />
-        </>
-      )
-    }
-    if (quantityRemaining === 0) {
-      return <NoRemaining quantityRemaining={quantityRemaining} />
-    } else {
-      return (
-        <Box sx={{ mt: 1 }}>
-          <Typography variant="body1" color="secondary.main">
-            Currently taking applications for all kittens
-          </Typography>
-        </Box>
-      )
+    return {
+      color: 'error' as const,
+      label: 'All reserved',
+      helper: 'Applications are still welcome for future litters.',
     }
   }
 
-  const result = renderReservedOrAvailable()
-  return result
-}
-type TextWithSecondaryTextProps = {
-  text: string
-  secondaryText: string
+  if (typeof quantityRemaining === 'number') {
+    return {
+      color: 'success' as const,
+      label: `${quantityRemaining} kitten${
+        quantityRemaining === 1 ? '' : 's'
+      } left`,
+      helper: reservedPostConception
+        ? `${reservedPostConception} already reserved.`
+        : 'Availability may change as applications are reviewed.',
+    }
+  }
+
+  if (reservedPreConception) {
+    return {
+      color: 'warning' as const,
+      label: `${reservedPreConception} reserved before conception`,
+      helper: 'Please apply if you would like to be considered.',
+    }
+  }
+
+  return {
+    color: 'success' as const,
+    label: 'Taking applications',
+    helper: 'Apply to be considered for this or a future litter.',
+  }
 }
 
-const TextWithSecondaryText = ({
-  text,
-  secondaryText,
-}: TextWithSecondaryTextProps) => {
-  return (
-    <Box sx={{ mt: 1, mb: 1 }}>
-      <Typography variant="body1" color="text.primary">
-        {text}
-      </Typography>
-      <Typography variant="body1" color="text.secondary">
-        {secondaryText}
-      </Typography>
-    </Box>
-  )
-}
-
-const NewLittersCard = (props: NewLittersProps) => {
-  const {
-    colors,
-    description,
-    expected,
-    image,
-    markings,
+const NewLittersCard = ({
+  colors,
+  description,
+  expected,
+  id,
+  image,
+  markings,
+  quantityRemaining,
+  reservedPostConception,
+  reservedPreConception,
+  title,
+}: NewLittersCardProps) => {
+  const [expanded, setExpanded] = React.useState(false)
+  const imageUrl = getImageUrl(image)
+  const cardId = id || title.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+  const shareUrl = `${siteMetadata.siteUrl}/NewLitters#${cardId}`
+  const availability = getAvailability({
     quantityRemaining,
     reservedPostConception,
     reservedPreConception,
-    title,
-  } = props
-  const [expanded, setExpanded] = React.useState(false)
-  const router = useRouter()
-  const handleExpandClick = () => {
-    setExpanded(!expanded)
-  }
-  const builder = imageUrlBuilder(client)
-  function urlFor(source) {
-    return builder.image(source)
-  }
-  const theme = useTheme()
-  const cardId = `${title}Card-${uuid()}`
-  return (
-    <Card sx={{ maxWidth: 345, m: 1, boxShadow: 2 }} id={cardId}>
-      <CardHeader title={title} />
-      <Image
-        height="200"
-        width={345}
-        src={urlFor(image).image(image).auto('format').url()}
-        alt={title}
-        style={{ objectFit: 'cover', objectPosition: 'center' }}
-      />
-      <CardContent>
-        <TextWithSecondaryText
-          text={'Expected:'}
-          secondaryText={dayjs(expected).format('MMMM - YYYY').toString()}
-        />
-        {colors && (
-          <TextWithSecondaryText text={'Colors:'} secondaryText={colors} />
-        )}
-        {markings && (
-          <TextWithSecondaryText text={'Markings:'} secondaryText={markings} />
-        )}
+  })
+  const expectedLabel = expected
+    ? dayjs(expected).format('MMMM YYYY')
+    : 'Timing to be announced'
 
-        <ReservedOrAvailable
-          quantityRemaining={quantityRemaining}
-          reservedPreConception={reservedPreConception}
-          reservedPostConception={reservedPostConception}
+  return (
+    <Card
+      id={cardId}
+      sx={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        borderRadius: 2,
+        border: '1px solid',
+        borderColor: 'divider',
+        boxShadow: '0 8px 24px rgba(15, 23, 42, 0.08)',
+        overflow: 'hidden',
+      }}
+    >
+      <Box sx={{ position: 'relative', aspectRatio: '16 / 10' }}>
+        {imageUrl ? (
+          <Image
+            fill
+            src={imageUrl}
+            alt={title}
+            sizes="(max-width: 900px) 100vw, 33vw"
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        ) : null}
+      </Box>
+
+      <CardHeader
+        title={title}
+        titleTypographyProps={{ variant: 'h5', fontWeight: 700 }}
+        subheader={`Expected ${expectedLabel}`}
+      />
+
+      <CardContent sx={{ pt: 0, flex: 1 }}>
+        <Chip
+          label={availability.label}
+          color={availability.color}
+          size="small"
+          sx={{ mb: 1.5, fontWeight: 700 }}
         />
-      </CardContent>
-      <CardActions disableSpacing sx={{ justifyContent: 'space-between' }}>
-        <Box sx={{ ml: 1, mb: 0 }}>
-          <Typography>Share via</Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
-            <FacebookShareButton
-              quote="Check out this kitten from Azure Sky Ragdolls!"
-              url={`https://azureskyragdolls.com//NewLitters#${cardId}`}
-              style={{ color: '#1093F4' }}
-            >
-              <FacebookRoundedIcon />
-            </FacebookShareButton>
-            <EmailShareButton
-              url={`https://azureskyragdolls.com//NewLitters#${cardId}`}
-            >
-              <EmailRoundedIcon color="action" />
-            </EmailShareButton>
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+          {availability.helper}
+        </Typography>
+
+        {colors ? (
+          <Box sx={{ mb: 1.5 }}>
+            <Typography variant="overline" color="text.secondary">
+              Expected colors
+            </Typography>
+            <Typography>{colors}</Typography>
           </Box>
+        ) : null}
+
+        {markings ? (
+          <Box>
+            <Typography variant="overline" color="text.secondary">
+              Markings
+            </Typography>
+            <Typography>{markings}</Typography>
+          </Box>
+        ) : null}
+      </CardContent>
+
+      <CardActions
+        sx={{
+          px: 2,
+          pb: 2,
+          pt: 0,
+          display: 'flex',
+          justifyContent: 'space-between',
+          gap: 1,
+        }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <FacebookShareButton
+            quote="Check out this litter from Azure Sky Ragdolls!"
+            url={shareUrl}
+            style={{ color: '#1093F4', display: 'flex' }}
+          >
+            <FacebookRoundedIcon />
+          </FacebookShareButton>
+          <EmailShareButton url={shareUrl} style={{ display: 'flex' }}>
+            <EmailRoundedIcon color="action" />
+          </EmailShareButton>
         </Box>
 
-        <Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
           <Button
-            aria-label="add to favorites"
-            sx={{ textTransform: 'capitalize' }}
-            onClick={() => router.replace(`/Purchasing#purchasing-form`)}
+            component={Link}
+            href="/Purchasing#purchasing-form"
+            variant="contained"
+            size="small"
           >
-            Reserve
+            Apply
           </Button>
-          {description && (
+          {description ? (
             <ExpandMore
               expand={expanded}
-              onClick={handleExpandClick}
+              onClick={() => setExpanded((current) => !current)}
               aria-expanded={expanded}
-              aria-label="show more"
+              aria-label={`Show more about ${title}`}
             >
               <ExpandMoreIcon />
             </ExpandMore>
-          )}
+          ) : null}
         </Box>
       </CardActions>
-      {description && (
+
+      {description ? (
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph>{description}</Typography>
+          <CardContent sx={{ pt: 0 }}>
+            <Typography>{description}</Typography>
           </CardContent>
         </Collapse>
-      )}
+      ) : null}
     </Card>
   )
 }
+
 export default NewLittersCard

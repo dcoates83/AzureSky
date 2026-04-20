@@ -1,46 +1,55 @@
-import { Container, Divider, Typography } from '@mui/material'
-import dayjs from 'dayjs'
-import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
-import React from 'react'
+import { Box, Typography } from '@mui/material'
 
 import NewLittersCard from './NewLittersCard'
 import NoRecords from './NoRecords'
 
-dayjs.extend(isSameOrBefore)
-
-interface INewLitters {
-  expirationDate: string | number | dayjs.Dayjs | Date
+export interface NewLitterPost {
+  _id: string
+  colors?: string
+  description?: string
+  expected?: string
+  expirationDate?: string
+  image?: any
+  quantityRemaining?: number
+  reservedPreConception?: number
+  reservedPostConception?: number
   title: string
-  image: any
-  description: string
-  expected: Date
-  colors: string
-  quantityRemaining: number
-  reservedPreConception: number
-  reservedPostConception: number
 }
 
-const PostedLitters = ({ newLittersPosts }) => {
+interface PostedLittersProps {
+  newLittersPosts: NewLitterPost[]
+}
+
+const PostedLitters = ({ newLittersPosts }: PostedLittersProps) => {
   return (
-    <>
-      <Typography variant="h5" sx={{ mt: 2, mb: 2 }}>
-        Posted Litters
-      </Typography>
-      <Divider sx={{ mt: 2, mb: 2 }} />
-      <Container
-        id="posted-litters"
-        disableGutters
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 2,
-          justifyContent: 'space-between',
-        }}
-      >
-        {newLittersPosts?.map((newLittersPost: INewLitters) => {
-          return dayjs().isSameOrBefore(newLittersPost.expirationDate) ? (
+    <Box component="section" id="posted-litters" sx={{ scrollMarginTop: 96 }}>
+      <Box sx={{ mb: 3 }}>
+        <Typography component="h2" variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
+          Posted Litters
+        </Typography>
+        <Typography color="text.secondary">
+          These are the currently posted litters and expected timelines.
+          Availability is not guaranteed until applications are reviewed.
+        </Typography>
+      </Box>
+
+      {newLittersPosts?.length ? (
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: {
+              xs: '1fr',
+              md: 'repeat(2, minmax(0, 1fr))',
+              lg: 'repeat(3, minmax(0, 1fr))',
+            },
+            gap: 3,
+            alignItems: 'stretch',
+          }}
+        >
+          {newLittersPosts.map((newLittersPost) => (
             <NewLittersCard
-              key={newLittersPost.title}
+              key={newLittersPost._id}
+              id={newLittersPost._id}
               title={newLittersPost.title}
               image={newLittersPost.image}
               description={newLittersPost.description}
@@ -50,13 +59,12 @@ const PostedLitters = ({ newLittersPosts }) => {
               reservedPreConception={newLittersPost.reservedPreConception}
               reservedPostConception={newLittersPost.reservedPostConception}
             />
-          ) : (
-            <></>
-          )
-        })}
-        {newLittersPosts?.length === 0 && <NoRecords />}
-      </Container>
-    </>
+          ))}
+        </Box>
+      ) : (
+        <NoRecords />
+      )}
+    </Box>
   )
 }
 

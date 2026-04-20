@@ -1,3 +1,5 @@
+import RateReviewRoundedIcon from '@mui/icons-material/RateReviewRounded'
+import StarRoundedIcon from '@mui/icons-material/StarRounded'
 import {
   Alert,
   Box,
@@ -15,11 +17,15 @@ import Seo from '../components/Seo'
 import siteMetadata from '../lib/seoConfig'
 
 const ELFSIGHT_SCRIPT_SRC = 'https://static.elfsight.com/platform/platform.js'
+const FACEBOOK_SCRIPT_SRC =
+  'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v25.0'
 const FACEBOOK_PAGE_URL =
   'https://www.facebook.com/profile.php?id=100063761763734'
+const GOOGLE_REVIEW_URL = 'https://maps.app.goo.gl/co9Raik461UZVVC88'
 const FACEBOOK_PLUGIN_MAX_WIDTH = 500
 const FACEBOOK_PLUGIN_MIN_WIDTH = 180
 const FACEBOOK_PLUGIN_HEIGHT = 650
+const REVIEW_STARS = Array.from({ length: 5 }, (_, index) => index)
 
 const ELFSIGHT_FEEDS = [
   {
@@ -44,6 +50,13 @@ type ElfsightWindow = Window & {
   }
   ElfsightApp?: {
     init?: () => void
+  }
+}
+type FacebookWindow = Window & {
+  FB?: {
+    XFBML?: {
+      parse?: (element?: HTMLElement | null) => void
+    }
   }
 }
 
@@ -73,19 +86,14 @@ const Socials = () => {
   const [scriptFailed, setScriptFailed] = React.useState(false)
   const [showFallback, setShowFallback] = React.useState(false)
   const [reloadKey, setReloadKey] = React.useState(0)
+  const [facebookScriptReady, setFacebookScriptReady] = React.useState(false)
+  const [facebookScriptFailed, setFacebookScriptFailed] = React.useState(false)
+  const [facebookLoaded, setFacebookLoaded] = React.useState(false)
   const [facebookWidth, setFacebookWidth] = React.useState(
     FACEBOOK_PLUGIN_MAX_WIDTH
   )
   const [feedStatus, setFeedStatus] = React.useState<FeedStatus>(
     createInitialFeedStatus
-  )
-
-  const facebookPluginSrc = React.useMemo(
-    () =>
-      `https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
-        FACEBOOK_PAGE_URL
-      )}&tabs=timeline&width=${facebookWidth}&height=${FACEBOOK_PLUGIN_HEIGHT}&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false`,
-    [facebookWidth]
   )
 
   const initializeElfsight = React.useCallback(() => {
@@ -104,6 +112,21 @@ const Socials = () => {
     window.setTimeout(initializeElfsight, 0)
   }
 
+  const parseFacebookPlugin = React.useCallback(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    const facebookWindow = window as FacebookWindow
+    facebookWindow.FB?.XFBML?.parse?.(facebookContainerRef.current)
+  }, [])
+
+  const handleFacebookScriptReady = () => {
+    setFacebookScriptFailed(false)
+    setFacebookScriptReady(true)
+    window.setTimeout(parseFacebookPlugin, 0)
+  }
+
   const handleRefreshFeeds = () => {
     if (scriptFailed) {
       window.location.reload()
@@ -112,8 +135,10 @@ const Socials = () => {
 
     setShowFallback(false)
     setFeedStatus(createInitialFeedStatus())
+    setFacebookLoaded(false)
     setReloadKey((currentKey) => currentKey + 1)
     window.setTimeout(initializeElfsight, 0)
+    window.setTimeout(parseFacebookPlugin, 0)
   }
 
   React.useEffect(() => {
@@ -214,6 +239,44 @@ const Socials = () => {
     }
   }, [])
 
+  React.useEffect(() => {
+    setFacebookLoaded(false)
+
+    if (!facebookScriptReady) {
+      return
+    }
+
+    window.setTimeout(parseFacebookPlugin, 0)
+  }, [facebookScriptReady, facebookWidth, parseFacebookPlugin, reloadKey])
+
+  React.useEffect(() => {
+    const facebookElement = facebookContainerRef.current
+
+    if (!facebookElement) {
+      return undefined
+    }
+
+    const markLoaded = () => {
+      const hasFacebookIframe = Boolean(
+        facebookElement.querySelector('iframe[src*="facebook.com"]')
+      )
+
+      if (hasFacebookIframe) {
+        setFacebookLoaded(true)
+      }
+    }
+
+    markLoaded()
+
+    const observer = new MutationObserver(markLoaded)
+    observer.observe(facebookElement, {
+      childList: true,
+      subtree: true,
+    })
+
+    return () => observer.disconnect()
+  }, [facebookWidth, reloadKey])
+
   const hasUnloadedFeeds = ELFSIGHT_FEEDS.some((feed) => !feedStatus[feed.id])
 
   return (
@@ -245,6 +308,19 @@ const Socials = () => {
         onReady={handleScriptReady}
         onError={() => {
           setScriptFailed(true)
+          setShowFallback(true)
+        }}
+      />
+      <div id="fb-root" />
+      <Script
+        id="facebook-jssdk"
+        src={FACEBOOK_SCRIPT_SRC}
+        strategy="afterInteractive"
+        crossOrigin="anonymous"
+        onLoad={handleFacebookScriptReady}
+        onReady={handleFacebookScriptReady}
+        onError={() => {
+          setFacebookScriptFailed(true)
           setShowFallback(true)
         }}
       />
@@ -282,6 +358,61 @@ const Socials = () => {
             Refresh Feeds
           </Button>
         </Box>
+
+        <Card
+          component="section"
+          sx={{
+            mb: 4,
+            p: { xs: 2.5, sm: 3 },
+            borderRadius: 2,
+            border: '1px solid rgba(234, 179, 8, 0.32)',
+            backgroundColor: 'rgba(250, 204, 21, 0.08)',
+            boxShadow: '0 8px 24px rgba(15, 23, 42, 0.08)',
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', md: '1fr auto' },
+            gap: { xs: 2, md: 3 },
+            alignItems: 'center',
+          }}
+        >
+          <Box>
+            <Box
+              aria-label="Five star review prompt"
+              sx={{ display: 'flex', gap: 0.25, mb: 1 }}
+            >
+              {REVIEW_STARS.map((star) => (
+                <StarRoundedIcon
+                  key={star}
+                  aria-hidden="true"
+                  sx={{ color: '#F59E0B', fontSize: 28 }}
+                />
+              ))}
+            </Box>
+            <Typography
+              component="h2"
+              variant="h5"
+              sx={{ fontWeight: 700, mb: 0.75 }}
+            >
+              Share your Azure Sky experience
+            </Typography>
+            <Typography color="text.secondary" sx={{ maxWidth: 720 }}>
+              Reviews help new families feel confident when choosing their
+              Ragdoll breeder. If you had a great experience, you can leave a
+              Google review here.
+            </Typography>
+          </Box>
+
+          <Button
+            href={GOOGLE_REVIEW_URL}
+            target="_blank"
+            rel="noreferrer"
+            variant="contained"
+            size="large"
+            startIcon={<RateReviewRoundedIcon />}
+            sx={{ justifySelf: { xs: 'stretch', md: 'end' } }}
+          >
+            Leave a Google Review
+          </Button>
+        </Card>
 
         {scriptFailed ? (
           <Alert severity="warning" sx={{ mb: 3 }}>
@@ -350,24 +481,51 @@ const Socials = () => {
                         overflow: 'hidden',
                       }}
                     >
-                      <Box
-                        key={facebookWidth}
-                        component="iframe"
-                        title="Azure Sky Ragdolls Facebook feed"
-                        src={facebookPluginSrc}
-                        width={facebookWidth}
-                        height={FACEBOOK_PLUGIN_HEIGHT}
-                        scrolling="no"
-                        frameBorder="0"
-                        allowFullScreen
-                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                        sx={{
-                          border: 0,
-                          maxWidth: '100%',
-                          overflow: 'hidden',
-                        }}
-                      />
+                      <div
+                        key={`facebook-${facebookWidth}-${reloadKey}`}
+                        className="fb-page"
+                        data-href={FACEBOOK_PAGE_URL}
+                        data-tabs="timeline"
+                        data-width={facebookWidth}
+                        data-height={FACEBOOK_PLUGIN_HEIGHT}
+                        data-small-header="true"
+                        data-adapt-container-width="true"
+                        data-hide-cover="false"
+                        data-show-facepile="false"
+                      >
+                        <blockquote
+                          cite={FACEBOOK_PAGE_URL}
+                          className="fb-xfbml-parse-ignore"
+                        >
+                          <a
+                            href={FACEBOOK_PAGE_URL}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Azure Sky Ragdolls on Facebook
+                          </a>
+                        </blockquote>
+                      </div>
                     </Box>
+
+                    {(facebookScriptFailed ||
+                      (showFallback && !facebookLoaded)) && (
+                      <Alert severity="info" sx={{ mt: 2 }}>
+                        Facebook may be blocked by browser privacy settings. You
+                        can still open the Azure Sky Ragdolls Facebook page
+                        directly.
+                      </Alert>
+                    )}
+
+                    <Button
+                      href={FACEBOOK_PAGE_URL}
+                      target="_blank"
+                      rel="noreferrer"
+                      variant="outlined"
+                      sx={{ mt: 2 }}
+                    >
+                      Open Facebook Page
+                    </Button>
                   </Card>
                 ) : null}
 
