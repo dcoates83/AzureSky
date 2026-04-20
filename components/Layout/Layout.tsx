@@ -1,6 +1,7 @@
 import FiberNewRoundedIcon from '@mui/icons-material/FiberNewRounded'
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded'
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded'
+import ShareRoundedIcon from '@mui/icons-material/ShareRounded'
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded'
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded'
 import { Box, Container, useMediaQuery, useTheme } from '@mui/material'
@@ -30,7 +31,7 @@ export default function BlogLayout({
             { name: 'About', icon: <InfoRoundedIcon /> },
             { name: 'Purchasing', icon: <ShoppingBasketRoundedIcon /> },
             { name: 'New Litters', icon: <FiberNewRoundedIcon /> },
-            { name: "Socials", icon: <FiberNewRoundedIcon /> },
+            { name: 'Socials', icon: <ShareRoundedIcon /> },
             // { name: 'Shop', icon: <ShoppingCartRoundedIcon /> },
           ]}
         />
@@ -47,7 +48,7 @@ export default function BlogLayout({
             { name: 'About', icon: <InfoRoundedIcon /> },
             { name: 'Purchasing', icon: <ShoppingBasketRoundedIcon /> },
             { name: 'New Litters', icon: <FiberNewRoundedIcon /> },
-            { name: "Socials", icon: <FiberNewRoundedIcon /> },
+            { name: 'Socials', icon: <ShareRoundedIcon /> },
             // { name: 'Shop', icon: <ShoppingCartRoundedIcon /> },
           ]}
         />
