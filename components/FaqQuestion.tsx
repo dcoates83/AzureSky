@@ -7,28 +7,29 @@ import {
   Divider,
   Typography,
 } from '@mui/material'
+import parse from 'html-react-parser'
 
 interface Props {
+  id: string
   question: string
   answer: string
 }
 
 const FaqQuestion = (props: Props) => {
-  const { question, answer } = props
-  const renderAnswer = require('html-react-parser')
+  const { answer, id, question } = props
   return (
     <Box sx={{ width: '100%' }}>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
+          aria-controls={`${id}-content`}
+          id={`${id}-header`}
         >
           <Typography>{question}</Typography>
         </AccordionSummary>
         <Divider></Divider>
         <AccordionDetails>
-          <Typography>{renderAnswer(answer)}</Typography>
+          <Typography>{parse(answer)}</Typography>
         </AccordionDetails>
       </Accordion>
     </Box>

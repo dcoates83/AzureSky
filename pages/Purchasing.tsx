@@ -1,62 +1,97 @@
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded'
-import MoveDownIcon from '@mui/icons-material/MoveDown'
-import { Box, Button, Container, Typography, useTheme } from '@mui/material'
+import { Box, Button, Container, Typography } from '@mui/material'
 import { PortableText } from '@portabletext/react'
-import { GetStaticProps, PreviewData } from 'next'
-import Image from 'next/image'
-
-import { useRouter } from 'next/router'
-import { JSXElementConstructor, Key, ReactElement, ReactFragment } from 'react'
-import uuid from 'react-uuid'
-import { Balancer } from 'react-wrap-balancer'
-import { Query, client } from '.'
+import { GetStaticProps } from 'next'
+import Link from 'next/link'
 
 import CMSSection from '../components/CMSSection'
 import FaqQuestion from '../components/FaqQuestion'
 import PurchaseForm from '../components/PurchaseForm'
-import SectionSubHeader from '../components/SectionSubHeader'
 import Seo from '../components/Seo'
+import { client } from '../lib/sanity.client'
 import siteMetadata from '../lib/seoConfig'
 
-export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
-  ctx
-) => {
-  const { preview = false, previewData = {} } = ctx
+type PortableContent = any
 
-  const purchasing = await client.fetch(`*[_type == "purchasing"]`)
-  const faqQuestions = await client.fetch(`*[_type == "faqType"]`)
+interface PurchasingPage {
+  title_purchasingAgreement?: string
+  content_purchasingAgreement?: PortableContent
+  title_purchasingComesWith?: string
+  list_purchasingComesWith?: string[]
+  content_purchasingComesWith?: PortableContent
+  title_purchasingGoingHome?: string
+  content_purchasingGoingHome?: PortableContent
+  title_AdoptionForm?: string
+  content_AdoptionForm?: PortableContent
+}
+
+interface FaqQuestionDocument {
+  _id?: string
+  title_faqs?: string
+  content_faqs?: string
+}
+
+interface PurchasingProps {
+  purchasing: PurchasingPage | null
+  faqQuestions: FaqQuestionDocument[]
+}
+
+const PROCESS_STEPS = [
+  {
+    title: 'Read the details',
+    description:
+      'Review the agreement, what your kitten comes with, and what to expect when they go home.',
+  },
+  {
+    title: 'Apply to adopt',
+    description:
+      'Use the adoption application for waitlist, availability, kitten, older kitten, or retired breeder requests.',
+  },
+  {
+    title: 'We follow up',
+    description:
+      'After reviewing your application, we will contact you with next steps and timing.',
+  },
+] as const
+
+const sanitizeAnswer = (value?: string) =>
+  value
+    ? value
+        .replace(/<[^>]*>/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+    : ''
+
+export const getStaticProps: GetStaticProps<PurchasingProps> = async () => {
+  const [purchasing, faqQuestions] = await Promise.all([
+    client.fetch<PurchasingPage | null>(`*[_type == "purchasing"][0]`),
+    client.fetch<FaqQuestionDocument[]>(
+      `*[_type == "faqType"] | order(_createdAt asc)`
+    ),
+  ])
 
   return {
     props: {
       purchasing,
-      faqQuestions,
+      faqQuestions: faqQuestions ?? [],
     },
     revalidate: 180,
   }
 }
-const Purchasing = ({ purchasing, faqQuestions }) => {
-  const theme = useTheme()
-  const copy = [...purchasing]
-  const {
-    title_purchasingAgreement,
-    content_purchasingAgreement,
-    title_purchasingComesWith,
-    list_purchasingComesWith,
-    content_purchasingComesWith,
-    title_purchasingGoingHome,
-    content_purchasingGoingHome,
-    title_AdoptionForm,
-    content_AdoptionForm,
-  } = copy.pop()
 
-  const router = useRouter()
-  const sanitizeAnswer = (value?: string) =>
-    value
-      ? value
-          .replace(/<[^>]*>/g, ' ')
-          .replace(/\s+/g, ' ')
-          .trim()
-      : ''
+const Purchasing = ({ purchasing, faqQuestions }: PurchasingProps) => {
+  const {
+    title_purchasingAgreement = 'Purchasing Agreement',
+    content_purchasingAgreement,
+    title_purchasingComesWith = 'What Your Kitten Comes With',
+    list_purchasingComesWith = [],
+    content_purchasingComesWith,
+    title_purchasingGoingHome = 'Going Home',
+    content_purchasingGoingHome,
+    title_AdoptionForm = 'Adoption Application',
+    content_AdoptionForm,
+  } = purchasing ?? {}
+
   return (
     <>
       <Seo
@@ -81,163 +116,321 @@ const Purchasing = ({ purchasing, faqQuestions }) => {
                 {
                   '@context': 'https://schema.org',
                   '@type': 'FAQPage',
-                  mainEntity: faqQuestions.map(
-                    (q: { title_faqs: string; content_faqs: string }) => ({
-                      '@type': 'Question',
-                      name: q.title_faqs,
-                      acceptedAnswer: {
-                        '@type': 'Answer',
-                        text: sanitizeAnswer(q.content_faqs),
-                      },
-                    })
-                  ),
+                  mainEntity: faqQuestions.map((q) => ({
+                    '@type': 'Question',
+                    name: q.title_faqs,
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text: sanitizeAnswer(q.content_faqs),
+                    },
+                  })),
                 },
               ]
             : []),
         ]}
       />
-      <Container maxWidth="md" sx={{ mb: 1 }}>
-        <CMSSection
-          link={
-            <>
-              <Button
-                variant="text"
-                size="large"
-                sx={{
-                  mt: -2,
-                  pl: 0,
-                  textTransform: 'capitalize',
-                }}
-                onClick={() => router.push(`/Purchasing#purchasing-form`)}
+
+      <Box
+        component="section"
+        sx={{
+          py: { xs: 4, md: 6 },
+          backgroundColor: 'rgba(14, 165, 233, 0.06)',
+          borderBottom: '1px solid',
+          borderColor: 'divider',
+        }}
+      >
+        <Container maxWidth="lg">
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', md: '1.2fr 0.8fr' },
+              gap: { xs: 3, md: 5 },
+              alignItems: 'center',
+            }}
+          >
+            <Box>
+              <Typography
+                component="h1"
+                variant="h3"
+                sx={{ fontWeight: 700, mb: 1.5 }}
               >
-                <MoveDownIcon sx={{ mr: 2 }} /> Jump to adoption form
-              </Button>
-            </>
-          }
-          title={title_purchasingAgreement}
-          content={content_purchasingAgreement}
-        />
-
-        <Box sx={{ mt: 2 }}>
-          <Typography variant={'h4'}>{title_purchasingComesWith}</Typography>
-
-          <Box sx={{ color: 'text.primary', mt: 2 }}>
-            {list_purchasingComesWith?.map((item: any) => {
-              return (
-                <Box
-                  key={uuid()}
-                  sx={{ display: 'flex', m: 1, alignItems: 'center' }}
+                Purchasing an Azure Sky Ragdoll
+              </Typography>
+              <Typography
+                variant="body1"
+                color="text.secondary"
+                sx={{ maxWidth: 720, mb: 3 }}
+              >
+                Review the adoption process, see what is included with each
+                kitten, and apply when you are ready to be considered.
+              </Typography>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: 2,
+                }}
+              >
+                <Button
+                  component={Link}
+                  href="#purchasing-form"
+                  variant="contained"
+                  size="large"
                 >
-                  <CheckCircleOutlineRoundedIcon
-                    color="primary"
-                    sx={{ mr: 1, ml: 2 }}
-                  />
-                  <Balancer>
-                    <Typography>{item}</Typography>
-                  </Balancer>
-                </Box>
-              )
-            })}
-            {<PortableText value={content_purchasingComesWith} />}
+                  Start Adoption Application
+                </Button>
+                <Button
+                  component={Link}
+                  href="#faq"
+                  variant="outlined"
+                  size="large"
+                >
+                  Read FAQ
+                </Button>
+              </Box>
+            </Box>
+
+            <Box
+              sx={{
+                p: { xs: 2, sm: 2.5 },
+                borderRadius: 2,
+                backgroundColor: 'background.paper',
+                border: '1px solid',
+                borderColor: 'divider',
+                boxShadow: '0 8px 24px rgba(15, 23, 42, 0.08)',
+              }}
+            >
+              <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
+                Adoption requests go through the application.
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                If you want to join the waitlist, ask about kitten availability,
+                or be considered for an older kitten or retired breeder, use the
+                adoption application instead of the general question form.
+              </Typography>
+            </Box>
           </Box>
-        </Box>
-        <CMSSection
-          title={title_purchasingGoingHome}
-          content={content_purchasingGoingHome}
-        />
-        <SectionSubHeader text="We make sure your kitten is well socialized" />
-        <Box
-          id="purchasing-form"
-          sx={{
-            position: 'absolute',
-            height: 64,
-            marginTop: -8,
-            visibility: 'hidden',
-          }}
-        ></Box>
-        <Typography variant="body2" sx={{ mt: 2, textAlign: 'center' }}>
-          Having trouble with the form? Email us directly at{' '}
-          <Box component="span" fontWeight={600}>
-            meg@azureskyragdolls.com
-          </Box>
-        </Typography>
+        </Container>
+      </Box>
+
+      <Container maxWidth="lg" sx={{ py: { xs: 4, md: 6 } }}>
         <Box
           sx={{
-            mt: 5,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
             gap: 2,
-            [theme.breakpoints.down('sm')]: {
-              display: 'flex',
-              flexDirection: 'column',
-            },
+            mb: { xs: 4, md: 6 },
+          }}
+        >
+          {PROCESS_STEPS.map((step, index) => (
+            <Box
+              key={step.title}
+              sx={{
+                p: 2.5,
+                borderRadius: 2,
+                border: '1px solid',
+                borderColor: 'divider',
+                backgroundColor: 'background.paper',
+              }}
+            >
+              <Typography
+                variant="overline"
+                color="primary"
+                sx={{ fontWeight: 700 }}
+              >
+                Step {index + 1}
+              </Typography>
+              <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
+                {step.title}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {step.description}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+
+        <Box
+          component="section"
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', lg: '0.95fr 1.05fr' },
+            gap: { xs: 4, lg: 6 },
+            alignItems: 'start',
+            mb: { xs: 4, md: 6 },
           }}
         >
           <Box>
-            <CMSSection
-              containerSx={{ m: 0 }}
-              titleSx={{ m: 0, pb: 1 }}
-              title={title_AdoptionForm}
-              content={content_AdoptionForm}
-              titleChildren={<PurchaseForm />}
-            />
+            {content_purchasingAgreement ? (
+              <CMSSection
+                containerSx={{ mt: 0 }}
+                title={title_purchasingAgreement}
+                content={content_purchasingAgreement}
+              />
+            ) : (
+              <Typography color="text.secondary">
+                Purchasing agreement details are being updated.
+              </Typography>
+            )}
+          </Box>
+
+          <Box
+            sx={{
+              p: { xs: 2, sm: 3 },
+              borderRadius: 2,
+              backgroundColor: 'rgba(34, 197, 94, 0.08)',
+              border: '1px solid rgba(34, 197, 94, 0.2)',
+            }}
+          >
+            <Typography
+              component="h2"
+              variant="h4"
+              sx={{ fontWeight: 700, mb: 2 }}
+            >
+              {title_purchasingComesWith}
+            </Typography>
+
+            {list_purchasingComesWith.length > 0 ? (
+              <Box
+                component="ul"
+                sx={{
+                  listStyle: 'none',
+                  m: 0,
+                  p: 0,
+                  display: 'grid',
+                  gap: 1.5,
+                }}
+              >
+                {list_purchasingComesWith.map((item, index) => (
+                  <Box
+                    component="li"
+                    key={`${item}-${index}`}
+                    sx={{
+                      display: 'grid',
+                      gridTemplateColumns: 'auto 1fr',
+                      gap: 1.25,
+                      alignItems: 'start',
+                    }}
+                  >
+                    <CheckCircleOutlineRoundedIcon
+                      color="success"
+                      sx={{ mt: 0.25 }}
+                    />
+                    <Typography>{item}</Typography>
+                  </Box>
+                ))}
+              </Box>
+            ) : null}
+
+            {content_purchasingComesWith ? (
+              <Box sx={{ mt: list_purchasingComesWith.length ? 2 : 0 }}>
+                <PortableText value={content_purchasingComesWith} />
+              </Box>
+            ) : null}
           </Box>
         </Box>
 
-        <section id="faq">
-          <Box className="faq-subheader" sx={{ mt: 4 }}>
-            <h2 className="questions">
-              Questions? Check out our FAQ&apos;s about Ragdolls below!
-            </h2>
-            <Typography className="questions-contact" sx={{ m: 2, ml: 0 }}>
-              If its not on the list, feel free to email us!
+        {content_purchasingGoingHome ? (
+          <Box component="section" sx={{ mb: { xs: 4, md: 6 } }}>
+            <CMSSection
+              title={title_purchasingGoingHome}
+              content={content_purchasingGoingHome}
+            />
+          </Box>
+        ) : null}
+
+        <Box
+          component="section"
+          id="purchasing-form"
+          sx={{
+            scrollMarginTop: { xs: 80, md: 96 },
+            py: { xs: 4, md: 6 },
+            borderTop: '1px solid',
+            borderBottom: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Box sx={{ maxWidth: 840, mx: 'auto', mb: 3, textAlign: 'center' }}>
+            <Typography
+              component="h2"
+              variant="h4"
+              sx={{ fontWeight: 700, mb: 1 }}
+            >
+              {title_AdoptionForm}
+            </Typography>
+            {content_AdoptionForm ? (
+              <Box sx={{ color: 'text.secondary' }}>
+                <PortableText value={content_AdoptionForm} />
+              </Box>
+            ) : (
+              <Typography color="text.secondary">
+                Use the application below when you are ready to adopt or join
+                the waitlist.
+              </Typography>
+            )}
+          </Box>
+
+          <PurchaseForm />
+
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ mt: 3, textAlign: 'center' }}
+          >
+            Having trouble with the form? Email us directly at{' '}
+            <Box component="span" fontWeight={700}>
+              meg@azureskyragdolls.com
+            </Box>
+            .
+          </Typography>
+        </Box>
+
+        <Box
+          component="section"
+          id="faq"
+          sx={{
+            scrollMarginTop: { xs: 80, md: 96 },
+            pt: { xs: 4, md: 6 },
+          }}
+        >
+          <Box sx={{ mb: 3 }}>
+            <Typography
+              component="h2"
+              variant="h4"
+              sx={{ fontWeight: 700, mb: 1 }}
+            >
+              Frequently Asked Questions
+            </Typography>
+            <Typography color="text.secondary">
+              If it is not on the list, send a general question through the form
+              above.
             </Typography>
           </Box>
-          <div className="top">
+
+          {faqQuestions.length > 0 ? (
             <Box
               sx={{
                 display: 'grid',
-                wordBreak: 'break-word',
-                justifyItems: 'center',
-                alignItems: 'center',
-                gridTemplateColumns: '1fr 1fr',
-
+                gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
                 gap: 2,
-                [theme.breakpoints.down('md')]: {
-                  gridTemplateColumns: '1fr',
-                  gridAutoFlow: 'row',
-                },
+                alignItems: 'start',
               }}
             >
-              {faqQuestions.map(
-                (q: {
-                  title: Key
-                  title_faqs: string
-                  content_faqs: string
-                  answer: any
-                }) => (
-                  <Box
-                    key={uuid()}
-                    sx={{
-                      width: '100%',
-                      [theme.breakpoints.down('md')]: {
-                        gridTemplateColumns: '1fr',
-                        gridAutoFlow: 'row',
-                      },
-                    }}
-                  >
-                    <FaqQuestion
-                      question={q.title_faqs}
-                      answer={q.content_faqs}
-                      key={uuid()}
-                    />
-                  </Box>
-                )
-              )}
+              {faqQuestions.map((question, index) => (
+                <FaqQuestion
+                  key={question._id ?? `${question.title_faqs}-${index}`}
+                  id={`faq-${question._id ?? index}`}
+                  question={question.title_faqs ?? 'Question'}
+                  answer={question.content_faqs ?? ''}
+                />
+              ))}
             </Box>
-          </div>
-        </section>
+          ) : (
+            <Typography color="text.secondary">
+              FAQ answers are being updated.
+            </Typography>
+          )}
+        </Box>
       </Container>
     </>
   )

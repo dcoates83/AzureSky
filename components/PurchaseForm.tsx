@@ -103,7 +103,6 @@ const PurchaseForm = () => {
 
   return (
     <Box
-      id="purchasing-form"
       sx={{
         mt: 1,
         display: 'flex',
@@ -154,7 +153,7 @@ const PurchaseForm = () => {
               variant="h5"
               sx={{ fontWeight: 700, mb: 1 }}
             >
-              I&apos;m Interested to Adopt
+              I&apos;m Interested in Adoption
             </Typography>
             <Typography variant="body1" sx={{ mb: 2 }}>
               Join the waitlist, apply for an available kitten, or let us know
@@ -398,10 +397,8 @@ const PurchaseForm = () => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            // p: 2,
           }}
         >
-          {' '}
           <DialogTitle id="ready-to-adopt-dialog-title">
             Azure Sky Ragdolls Adoption Application
           </DialogTitle>

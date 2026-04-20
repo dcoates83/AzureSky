@@ -3,34 +3,43 @@ import React from 'react'
 
 import ImageComponent from './ImageComponent'
 
-const ImageCircle = ({ image }) => {
+interface ImageCircleProps {
+  image: {
+    color?: string
+    description?: string
+    name?: string
+  }
+}
+
+const ImageCircle = ({ image }: ImageCircleProps) => {
+  const title = image?.name ?? image?.color ?? 'Ragdoll example'
+
   return (
     <Box
       sx={{
         m: 1,
         textAlign: 'center',
-        width: '300px',
-        height: '500px',
+        width: 300,
+        minHeight: 420,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 1.5,
       }}
     >
-      {' '}
       <Typography
         variant="h5"
         sx={{
-          m: 1,
           color: 'primary.main',
+          fontWeight: 700,
         }}
       >
-        {image?.name ?? image?.color}
+        {title}
       </Typography>
-      <ImageComponent image={image} width={undefined} height={undefined} />
-      <Typography
-        sx={{
-          p: 0,
-        }}
-      >
-        {image?.description}
-      </Typography>
+      <ImageComponent image={image} alt={`${title} Ragdoll example`} />
+      {image?.description ? (
+        <Typography color="text.secondary">{image.description}</Typography>
+      ) : null}
     </Box>
   )
 }

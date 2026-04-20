@@ -1,9 +1,8 @@
-import { Box, Container, useTheme } from '@mui/material'
-import { GetStaticProps, PreviewData } from 'next'
+import { Box, Button, Container, Typography } from '@mui/material'
+import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import uuid from 'react-uuid'
+import Link from 'next/link'
 
-import { client, Query } from '.'
 import buckwheat from '../assets/buckwheat.jpg'
 import daddyWarbucks from '../assets/Daddy warbucks.jpg'
 import fugianna from '../assets/fugianna.jpg'
@@ -12,128 +11,151 @@ import historyLanding from '../assets/history-landing.jpg'
 import CMSSection from '../components/CMSSection'
 import ImageCircle from '../components/ImageCircle'
 import ImageContainer from '../components/ImageContainer'
+import { client } from '../lib/sanity.client'
 import Seo from '../components/Seo'
 import siteMetadata from '../lib/seoConfig'
-interface AboutPage {
-  _id: string
-  _rev: string
-  _type: string
-  _updatedAt: string
-  title_AboutRagdolls: string
-  content_AboutRagdolls: string
-  title_AppearanceRagdolls: string
-  content_AppearanceRagdolls: AppearanceRagdoll[]
-  title_ColorPatterns: string
-  content_ColorPatterns: string
-  title_ColorPoints: string
-  content_ColorPoints: string
-  content_ColorPointsImages: ColorPointsImage[]
-  title_ColorVariations: string
-  content_ColorVariations: string
-  content_ColorVariationsImages: ColorVariationsImage[]
-  title_RagdollHistory: string
-  content_RagdollHistory: string
-  title_GrumpyCat: string
-  content_GrumpyCat: string
-  title_Minks: string
-  content_MinksDescription: string
-  content_MinksImages: MinksImage[]
-  title_BeCareful: string
-  content_BeCareful: string
+
+type PortableContent = any
+
+interface AboutImage {
+  _key?: string
+  _type?: string
+  asset?: {
+    _ref?: string
+    _type?: string
+  }
+  color?: string
+  name?: string
+  description?: string
 }
 
-interface MinksImage {
-  _type: string
-  name: string
-  description: string
-  _key: string
-  asset: AssetReference
-}
-interface ColorPointsImage {
-  color: string
-  _type: string
-  description: string
-  _key: string
-  asset: AssetReference
-}
-
-interface ColorVariationsImage {
-  _type: string
-  name: string
-  description: string
-  _key: string
-  asset: AssetReference
-}
-
-interface AssetReference {
-  _ref: string
-  _type: string
+interface AboutPageData {
+  title_AboutRagdolls?: string
+  content_AboutRagdolls?: PortableContent
+  title_AppearanceRagdolls?: string
+  content_AppearanceRagdolls?: PortableContent
+  title_ColorPatterns?: string
+  content_ColorPatterns?: PortableContent
+  title_ColorPoints?: string
+  content_ColorPoints?: PortableContent
+  content_ColorPointsImages?: AboutImage[]
+  title_ColorVariations?: string
+  content_ColorVariations?: PortableContent
+  content_ColorVariationsImages?: AboutImage[]
+  title_RagdollHistory?: string
+  content_RagdollHistory?: PortableContent
+  title_GrumpyCat?: string
+  content_GrumpyCat?: PortableContent
+  title_Minks?: string
+  content_MinksDescription?: PortableContent
+  content_MinksImages?: AboutImage[]
+  title_BeCareful?: string
+  content_BeCareful?: PortableContent
 }
 
-interface AppearanceRagdoll {
-  style: string
-  _key: string
-  markDefs: any[]
-  children: AppearanceRagdollChild[]
-  _type: string
+interface AboutPageProps {
+  aboutPage: AboutPageData | null
 }
 
-interface AppearanceRagdollChild {
-  _type: string
-  marks: any[]
-  text: string
-  _key: string
-}
-export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
-  ctx
-) => {
-  const { preview = false, previewData = {} } = ctx
+const historyCats = [
+  { src: fugianna, alt: 'Fugianna Ragdoll cat' },
+  { src: daddyWarbucks, alt: 'Daddy Warbucks Ragdoll cat' },
+  { src: buckwheat, alt: 'Buckwheat Ragdoll cat' },
+] as const
 
-  const aboutPage: AboutPage[] = await client.fetch(`*[_type == "aboutPage"]`)
+const quickLinks = [
+  { href: '#history', label: 'History' },
+  { href: '#appearance', label: 'Appearance' },
+  { href: '#colors', label: 'Colors' },
+  { href: '#minks', label: 'Minks' },
+  { href: '#careful', label: 'Buyer Tips' },
+] as const
+
+const getImageKey = (image: AboutImage, index: number, prefix: string) =>
+  image?._key ??
+  image?.asset?._ref ??
+  `${prefix}-${image?.name ?? image?.color ?? index}`
+
+const hasContent = (content: PortableContent) =>
+  Array.isArray(content) ? content.length > 0 : Boolean(content)
+
+const GallerySection = ({
+  images,
+  prefix,
+}: {
+  images?: AboutImage[]
+  prefix: string
+}) =>
+  images?.length ? (
+    <ImageContainer>
+      {images.map((image, index) => (
+        <ImageCircle key={getImageKey(image, index, prefix)} image={image} />
+      ))}
+    </ImageContainer>
+  ) : null
+
+export const getStaticProps: GetStaticProps<AboutPageProps> = async () => {
+  const aboutPage = await client.fetch<AboutPageData | null>(`
+    *[_type == "aboutPage"][0]{
+      title_AboutRagdolls,
+      content_AboutRagdolls,
+      title_RagdollHistory,
+      content_RagdollHistory,
+      title_GrumpyCat,
+      content_GrumpyCat,
+      title_AppearanceRagdolls,
+      content_AppearanceRagdolls,
+      title_ColorPatterns,
+      content_ColorPatterns,
+      title_ColorPoints,
+      content_ColorPoints,
+      content_ColorPointsImages,
+      title_ColorVariations,
+      content_ColorVariations,
+      content_ColorVariationsImages,
+      title_Minks,
+      content_MinksDescription,
+      content_MinksImages,
+      title_BeCareful,
+      content_BeCareful
+    }
+  `)
+
   return {
     props: {
       aboutPage,
-      // token: previewData?.token ?? null,
     },
     revalidate: 180,
   }
 }
 
-// const AboutPage = ({ aboutPage }) => {
-const AboutPage = ({ aboutPage }: { aboutPage: AboutPage[] }) => {
-  const theme = useTheme()
-  const copy = [...aboutPage]
+const AboutPage = ({ aboutPage }: AboutPageProps) => {
   const {
-    title_AboutRagdolls,
+    title_AboutRagdolls = 'About Ragdolls',
     content_AboutRagdolls,
-    title_RagdollHistory,
+    title_RagdollHistory = 'Ragdoll History',
     content_RagdollHistory,
-    title_GrumpyCat,
+    title_GrumpyCat = 'The Grumpy Cat Connection',
     content_GrumpyCat,
-    title_AppearanceRagdolls,
+    title_AppearanceRagdolls = 'Ragdoll Appearance',
     content_AppearanceRagdolls,
-    title_ColorPatterns,
+    title_ColorPatterns = 'Color Patterns',
     content_ColorPatterns,
-    title_ColorPoints,
+    title_ColorPoints = 'Color Points',
     content_ColorPoints,
-    content_ColorPointsImages,
-    title_ColorVariations,
+    content_ColorPointsImages = [],
+    title_ColorVariations = 'White Variations',
     content_ColorVariations,
-    content_ColorVariationsImages,
-    title_Minks,
+    content_ColorVariationsImages = [],
+    title_Minks = 'Minks',
     content_MinksDescription,
-    content_MinksImages,
-    title_BeCareful,
+    content_MinksImages = [],
+    title_BeCareful = 'Be Careful',
     content_BeCareful,
-  } = copy.pop()
+  } = aboutPage ?? {}
+
   return (
     <>
-      {/* <MetaTags
-        title="Home"
-        description="
-  Ragdolls are known worldwide for their affectionate nature, beautiful appearance, and
-  intelligence. Stunning eyes, soft luxurious fur and a variety of coat colors and marking’s hallmark the Ragdoll of today, making them extremely popular."
-      /> */}
       <Seo
         title="About Ragdoll Cats"
         description="Learn about the Ragdoll breed from Azure Sky Ragdolls - exploring history, color patterns, coat variations, and the traits that make these kittens affectionate family pets."
@@ -158,123 +180,297 @@ const AboutPage = ({ aboutPage }: { aboutPage: AboutPage[] }) => {
           },
         ]}
       />
-      <section id="about" className="section">
-        {/* <Container maxWidth="xl" sx={{ position: 'relative', height: 500 }}>
+
+      <Box component="section" id="about" sx={{ pb: { xs: 4, md: 6 } }}>
+        <Box
+          sx={{
+            position: 'relative',
+            minHeight: { xs: 420, md: 520 },
+            display: 'flex',
+            alignItems: 'flex-end',
+            overflow: 'hidden',
+            color: '#fff',
+          }}
+        >
           <Image
             src={historyLanding}
+            alt="Azure Sky Ragdoll cat"
             fill
+            priority
+            sizes="100vw"
             style={{
-              top: '8px',
               objectFit: 'cover',
-              objectPosition: 'top',
-              borderRadius: '8px',
+              objectPosition: '58% 28%',
             }}
-            alt=""
-            className="history-landing"
           />
-        </Container> */}
-        <Container maxWidth="md">
-          <CMSSection
-            title={title_AboutRagdolls}
-            content={content_AboutRagdolls}
-          />
-          <CMSSection
-            title={title_RagdollHistory}
-            content={content_RagdollHistory}
-          />
-          <ImageContainer>
-            <Image
-              width={250}
-              height={250}
-              src={fugianna}
-              alt="fugianna cat"
-              className="history-img"
-              style={{
-                borderRadius: 8,
-                objectFit: 'cover',
-                paddingLeft: 1,
-                overflow: 'hidden',
-              }}
-            />
-            <Image
-              width={250}
-              height={250}
-              src={daddyWarbucks}
-              alt="daddy warbucks cat"
-              className="history-img"
-              style={{ borderRadius: 8 }}
-            />
-            <Image
-              width={250}
-              height={250}
-              style={{ borderRadius: 8 }}
-              src={buckwheat}
-              alt="buckwheat cat"
-              className="history-img"
-            />
-          </ImageContainer>
           <Box
             sx={{
+              position: 'absolute',
+              inset: 0,
+              background:
+                'linear-gradient(90deg, rgba(15, 23, 42, 0.72) 0%, rgba(15, 23, 42, 0.42) 38%, rgba(15, 23, 42, 0.12) 74%, rgba(15, 23, 42, 0.04) 100%)',
+            }}
+          />
+          <Box
+            sx={{
+              position: 'absolute',
+              inset: 0,
+              background:
+                'linear-gradient(180deg, rgba(15, 23, 42, 0.08) 0%, rgba(15, 23, 42, 0.34) 100%)',
+            }}
+          />
+          <Container
+            maxWidth="lg"
+            sx={{
+              position: 'relative',
+              py: { xs: 4, md: 6 },
               display: 'flex',
-              alignItems: 'center',
-              [theme.breakpoints.down('md')]: {
-                flexDirection: 'column',
-              },
+              alignItems: 'flex-end',
+              minHeight: { xs: 420, md: 520 },
             }}
           >
-            <CMSSection title={title_GrumpyCat} content={content_GrumpyCat} />
-            <Image
-              src={grumpyCat}
-              style={{ borderRadius: 8, marginLeft: '1em' }}
-              height={300}
-              alt="grumpy cat"
-              className="heading-img"
-            />
+            <Box sx={{ maxWidth: 720 }}>
+              <Typography
+                component="h1"
+                variant="h3"
+                sx={{ fontWeight: 700, mb: 1 }}
+              >
+                About Ragdoll Cats
+              </Typography>
+              <Typography variant="h6">
+                Learn about the breed&apos;s history, appearance, colors, and
+                the traits that make Ragdolls such affectionate family
+                companions.
+              </Typography>
+            </Box>
+          </Container>
+        </Box>
+
+        <Container maxWidth="lg" sx={{ py: { xs: 3, md: 4 } }}>
+          <Box
+            aria-label="About page sections"
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 1.5,
+              justifyContent: 'center',
+            }}
+          >
+            {quickLinks.map((link) => (
+              <Button
+                key={link.href}
+                component={Link}
+                href={link.href}
+                variant="outlined"
+                size="small"
+              >
+                {link.label}
+              </Button>
+            ))}
           </Box>
-          <CMSSection
-            title={title_AppearanceRagdolls}
-            content={content_AppearanceRagdolls}
-          />
-          <CMSSection
-            title={title_ColorPatterns}
-            content={content_ColorPatterns}
-          />
-          <CMSSection title={title_ColorPoints} content={content_ColorPoints} />
         </Container>
 
-        <Container maxWidth="lg">
-          <ImageContainer>
-            {content_ColorPointsImages?.map((image) => (
-              <ImageCircle key={uuid()} image={image} />
-            ))}
-          </ImageContainer>
-          <Container maxWidth="md">
+        <Container maxWidth="md">
+          {hasContent(content_AboutRagdolls) ? (
             <CMSSection
-              title={title_ColorVariations}
-              content={content_ColorVariations}
+              title={title_AboutRagdolls}
+              content={content_AboutRagdolls}
+              headerVariant="h3"
             />
-          </Container>
-          <ImageContainer>
-            {content_ColorVariationsImages?.map((image) => (
-              <ImageCircle key={uuid()} image={image} />
-            ))}
-          </ImageContainer>
-          <Container maxWidth="md">
-            <CMSSection
-              title={title_Minks}
-              content={content_MinksDescription}
-            />
-          </Container>
-          <ImageContainer>
-            {content_MinksImages?.map((image) => (
-              <ImageCircle key={uuid()} image={image} />
-            ))}
-          </ImageContainer>
-          <Container maxWidth="md">
-            <CMSSection title={title_BeCareful} content={content_BeCareful} />
-          </Container>
+          ) : (
+            <Typography color="text.secondary" sx={{ my: 3 }}>
+              Ragdoll breed information is being updated.
+            </Typography>
+          )}
         </Container>
-      </section>
+
+        <Box
+          component="section"
+          id="history"
+          sx={{
+            scrollMarginTop: { xs: 80, md: 96 },
+            py: { xs: 4, md: 6 },
+            backgroundColor: 'rgba(14, 165, 233, 0.06)',
+          }}
+        >
+          <Container maxWidth="md">
+            {hasContent(content_RagdollHistory) ? (
+              <CMSSection
+                title={title_RagdollHistory}
+                content={content_RagdollHistory}
+                headerVariant="h3"
+                containerSx={{ mt: 0 }}
+              />
+            ) : null}
+          </Container>
+
+          <Container maxWidth="lg">
+            <ImageContainer>
+              {historyCats.map((image) => (
+                <Image
+                  key={image.alt}
+                  width={250}
+                  height={250}
+                  src={image.src}
+                  alt={image.alt}
+                  style={{
+                    borderRadius: 8,
+                    objectFit: 'cover',
+                    overflow: 'hidden',
+                  }}
+                />
+              ))}
+            </ImageContainer>
+          </Container>
+        </Box>
+
+        <Container maxWidth="lg" sx={{ py: { xs: 4, md: 6 } }}>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', md: '1fr 280px' },
+              gap: { xs: 3, md: 4 },
+              alignItems: 'center',
+            }}
+          >
+            {hasContent(content_GrumpyCat) ? (
+              <CMSSection
+                title={title_GrumpyCat}
+                content={content_GrumpyCat}
+                headerVariant="h3"
+                containerSx={{ mt: 0, mb: 0 }}
+              />
+            ) : null}
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Image
+                src={grumpyCat}
+                width={280}
+                height={280}
+                style={{
+                  borderRadius: 8,
+                  objectFit: 'cover',
+                }}
+                alt="Grumpy Cat"
+              />
+            </Box>
+          </Box>
+        </Container>
+
+        <Box
+          component="section"
+          id="appearance"
+          sx={{
+            scrollMarginTop: { xs: 80, md: 96 },
+            py: { xs: 4, md: 6 },
+            borderTop: '1px solid',
+            borderBottom: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Container maxWidth="md">
+            {hasContent(content_AppearanceRagdolls) ? (
+              <CMSSection
+                title={title_AppearanceRagdolls}
+                content={content_AppearanceRagdolls}
+                headerVariant="h3"
+                containerSx={{ mt: 0 }}
+              />
+            ) : null}
+            {hasContent(content_ColorPatterns) ? (
+              <CMSSection
+                title={title_ColorPatterns}
+                content={content_ColorPatterns}
+              />
+            ) : null}
+          </Container>
+        </Box>
+
+        <Box
+          component="section"
+          id="colors"
+          sx={{
+            scrollMarginTop: { xs: 80, md: 96 },
+            py: { xs: 4, md: 6 },
+          }}
+        >
+          <Container maxWidth="md">
+            {hasContent(content_ColorPoints) ? (
+              <CMSSection
+                title={title_ColorPoints}
+                content={content_ColorPoints}
+                headerVariant="h3"
+                containerSx={{ mt: 0 }}
+              />
+            ) : null}
+          </Container>
+          <Container maxWidth="lg">
+            <GallerySection
+              images={content_ColorPointsImages}
+              prefix="color-points"
+            />
+          </Container>
+
+          <Container maxWidth="md">
+            {hasContent(content_ColorVariations) ? (
+              <CMSSection
+                title={title_ColorVariations}
+                content={content_ColorVariations}
+                headerVariant="h3"
+              />
+            ) : null}
+          </Container>
+          <Container maxWidth="lg">
+            <GallerySection
+              images={content_ColorVariationsImages}
+              prefix="color-variations"
+            />
+          </Container>
+        </Box>
+
+        <Box
+          component="section"
+          id="minks"
+          sx={{
+            scrollMarginTop: { xs: 80, md: 96 },
+            py: { xs: 4, md: 6 },
+            backgroundColor: 'rgba(34, 197, 94, 0.06)',
+          }}
+        >
+          <Container maxWidth="md">
+            {hasContent(content_MinksDescription) ? (
+              <CMSSection
+                title={title_Minks}
+                content={content_MinksDescription}
+                headerVariant="h3"
+                containerSx={{ mt: 0 }}
+              />
+            ) : null}
+          </Container>
+          <Container maxWidth="lg">
+            <GallerySection images={content_MinksImages} prefix="minks" />
+          </Container>
+        </Box>
+
+        <Box
+          component="section"
+          id="careful"
+          sx={{
+            scrollMarginTop: { xs: 80, md: 96 },
+            py: { xs: 4, md: 6 },
+          }}
+        >
+          <Container maxWidth="md">
+            {hasContent(content_BeCareful) ? (
+              <CMSSection
+                title={title_BeCareful}
+                content={content_BeCareful}
+                headerVariant="h3"
+                containerSx={{ mt: 0 }}
+              />
+            ) : null}
+          </Container>
+        </Box>
+      </Box>
     </>
   )
 }

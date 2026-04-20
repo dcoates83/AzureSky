@@ -1,11 +1,12 @@
 import { Container, Divider, Typography } from '@mui/material'
 import dayjs from 'dayjs'
-import { GetStaticProps, PreviewData } from 'next'
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import React from 'react'
-import { Query, client } from '../pages'
-import newLittersPosts from '../schemas/newLitters/newLittersPosts'
+
 import NewLittersCard from './NewLittersCard'
 import NoRecords from './NoRecords'
+
+dayjs.extend(isSameOrBefore)
 
 interface INewLitters {
   expirationDate: string | number | dayjs.Dayjs | Date
@@ -39,7 +40,7 @@ const PostedLitters = ({ newLittersPosts }) => {
         {newLittersPosts?.map((newLittersPost: INewLitters) => {
           return dayjs().isSameOrBefore(newLittersPost.expirationDate) ? (
             <NewLittersCard
-              key={new Date().getMilliseconds()}
+              key={newLittersPost.title}
               title={newLittersPost.title}
               image={newLittersPost.image}
               description={newLittersPost.description}

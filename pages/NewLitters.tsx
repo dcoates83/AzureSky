@@ -1,16 +1,15 @@
 import { Container } from '@mui/material'
-import { GetStaticProps, PreviewData } from 'next'
+import { GetStaticProps } from 'next'
 
-import { client, Query } from '.'
 import CMSSection from '../components/CMSSection'
+import type { PreviewData, Query } from '../lib/pageTypes'
+import { client } from '../lib/sanity.client'
 import Seo from '../components/Seo'
 import siteMetadata from '../lib/seoConfig'
-
 
 export const getStaticProps: GetStaticProps<any, Query, PreviewData> = async (
   ctx
 ) => {
-
   const newLitters = await client.fetch(`*[_type == "newLitters"]`)
   const newLittersPosts = await client.fetch(`*[_type == "newLittersPost"]`)
   return {

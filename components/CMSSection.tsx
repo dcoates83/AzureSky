@@ -1,16 +1,10 @@
-import {
-  Box,
-  Container,
-  SxProps,
-  Theme,
-  Typography,
-  useTheme,
-} from '@mui/material'
+import { Box, Container, SxProps, Theme, Typography } from '@mui/material'
 import { PortableText } from '@portabletext/react'
 import imageUrlBuilder from '@sanity/image-url'
 import React from 'react'
 import { SvgBlob } from 'react-svg-blob'
-import { client } from '../pages'
+
+import { client } from '../lib/sanity.client'
 interface CMSSectionProps {
   title: string
   content: any
@@ -28,8 +22,9 @@ const headerSx = {
   textWrap: 'balance',
 }
 
+const builder = imageUrlBuilder(client)
+
 const ImageComponent = (image) => {
-  const builder = imageUrlBuilder(client)
   function urlFor(source) {
     return builder.image(source)
   }

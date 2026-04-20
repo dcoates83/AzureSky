@@ -11,13 +11,11 @@ export interface PostPageHeadProps {
 
 export default function PostPageHead({ settings, post }: PostPageHeadProps) {
   const blogTitle = settings.title ?? demo.title
-  const description = post.excerpt ?? demo.description
+  const description = post.excerpt ?? siteMetadata.description
   const ogImageUrl = post.coverImage?.asset?._ref
     ? urlForImage(post.coverImage).width(1200).height(627).fit('crop').url()
     : undefined
-  const relativeUrl = post.slug?.current
-    ? `/posts/${post.slug.current}`
-    : undefined
+  const relativeUrl = post.slug ? `/posts/${post.slug}` : undefined
 
   const structuredData = [
     {

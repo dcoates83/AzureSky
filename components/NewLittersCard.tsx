@@ -20,12 +20,10 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React from 'react'
-import {
-  EmailShareButton,
-  FacebookShareButton,
-} from 'react-share'
+import { EmailShareButton, FacebookShareButton } from 'react-share'
 import uuid from 'react-uuid'
-import { client } from '../pages'
+
+import { client } from '../lib/sanity.client'
 interface ReservedOrAvailableProps {
   quantityRemaining?: number
   reservedPreConception?: number
@@ -193,7 +191,7 @@ const NewLittersCard = (props: NewLittersProps) => {
   const [expanded, setExpanded] = React.useState(false)
   const router = useRouter()
   const handleExpandClick = () => {
-    setExpanded(!expanded)  
+    setExpanded(!expanded)
   }
   const builder = imageUrlBuilder(client)
   function urlFor(source) {
