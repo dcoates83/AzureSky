@@ -65,7 +65,7 @@ export const HeroLanding = () => {
                     pl: smallScreens ? '16px' : 0,
                   }}
                 >
-                  Fall in love with your new friend
+                  Find your forever friend
                 </Typography>
               </Balancer>
               <Box
