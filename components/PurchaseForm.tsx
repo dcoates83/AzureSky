@@ -393,12 +393,22 @@ const PurchaseForm = () => {
         fullScreen
         maxWidth="md"
       >
-        <DialogTitle id="ready-to-adopt-dialog-title">
-          Azure Sky Ragdolls Adoption Application
-        </DialogTitle>
-        <DialogActions>
-          <Button onClick={() => setIsReadyDialogOpen(false)}>Close</Button>
-        </DialogActions>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            // p: 2,
+          }}
+        >
+          {' '}
+          <DialogTitle id="ready-to-adopt-dialog-title">
+            Azure Sky Ragdolls Adoption Application
+          </DialogTitle>
+          <DialogActions>
+            <Button onClick={() => setIsReadyDialogOpen(false)}>Close</Button>
+          </DialogActions>
+        </Box>
         <DialogContent sx={{ p: 0, overflow: 'hidden', flex: 1 }}>
           <Box
             sx={{
