@@ -37,7 +37,6 @@ export default function BlogLayout({
               name: 'Supplies',
               href: '/RecommendedSupplies',
               icon: <LocalMallRoundedIcon />,
-              showInMobile: false,
             },
             { name: 'Socials', icon: <ShareRoundedIcon /> },
           ]}
@@ -63,7 +62,6 @@ export default function BlogLayout({
               name: 'Supplies',
               href: '/RecommendedSupplies',
               icon: <LocalMallRoundedIcon />,
-              showInMobile: false,
             },
             { name: 'Socials', icon: <ShareRoundedIcon /> },
           ]}

@@ -117,6 +117,20 @@ function NavBar(props: Props) {
             onChange={(_, newValue) => {
               setValue(newValue)
             }}
+            sx={{
+              '& .MuiBottomNavigationAction-root': {
+                minWidth: 0,
+                px: 0.25,
+              },
+              '& .MuiBottomNavigationAction-label': {
+                fontSize: '0.68rem',
+                lineHeight: 1.15,
+                whiteSpace: 'nowrap',
+              },
+              '& .MuiSvgIcon-root': {
+                fontSize: '1.35rem',
+              },
+            }}
           >
             {mobileNavItems.map((item) => (
               <BottomNavigationAction
