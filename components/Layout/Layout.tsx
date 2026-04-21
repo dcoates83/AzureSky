@@ -1,14 +1,12 @@
 import FiberNewRoundedIcon from '@mui/icons-material/FiberNewRounded'
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded'
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded'
+import LocalMallRoundedIcon from '@mui/icons-material/LocalMallRounded'
 import ShareRoundedIcon from '@mui/icons-material/ShareRounded'
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded'
-import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded'
-import { Box, Container, useMediaQuery, useTheme } from '@mui/material'
-import AlertBanner from 'components/AlertBanner'
+import { Box } from '@mui/material'
 
 import { useRouter } from 'next/router'
-import path from 'path'
 import Footer from './Footer'
 import NavBar from './NavBar'
 export default function BlogLayout({
@@ -30,9 +28,18 @@ export default function BlogLayout({
             { name: 'Home', icon: <HomeRoundedIcon /> },
             { name: 'About', icon: <InfoRoundedIcon /> },
             { name: 'Purchasing', icon: <ShoppingBasketRoundedIcon /> },
-            { name: 'New Litters', icon: <FiberNewRoundedIcon /> },
+            {
+              name: 'New Litters',
+              icon: <FiberNewRoundedIcon />,
+              mobileLabel: 'Litters',
+            },
+            {
+              name: 'Supplies',
+              href: '/RecommendedSupplies',
+              icon: <LocalMallRoundedIcon />,
+              showInMobile: false,
+            },
             { name: 'Socials', icon: <ShareRoundedIcon /> },
-            // { name: 'Shop', icon: <ShoppingCartRoundedIcon /> },
           ]}
         />
         <Box sx={{ pt: 8 }}>{children}</Box>
@@ -47,9 +54,18 @@ export default function BlogLayout({
             { name: 'Home', icon: <HomeRoundedIcon /> },
             { name: 'About', icon: <InfoRoundedIcon /> },
             { name: 'Purchasing', icon: <ShoppingBasketRoundedIcon /> },
-            { name: 'New Litters', icon: <FiberNewRoundedIcon /> },
+            {
+              name: 'New Litters',
+              icon: <FiberNewRoundedIcon />,
+              mobileLabel: 'Litters',
+            },
+            {
+              name: 'Supplies',
+              href: '/RecommendedSupplies',
+              icon: <LocalMallRoundedIcon />,
+              showInMobile: false,
+            },
             { name: 'Socials', icon: <ShareRoundedIcon /> },
-            // { name: 'Shop', icon: <ShoppingCartRoundedIcon /> },
           ]}
         />
         <Box

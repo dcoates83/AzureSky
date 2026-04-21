@@ -22,6 +22,8 @@ import newLittersTest from './schemas/newLitters/newLittersPosts'
 import faqType from './schemas/purchasing/faqType'
 import purchasing from './schemas/purchasing/purchasing'
 import purchasingPage from './schemas/purchasing/purchasingPage'
+import recommendedProduct from './schemas/recommendedSupplies/recommendedProduct'
+import recommendedSuppliesPage from './schemas/recommendedSupplies/recommendedSuppliesPage'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Azure Sky Ragdolls'
@@ -44,6 +46,8 @@ export default defineConfig({
       faqType,
       newLitters,
       newLittersTest,
+      recommendedSuppliesPage,
+      recommendedProduct,
     ],
   },
   plugins: [
@@ -56,6 +60,8 @@ export default defineConfig({
         purchasingPage,
         newLitters,
         newLittersTest,
+        recommendedSuppliesPage,
+        recommendedProduct,
       ]),
       // structure: settingsStructure(settingsType),
       // `defaultDocumentNode` is responsible for adding a “Preview” tab to the document pane

@@ -1,4 +1,3 @@
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined'
 import { Box, useMediaQuery } from '@mui/material'
 import Link from 'next/link'
 
@@ -7,7 +6,6 @@ const Footer = () => {
 
   return (
     <Box component="footer" sx={{ pb: mobile ? '4em' : 'unset' }}>
-    
       <div className="links">
         <nav className="footer-links">
           <ul className="footer-items">
@@ -18,6 +16,9 @@ const Footer = () => {
             </li>
             <li>
               <Link href="/Purchasing#faq">FAQ</Link>
+            </li>
+            <li>
+              <Link href="/RecommendedSupplies">Recommended Supplies</Link>
             </li>
           </ul>
         </nav>

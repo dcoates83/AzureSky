@@ -16,8 +16,11 @@ import * as React from 'react'
 
 import Logo from '../../assets/Logo.svg'
 interface INavItems {
+  href?: string
   name: string
   icon: React.ReactNode
+  mobileLabel?: string
+  showInMobile?: boolean
 }
 
 interface Props {
@@ -29,34 +32,40 @@ function NavBar(props: Props) {
   const router = useRouter()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
-  const [value, setValue] = React.useState(0)
+  const mobileNavItems = React.useMemo(
+    () => navItems.filter((item) => item.showInMobile !== false),
+    [navItems]
+  )
+  const [value, setValue] = React.useState<number | false>(false)
 
-  const _handleNavigate = (item: string) => {
-    if (item === 'Home') {
-      return router.push(`/`)
+  const getItemHref = React.useCallback((item: INavItems) => {
+    if (item.href) {
+      return item.href
     }
-    // If the item has a space in it, replace it with a no space
-    router.push(`/${item.replace(/\s+/, '')}`)
+
+    if (item.name === 'Home') {
+      return '/'
+    }
+
+    return `/${item.name.replace(/\s+/g, '')}`
+  }, [])
+
+  const _handleNavigate = (item: INavItems) => {
+    router.push(getItemHref(item))
   }
 
   React.useEffect(() => {
-    const path = window.location.pathname
+    const activeIndex = mobileNavItems.findIndex(
+      (item) => getItemHref(item) === router.pathname
+    )
 
-    switch (path) {
-      case '/':
-        return setValue(0)
-      case '/About':
-        return setValue(1)
-      case '/Purchasing':
-        return setValue(2)
-      case '/NewLitters':
-        return setValue(3)
-      // case '/shop':
-      //   return setValue(4)
-      default:
-        return setValue(0)
+    if (activeIndex === -1) {
+      setValue(false)
+      return
     }
-  }, [navItems])
+
+    setValue(activeIndex)
+  }, [getItemHref, mobileNavItems, router.pathname])
 
   return (
     <>
@@ -87,7 +96,7 @@ function NavBar(props: Props) {
                       textTransform: 'capitalize',
                       fontSize: '1.12rem',
                     }}
-                    onClick={() => _handleNavigate(item.name)}
+                    onClick={() => _handleNavigate(item)}
                   >
                     {item.name}
                   </Button>
@@ -105,20 +114,16 @@ function NavBar(props: Props) {
           <BottomNavigation
             showLabels
             value={value}
-            onChange={(event, newValue) => {
+            onChange={(_, newValue) => {
               setValue(newValue)
             }}
           >
-            {navItems.map((item) => (
+            {mobileNavItems.map((item) => (
               <BottomNavigationAction
                 key={item.name}
-                label={
-                  item.name === 'New Litters' && isMobile
-                    ? 'Litters'
-                    : item.name
-                }
+                label={item.mobileLabel ?? item.name}
                 icon={item.icon}
-                onClick={() => _handleNavigate(item.name)}
+                onClick={() => _handleNavigate(item)}
               />
             ))}
           </BottomNavigation>

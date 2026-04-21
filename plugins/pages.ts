@@ -3,6 +3,7 @@
  */
 import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded'
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded'
+import LocalMallRoundedIcon from '@mui/icons-material/LocalMallRounded'
 import PetsRoundedIcon from '@mui/icons-material/PetsRounded'
 import { HomeIcon } from '@sanity/icons'
 import { definePlugin, type DocumentDefinition } from 'sanity'
@@ -97,6 +98,26 @@ export const pagesStructure = (
     //   S.document().schemaType('purchasingPage').documentId('purchasingPage')
     // )
 
+    const recommendedSuppliesPage = S.listItem()
+      .title('Recommended Supplies')
+      .icon(LocalMallRoundedIcon)
+      .child(
+        S.list()
+          .title('Manage recommended supplies')
+          .items([
+            S.listItem()
+              .title('Page content and disclosure')
+              .child(
+                S.document()
+                  .schemaType('recommendedSuppliesPage')
+                  .documentId('recommendedSuppliesPage')
+              ),
+            S.listItem()
+              .title('Recommended products')
+              .child(S.documentTypeList('recommendedProduct')),
+          ])
+      )
+
     const pagesList = S.list()
       .title('Pages')
       .items([
@@ -110,6 +131,7 @@ export const pagesStructure = (
           .child(S.document().schemaType('aboutPage').documentId('aboutPage')),
         purchasingPage,
         newLittersPage,
+        recommendedSuppliesPage,
         ...defaultListItems,
       ])
     return pagesList
